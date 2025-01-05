@@ -1,11 +1,8 @@
 package com.pintoss.gitftmall.domain.membership.controller.request;
 
-import com.pintoss.gitftmall.common.dto.SelfValidating;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
