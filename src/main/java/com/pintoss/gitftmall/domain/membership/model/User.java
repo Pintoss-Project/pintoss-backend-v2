@@ -43,7 +43,4 @@ public class User {
         return new User(email, password, name, phone);
     }
 
-    public boolean exsistsUser(){
-        repository.existsById()
-    }
 }
