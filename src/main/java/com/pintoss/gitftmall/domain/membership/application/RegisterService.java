@@ -19,8 +19,8 @@ public class RegisterService {
             throw new IllegalArgumentException("이미 존재하는 회원입니다.");
         };
 
-        encoder.encode(command.getPassword());
-        User user = User.create(command.getEmail(), command.getPassword(), command.getName(), command.getPhone());
+        String encodePassword = encoder.encode(command.getPassword());
+        User user = User.create(command.getEmail(), encodePassword, command.getName(), command.getPhone());
 
         userRepository.save(user);
     }
