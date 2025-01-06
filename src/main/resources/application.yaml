@@ -50,6 +50,9 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
     database-platform: org.hibernate.dialect.MariaDBDialect
+  profiles:
+    include:
+      oauth
 jwt:
   token:
     secret-key: asbnfu1231j2308j1nqewdjnd108dejh10823hj12803h1298hnqsdjfnkasjdasdasd213123123123f123
