@@ -20,6 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -44,7 +46,17 @@ public class SecurityConfig {
                 request.requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
             )
-            .oauth2Login(Customizer.withDefaults())
+            .oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfo
+                        -> userInfo.userService(customOAuth2UserService)) // AccessToken 발급시 loadUser 실행.
+                .successHandler((request, response, authentication) -> {
+                    response.sendRedirect("/success");
+                })
+                .failureHandler((request, response, exception) -> {
+//                    System.out.println("OAuth2 로그인 실패: " + exception.getMessage());
+                    response.sendRedirect("/failure");
+                })
+            )
             .build();
     }
 }
