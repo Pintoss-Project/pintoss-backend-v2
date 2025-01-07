@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.infra.security.jwt;
+package com.pintoss.gitftmall.infra.security.filter.jwt;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
