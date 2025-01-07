@@ -1,16 +1,17 @@
 package com.pintoss.gitftmall.common.dto;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import java.time.LocalDateTime;
-import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
+import java.util.Map;
+
 @Getter
 public class ApiErrorResponse {
 
-    private final int code;
+    private final String code;
     private final HttpStatus status;
     private final String errorCodeMessage;
     private final String errorMessage;
@@ -19,7 +20,7 @@ public class ApiErrorResponse {
 
     @Builder
     private ApiErrorResponse(HttpStatus status, ErrorCode errorCode, String errorMessage, LocalDateTime timestamp, Map<String, String> errors) {
-        this.code = status.value();
+        this.code = errorCode != null ? errorCode.getCode() : null;
         this.status = status;
         this.errorCodeMessage = errorCode != null ? errorCode.getMessage() : null;
         this.errorMessage = errorMessage;
@@ -48,13 +49,13 @@ public class ApiErrorResponse {
             .build();
     }
 
-    public static ApiErrorResponse withErrors(HttpStatus status, String errorMessage, Map<String, String> errors) {
+    public static ApiErrorResponse withErrors(HttpStatus status, ErrorCode errorCode, String errorMessage, Map<String, String> errors) {
         return ApiErrorResponse.builder()
             .status(status)
+            .errorCode(errorCode)
             .errorMessage(errorMessage)
             .timestamp(LocalDateTime.now())
             .errors(errors)
             .build();
     }
-
 }
