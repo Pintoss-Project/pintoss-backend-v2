@@ -36,6 +36,7 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type:
     org.hibernate.orm.jdbc.bind: trace
+
 ---
 spring:
   config:

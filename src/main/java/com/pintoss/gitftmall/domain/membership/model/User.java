@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -74,7 +75,7 @@ public class User {
     }
 
     public static User createOAuthUser(Email email, String name, Set<UserRole> roles, OAuthProvider provider) {
-        Password dummyPassword = new Password("OAUTH_USER", null);
+        Password dummyPassword = new Password("Oauthuser0!", new BCryptPasswordEncoder());
 
         return new User(
                 email,

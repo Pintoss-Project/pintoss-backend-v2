@@ -58,9 +58,16 @@ public class OAuthAttributes {
             Map<String, Object> attributes,
             OAuthProvider provider
     ) {
+
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
+
+        String nickname = (String) properties.get("nickname"); // 닉네임은 properties에서 가져옴
+        String email = (String) kakaoAccount.get("email");     // 이메일은 kakao_account에서 가져옴
+
         return OAuthAttributes.builder()
-                .name((String) attributes.get("profile_nickname"))
-                .email((String) attributes.get("account_email"))
+                .name(nickname)
+                .email(email)
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .provider(provider)
@@ -72,9 +79,15 @@ public class OAuthAttributes {
             Map<String, Object> attributes,
             OAuthProvider provider
     ) {
+
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        String name = (String) response.get("name");
+        String email = (String) response.get("email");
+
         return OAuthAttributes.builder()
-                .name((String) attributes.get("name"))
-                .email((String) attributes.get("email"))
+                .name(name)
+                .email(email)
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .provider(provider)
