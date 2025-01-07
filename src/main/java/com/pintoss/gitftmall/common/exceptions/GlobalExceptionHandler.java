@@ -3,16 +3,19 @@ package com.pintoss.gitftmall.common.exceptions;
 import com.pintoss.gitftmall.common.dto.ApiErrorResponse;
 import com.pintoss.gitftmall.common.exceptions.client.BadRequestException;
 import jakarta.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestControllerAdvice
@@ -50,6 +53,7 @@ public class GlobalExceptionHandler {
 
         ApiErrorResponse errorResponse = ApiErrorResponse.withErrors(
             HttpStatus.BAD_REQUEST,
+            ErrorCode.BAD_REQUEST,
             "유효하지 않은 요청입니다",
             errors
         );
@@ -65,10 +69,32 @@ public class GlobalExceptionHandler {
 
         ApiErrorResponse errorResponse = ApiErrorResponse.withErrors(
             HttpStatus.BAD_REQUEST,
+            ErrorCode.BAD_REQUEST,
             ex.getMessage(),
             errors
         );
 
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = {UsernameNotFoundException.class})
+    public final ResponseEntity<ApiErrorResponse> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                HttpStatus.BAD_REQUEST,
+                ErrorCode.UNAUTHORIZED,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(value = {BadCredentialsException.class})
+    public final ResponseEntity<ApiErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                HttpStatus.BAD_REQUEST,
+                ErrorCode.UNAUTHORIZED,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
