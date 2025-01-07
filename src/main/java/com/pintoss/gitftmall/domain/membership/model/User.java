@@ -46,14 +46,19 @@ public class User {
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserRole> roles = new HashSet<>();
 
+    @Column(name = "oauth_provider", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OAuthProvider oAuthProvider;
+
     private LocalDateTime createdAt;
 
-    private User(Email email, Password password, String name, Phone phone, Set<UserRole> roles){
+    private User(Email email, Password password, String name, Phone phone, Set<UserRole> roles, OAuthProvider oAuthProvider){
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.roles = roles;
+        this.oAuthProvider = oAuthProvider;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -63,7 +68,21 @@ public class User {
                 new Password(rawPassword, encoder),
                 name,
                 phone,
-                roles
+                roles,
+                OAuthProvider.NONE
+        );
+    }
+
+    public static User createOAuthUser(Email email, String name, Set<UserRole> roles, OAuthProvider provider) {
+        Password dummyPassword = new Password("OAUTH_USER", null);
+
+        return new User(
+                email,
+                dummyPassword,
+                name,
+                new Phone("010-0000-0000"),
+                roles,
+                provider
         );
     }
 }
