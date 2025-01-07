@@ -33,4 +33,14 @@ public class UserRepositoryImpl implements IUserRepository {
     public Optional<User> findById(long id) {
         return userJpaRepository.findById(id);
     }
+
+    @Override
+    public Optional<User> findByIdWithRoles(long id) {
+        return userJpaRepository.findByIdWithRoles(id);
+    }
+
+    @Override
+    public boolean existsByPhone_Phone(String phone) {
+        return userJpaRepository.existsByPhone_Phone(phone);
+    }
 }
