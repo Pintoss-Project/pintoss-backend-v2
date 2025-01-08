@@ -27,32 +27,40 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2User oAuth2User = getOAuth2User(userRequest);
 
+        OAuthAttributes attributes = getOAuthAttributes(userRequest, oAuth2User);
+        Long userId = getOrCreate(attributes);
+
+        return createDefaultOAuth2User(attributes);
+    }
+
+    private OAuth2User getOAuth2User(OAuth2UserRequest userRequest) {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
-        OAuth2User oAuth2User = delegate.loadUser(userRequest);
+        return delegate.loadUser(userRequest);
+    }
 
+    private OAuthAttributes getOAuthAttributes(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
         // 현재 로그인 진행중인 서비스
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         // OAuth2 로그인 진행시 키가 되는 필드값
         String userNameAttributeName = userRequest.getClientRegistration()
                 .getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
-        OAuthAttributes attributes = OAuthAttributes
-                .of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+        return OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+    }
 
-        User user = saveOrUpdate(attributes);
-        userRepository.save(user);
+    private Long getOrCreate(OAuthAttributes attributes) {
+        User user = userRepository.findByEmail(attributes.getEmail().toString())
+                .orElse(attributes.toEntity());
+        return userRepository.save(user);
+    }
 
+    private DefaultOAuth2User createDefaultOAuth2User(OAuthAttributes attributes) {
         return new DefaultOAuth2User(
                 Collections.emptySet(),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey()
         );
-    }
-
-    private User saveOrUpdate(OAuthAttributes attributes) {
-
-        return userRepository.findByEmail(attributes.getEmail().toString())
-                .orElse(attributes.toEntity());
     }
 }
