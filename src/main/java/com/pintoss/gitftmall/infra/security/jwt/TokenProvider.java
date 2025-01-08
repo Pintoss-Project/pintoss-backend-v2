@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.infra.security.filter.jwt;
+package com.pintoss.gitftmall.infra.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

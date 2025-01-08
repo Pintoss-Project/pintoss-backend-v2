@@ -42,11 +42,9 @@ public class User {
     )
     private Phone phone;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserRole> roles = new HashSet<>();
-
-    private String refreshToken;
 
     private LocalDateTime createdAt;
 
@@ -67,14 +65,5 @@ public class User {
                 phone,
                 roles
         );
-    }
-
-    public void storeRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-
-    public boolean isEqualsRefreshToken(String refreshToken) {
-        return this.refreshToken.equals(refreshToken);
     }
 }
