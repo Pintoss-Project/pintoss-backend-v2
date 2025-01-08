@@ -6,18 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/oauth2/authorization")
+@RequestMapping("/oauth2")
 public class OAuthController {
 
-    @GetMapping("/kakao")
-    public ApiResponse<Void> oauth2Kakao() {
-
-        return ApiResponse.ok(null);
+    @GetMapping("/success")
+    public ApiResponse<String> oauth2Success() {
+        return ApiResponse.ok("OAuth 로그인 성공");
     }
 
-    @GetMapping("/naver")
-    public ApiResponse<Void> oauth2Naver() {
-
-        return ApiResponse.ok(null);
+    @GetMapping("/failure")
+    public ApiResponse<String> oauth2Failure() {
+        return ApiResponse.ok("OAuth 로그인 실패");
     }
 }

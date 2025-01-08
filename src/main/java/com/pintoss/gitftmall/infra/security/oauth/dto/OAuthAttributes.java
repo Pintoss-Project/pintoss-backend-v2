@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.infra.security.dto;
+package com.pintoss.gitftmall.infra.security.oauth.dto;
 
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.model.value.Email;

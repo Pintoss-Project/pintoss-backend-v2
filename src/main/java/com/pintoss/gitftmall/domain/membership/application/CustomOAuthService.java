@@ -1,12 +1,9 @@
-package com.pintoss.gitftmall.infra.security;
+package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.repository.IUserRepository;
-import com.pintoss.gitftmall.infra.security.dto.OAuthAttributes;
-import com.pintoss.gitftmall.infra.security.dto.SessionUser;
-import jakarta.servlet.http.HttpSession;
+import com.pintoss.gitftmall.infra.security.oauth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -16,14 +13,12 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final IUserRepository userRepository;
-    private final HttpSession httpSession;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

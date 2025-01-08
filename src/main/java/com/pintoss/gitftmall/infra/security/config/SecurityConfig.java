@@ -1,17 +1,15 @@
 package com.pintoss.gitftmall.infra.security.config;
 
-<<<<<<< HEAD:src/main/java/com/pintoss/gitftmall/infra/security/SecurityConfig.java
-=======
 import com.pintoss.gitftmall.common.utils.HttpServletUtils;
+import com.pintoss.gitftmall.domain.membership.application.CustomOAuthService;
+import com.pintoss.gitftmall.infra.security.oauth.handler.OAuthSuccessHandler;
 import com.pintoss.gitftmall.infra.security.service.SecurityService;
 import com.pintoss.gitftmall.infra.security.filter.jwt.JwtFilter;
 import com.pintoss.gitftmall.infra.security.filter.jwt.TokenProvider;
->>>>>>> develop:src/main/java/com/pintoss/gitftmall/infra/security/config/SecurityConfig.java
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,16 +24,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-<<<<<<< HEAD:src/main/java/com/pintoss/gitftmall/infra/security/SecurityConfig.java
-    private final CustomOAuth2UserService customOAuth2UserService;
-=======
+    private final CustomOAuthService customOAuthUserService;
+    private final OAuthSuccessHandler oAuthSuccessHandler;
     private final TokenProvider tokenProvider;
     private final HttpServletUtils servletUtils;
     private final SecurityService securityService;
->>>>>>> develop:src/main/java/com/pintoss/gitftmall/infra/security/config/SecurityConfig.java
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -77,13 +72,11 @@ public class SecurityConfig {
             )
             .oauth2Login(oauth2 -> oauth2
                 .userInfoEndpoint(userInfo
-                        -> userInfo.userService(customOAuth2UserService)) // AccessToken 발급시 loadUser 실행.
-                .successHandler((request, response, authentication) -> {
-                    response.sendRedirect("/success");
-                })
+                        -> userInfo.userService(customOAuthUserService)) // AccessToken 발급시 loadUser 실행.
+                .successHandler(oAuthSuccessHandler)
                 .failureHandler((request, response, exception) -> {
 //                    System.out.println("OAuth2 로그인 실패: " + exception.getMessage());
-                    response.sendRedirect("/failure");
+                    response.sendRedirect("/oauth2/failure");
                 })
             )
             .build();
