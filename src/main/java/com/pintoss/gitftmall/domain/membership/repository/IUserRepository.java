@@ -12,4 +12,8 @@ public interface IUserRepository {
     boolean existsByEmail_Email(String email);
 
     Optional<User> findById(long id);
+
+    Optional<User> findByIdWithRoles(long id);
+
+    boolean existsByPhone_Phone(String phone);
 }

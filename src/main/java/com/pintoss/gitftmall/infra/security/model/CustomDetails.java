@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.infra.security;
+package com.pintoss.gitftmall.infra.security.model;
 
 import com.pintoss.gitftmall.domain.membership.model.User;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class CustomDetails implements UserDetails {
@@ -21,10 +21,18 @@ public class CustomDetails implements UserDetails {
         this.refreshToken = refreshToken;
     }
 
+
     // 계정 권한 목록 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return user.getRoles()
+                .stream()
+                .map(role -> new GrantedAuthority() {
+                    @Override
+                    public String getAuthority() {
+                        return role.getName().toString();
+                    }
+                }).collect(Collectors.toSet());
     }
 
     // 비밀번호 반환

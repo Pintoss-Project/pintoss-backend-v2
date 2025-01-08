@@ -43,13 +43,15 @@ public class User {
     )
     private Phone phone;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserRole> roles = new HashSet<>();
 
     @Column(name = "oauth_provider", nullable = false)
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
+
+    private String refreshToken;
 
     private LocalDateTime createdAt;
 
@@ -85,5 +87,14 @@ public class User {
                 roles,
                 provider
         );
+    }
+
+    public void storeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+
+    public boolean isEqualsRefreshToken(String refreshToken) {
+        return this.refreshToken.equals(refreshToken);
     }
 }
