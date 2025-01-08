@@ -1,6 +1,7 @@
 package com.pintoss.gitftmall.common.exceptions;
 
 import com.pintoss.gitftmall.common.dto.ApiErrorResponse;
+import com.pintoss.gitftmall.common.exceptions.client.AuthorizationException;
 import com.pintoss.gitftmall.common.exceptions.client.BadRequestException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,17 @@ public class GlobalExceptionHandler {
             e.getErrorCode(),
             e.getMessage(),
             LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, e.getHttpStatus());
+    }
+
+    @ExceptionHandler(value = {AuthorizationException.class})
+    public final ResponseEntity<ApiErrorResponse> handleAuthorizationException(AuthorizationException e){
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                e.getHttpStatus(),
+                e.getErrorCode(),
+                e.getMessage(),
+                LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }

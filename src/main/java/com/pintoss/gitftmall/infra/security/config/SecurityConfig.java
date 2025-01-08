@@ -1,11 +1,17 @@
-package com.pintoss.gitftmall.infra.security;
+package com.pintoss.gitftmall.infra.security.config;
 
+import com.pintoss.gitftmall.common.utils.HttpServletUtils;
+import com.pintoss.gitftmall.infra.security.service.SecurityService;
+import com.pintoss.gitftmall.infra.security.filter.jwt.JwtFilter;
+import com.pintoss.gitftmall.infra.security.filter.jwt.TokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final TokenProvider tokenProvider;
+    private final HttpServletUtils servletUtils;
+    private final SecurityService securityService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -25,6 +36,19 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
         return configuration.getAuthenticationManager();
+    }
+
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/h2-console/**",
+                        "/resources/**",
+                        "/static/**"
+                );
     }
 
     @Bean
@@ -37,6 +61,7 @@ public class SecurityConfig {
             .sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+            .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, securityService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(request ->
                 request.requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
