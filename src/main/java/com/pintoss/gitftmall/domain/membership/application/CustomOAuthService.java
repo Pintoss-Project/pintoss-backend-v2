@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +27,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         OAuth2User oAuth2User = getOAuth2User(userRequest);
 
         OAuthAttributes attributes = getOAuthAttributes(userRequest, oAuth2User);
-        Long userId = getOrCreate(attributes);
+        getOrCreate(attributes);
 
         return createDefaultOAuth2User(attributes);
     }
@@ -45,16 +47,23 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         return OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
     }
 
-    private Long getOrCreate(OAuthAttributes attributes) {
-        User user = userRepository.findByEmail(attributes.getEmail().toString())
-                .orElse(attributes.toEntity());
-        return userRepository.save(user);
+    private void getOrCreate(OAuthAttributes attributes) {
+        userRepository.findByEmail(attributes.getEmail())
+            .orElseGet(() -> {
+                User newUser = attributes.toEntity();
+                userRepository.save(newUser);
+                return newUser;
+            });
     }
 
     private DefaultOAuth2User createDefaultOAuth2User(OAuthAttributes attributes) {
+        Map<String, Object> updatedAttributes = new HashMap<>(attributes.getAttributes());
+        updatedAttributes.put("email", attributes.getEmail());
+        updatedAttributes.put("password", attributes.getPassword()); // 비밀번호는 보안상 실제 값 대신 더미값 사용 권장
+
         return new DefaultOAuth2User(
                 Collections.emptySet(),
-                attributes.getAttributes(),
+                updatedAttributes,
                 attributes.getNameAttributeKey()
         );
     }

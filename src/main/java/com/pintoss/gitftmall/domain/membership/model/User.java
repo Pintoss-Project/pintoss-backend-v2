@@ -76,14 +76,12 @@ public class User {
         );
     }
 
-    public static User createOAuthUser(Email email, String name, Set<UserRole> roles, OAuthProvider provider) {
-        Password dummyPassword = new Password("Oauthuser0!", new BCryptPasswordEncoder());
-
+    public static User create(Email email, String rawPassword, String name, Phone phone, Set<UserRole> roles, PasswordEncoder encoder, OAuthProvider provider) {
         return new User(
                 email,
-                dummyPassword,
+                new Password(rawPassword, encoder),
                 name,
-                new Phone("010-0000-0000"),
+                phone,
                 roles,
                 provider
         );

@@ -27,10 +27,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final CustomOAuthService customOAuthUserService;
-    private final OAuthSuccessHandler oAuthSuccessHandler;
     private final TokenProvider tokenProvider;
     private final HttpServletUtils servletUtils;
     private final SecurityService securityService;
+    private final OAuthSuccessHandler oAuthSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,7 +41,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
         return configuration.getAuthenticationManager();
     }
-
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -76,7 +75,7 @@ public class SecurityConfig {
                 .successHandler(oAuthSuccessHandler)
                 .failureHandler((request, response, exception) -> {
 //                    System.out.println("OAuth2 로그인 실패: " + exception.getMessage());
-                    response.sendRedirect("/oauth2/failure");
+                    response.sendRedirect("/oauth2/failure"); // 실패 redirect
                 })
             )
             .build();

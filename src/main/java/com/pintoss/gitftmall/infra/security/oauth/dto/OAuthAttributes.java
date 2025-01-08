@@ -1,32 +1,39 @@
 package com.pintoss.gitftmall.infra.security.oauth.dto;
 
+import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceCommand;
+import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
 import com.pintoss.gitftmall.domain.membership.model.User;
-import com.pintoss.gitftmall.domain.membership.model.value.Email;
-import com.pintoss.gitftmall.domain.membership.model.value.OAuthProvider;
-import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.domain.membership.model.value.UserRole;
+import com.pintoss.gitftmall.domain.membership.model.value.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 public class OAuthAttributes {
     private final Map<String, Object> attributes;
     private final String nameAttributeKey;
     private final String name;
-    private final Email email;
+    private final String email;
+    private final String password;
     private final OAuthProvider provider;
+
+    private static final String BASE_PASSWORD = "Oauth0!";
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Builder
     public OAuthAttributes(
-            Map<String, Object> attributes, String nameAttributeKey, String name, String email, OAuthProvider provider
+            Map<String, Object> attributes, String nameAttributeKey, String name,
+            String email, String password, OAuthProvider provider
     ) {
       this.attributes = attributes;
       this.nameAttributeKey = nameAttributeKey;
       this.name = name;
-      this.email = new Email(email);
+      this.email = email;
+      this.password = password;
       this.provider = provider;
     }
 
@@ -71,6 +78,7 @@ public class OAuthAttributes {
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .provider(provider)
+                .password(PasswordGenerator())
                 .build();
     }
 
@@ -91,12 +99,21 @@ public class OAuthAttributes {
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .provider(provider)
+                .password(PasswordGenerator())
                 .build();
     }
 
     public User toEntity() {
-        return User.createOAuthUser(
-                email, name, Set.of(new UserRole(RoleEnum.USER)), provider
-        );
+        String dummyPassword = PasswordGenerator();
+        Phone dummyPhone = new Phone("010-0000-0000");
+
+        return User.create(
+                new Email(email), dummyPassword, name, dummyPhone, Set.of(new UserRole(RoleEnum.USER)), encoder, provider);
+    }
+
+    public static String PasswordGenerator() {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+
+        return BASE_PASSWORD + uuid.substring(0, 13);
     }
 }
