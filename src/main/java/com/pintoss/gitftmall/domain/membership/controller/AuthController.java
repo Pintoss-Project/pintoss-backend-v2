@@ -9,6 +9,9 @@ import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceC
 import com.pintoss.gitftmall.domain.membership.application.command.RegisterServiceCommand;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
+import com.pintoss.gitftmall.domain.membership.model.User;
+import com.pintoss.gitftmall.infra.persistence.membership.UserJpaRepository;
+import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,7 @@ public class AuthController {
     public ApiResponse<LoginResult> login(@RequestBody @Valid LoginRequest request, HttpServletResponse servletResponse) {
         LoginServiceCommand command = new LoginServiceCommand(request.getEmail(), request.getPassword());
 
+        // TODO loginService에서 login하는 과정에서 에러 발생. command에 email과 pw는 잘 넘어옴.
         LoginResult loginResult = loginService.login(command);
 
         // TODO : 만료 기간은 미정 임의 값 입니다.
