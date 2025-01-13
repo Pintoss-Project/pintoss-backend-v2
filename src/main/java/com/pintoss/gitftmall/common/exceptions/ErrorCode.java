@@ -11,7 +11,8 @@ public enum ErrorCode {
     BAD_REQUEST("4001", "잘못된 요청입니다."),
     INVALID_ACCESS("4002", "유효하지 않은 토큰입니다."),
     EXPIRED_TOKEN("4003", "만료된 토큰입니다."),
-
+    MISSING_REQUEST_FIELD("4004", "필수 입력 필드가 누락되었습니다."),
+    INVALID_REQUEST_FIELD("4005", "잘못된 요청 필드입니다."),
     // 401 Unauthorized
     UNAUTHORIZED("4011", "잘못된 자격증명 입니다."),
 
