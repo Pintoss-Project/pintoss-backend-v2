@@ -35,4 +35,11 @@ public class RegisterService {
         userRepository.save(user);
     }
 
+    public Boolean checkEmailDuplicate(String email) {
+        return userRepository.existsByEmail_Email(email);
+    }
+
+    public Boolean checkPhoneDuplicate(String phone) {
+        return userRepository.existsByPhone_Phone(phone);
+    }
 }
