@@ -2,6 +2,7 @@ spring:
   config:
     active:
       on-profile: local
+    import: application-jwt.yaml, application-nice.yaml
   application:
     name : giftmall
   #  sql:
@@ -22,12 +23,6 @@ spring:
         highlight_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
 #        use_sql_comments: true
-
-jwt:
-  token:
-    secret-key: sgjasg3123adadg3123123hdfh21ad53422dadasf5123adadg3123123hdfh21ad53425
-    access-token-expiration: 6400000000000000000
-    refresh-token-expiration: 6400000000000000000
 logging:
   level:
     org.hibernate.SQL: debug
@@ -50,8 +45,3 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
     database-platform: org.hibernate.dialect.MariaDBDialect
-jwt:
-  token:
-    secret-key: asbnfu1231j2308j1nqewdjnd108dejh10823hj12803h1298hnqsdjfnkasjdasdasd213123123123f123
-    access-token-expiration: 6400000000000000000
-    refresh-token-expiration: 6400000000000000000
