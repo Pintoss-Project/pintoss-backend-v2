@@ -51,6 +51,6 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         servletUtils.addCookie(response, "RefreshToken", refreshToken, (int) 1000000000L);
 
         // 성공 후 리다이렉트
-        response.sendRedirect("/oauth2/success");
+        response.sendRedirect("https://pin-toss.com/");
     }
 }

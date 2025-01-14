@@ -73,10 +73,6 @@ public class SecurityConfig {
                 .userInfoEndpoint(userInfo
                         -> userInfo.userService(customOAuthUserService)) // AccessToken 발급시 loadUser 실행.
                 .successHandler(oAuthSuccessHandler)
-                .failureHandler((request, response, exception) -> {
-//                    System.out.println("OAuth2 로그인 실패: " + exception.getMessage());
-                    response.sendRedirect("/oauth2/failure"); // 실패 redirect
-                })
             )
             .build();
     }
