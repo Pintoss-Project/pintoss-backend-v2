@@ -27,9 +27,9 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         OAuth2User oAuth2User = getOAuth2User(userRequest);
 
         OAuthAttributes attributes = getOAuthAttributes(userRequest, oAuth2User);
-        getOrCreate(attributes);
+        Long userId = getOrCreate(attributes);
 
-        return createDefaultOAuth2User(attributes);
+        return createDefaultOAuth2User(userId, attributes);
     }
 
     private OAuth2User getOAuth2User(OAuth2UserRequest userRequest) {
@@ -47,19 +47,21 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         return OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
     }
 
-    private void getOrCreate(OAuthAttributes attributes) {
-        userRepository.findByEmail(attributes.getEmail())
-            .orElseGet(() -> {
-                User newUser = attributes.toEntity();
-                userRepository.save(newUser);
-                return newUser;
-            });
+    private Long getOrCreate(OAuthAttributes attributes) {
+        return userRepository.findByEmail(attributes.getEmail())
+                .map(User::getId)
+                .orElseGet(() -> {
+                    User newUser = attributes.toEntity();
+                    return userRepository.save(newUser);
+                });
     }
 
-    private DefaultOAuth2User createDefaultOAuth2User(OAuthAttributes attributes) {
+    private DefaultOAuth2User createDefaultOAuth2User(Long userId, OAuthAttributes attributes) {
         Map<String, Object> updatedAttributes = new HashMap<>(attributes.getAttributes());
+
+        updatedAttributes.put("userId", userId);
         updatedAttributes.put("email", attributes.getEmail());
-        updatedAttributes.put("password", attributes.getPassword()); // 비밀번호는 보안상 실제 값 대신 더미값 사용 권장
+        updatedAttributes.put("password", attributes.getPassword());
 
         return new DefaultOAuth2User(
                 Collections.emptySet(),
