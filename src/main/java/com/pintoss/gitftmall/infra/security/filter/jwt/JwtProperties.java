@@ -2,11 +2,11 @@ package com.pintoss.gitftmall.infra.security.filter.jwt;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 @Data
 @ConfigurationProperties("jwt.token")
-@Component
+@Configuration
 public class JwtProperties {
     private String secretKey;
     private long accessTokenExpiration;
