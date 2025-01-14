@@ -10,11 +10,13 @@ import com.pintoss.gitftmall.domain.membership.application.ReissueService;
 import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.command.RegisterServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.command.ReissueServiceCommand;
+import com.pintoss.gitftmall.domain.membership.application.result.EncryptedTokenResponse;
 import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
+import com.pintoss.gitftmall.infra.nice.service.NiceAuthService;
 import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +34,7 @@ public class AuthController {
     private final LoginService loginService;
     private final ReissueService reissueService;
     private final HttpServletUtils servletUtils;
+    private final NiceAuthService niceAuthService;
 
     @PostMapping("/register")
     public ApiResponse<Void> register(@RequestBody @Valid RegisterRequest request) {
@@ -96,4 +99,9 @@ public class AuthController {
         return ApiResponse.ok(rs);
     }
 
+    @GetMapping("/nice/token")
+    public ApiResponse<EncryptedTokenResponse> registerIdentify() throws Exception{
+        EncryptedTokenResponse token = niceAuthService.getEncryptedToken();
+        return ApiResponse.ok(token);
+    }
 }
