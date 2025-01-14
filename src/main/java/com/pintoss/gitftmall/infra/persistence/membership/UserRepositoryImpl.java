@@ -5,6 +5,7 @@ import com.pintoss.gitftmall.domain.membership.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -42,5 +43,10 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public boolean existsByPhone_Phone(String phone) {
         return userJpaRepository.existsByPhone_Phone(phone);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userJpaRepository.findAll();
     }
 }
