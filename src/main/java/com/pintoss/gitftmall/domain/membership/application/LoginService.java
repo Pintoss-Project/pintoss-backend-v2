@@ -16,12 +16,9 @@ public class LoginService {
     private final AuthenticationManager authenticationManager;
 
     public LoginResult login(LoginServiceCommand command) {
-        // TODO autnenticationManager.authenticate에서 에러남. 현재 command에 email과 pw는 잘 넘어오는것 확인.
-        System.out.println("command = " + command);
         Authentication authenticate = authenticationManager.authenticate(
             new CustomAuthentication(command.getEmail(), command
                 .getPassword()));
-        System.out.println("authenticate = " + authenticate);
         CustomDetails principal = (CustomDetails) authenticate.getPrincipal();
         LoginResult loginResult = new LoginResult(principal.getAccessToken(), principal.getRefreshToken());
         return loginResult;
