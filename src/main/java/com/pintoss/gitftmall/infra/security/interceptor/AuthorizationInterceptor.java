@@ -41,9 +41,11 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     }
 
     private AuthorizationRequired getAnnotation(Object handler) {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-
-        return handlerMethod.getMethodAnnotation(AuthorizationRequired.class);
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            return handlerMethod.getMethodAnnotation(AuthorizationRequired.class);
+        }
+        return null;
     }
 
     private Collection<? extends GrantedAuthority> roleToAuthority(RoleEnum[] required) {
