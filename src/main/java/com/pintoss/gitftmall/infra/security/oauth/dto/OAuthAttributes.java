@@ -50,14 +50,7 @@ public class OAuthAttributes {
     }
 
     private static OAuthProvider convertToProvider(String registrationId) {
-        switch (registrationId.toLowerCase()) {
-            case "kakao":
-                return OAuthProvider.KAKAO;
-            case "naver":
-                return OAuthProvider.NAVER;
-            default:
-                return OAuthProvider.NONE;
-        }
+        return OAuthProvider.fromValue(registrationId);
     }
 
     private static OAuthAttributes ofKakao(
