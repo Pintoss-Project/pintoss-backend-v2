@@ -1,10 +1,10 @@
-package com.pintoss.gitftmall.domain.membership.application.command;
+package com.pintoss.gitftmall.infra.nice.client.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class EncryptedRequestDataHeader {
+public class NiceApiEncryptedTokenRequestDataHeader {
     public String CNTY_CD;
 }

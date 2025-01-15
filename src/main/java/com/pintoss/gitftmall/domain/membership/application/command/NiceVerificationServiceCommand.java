@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class EncryptedRequest {
-    public EncryptedRequestDataHeader dataHeader;
-    public EncryptedRequestDataBody dataBody;
+public class NiceVerificationServiceCommand {
+    private String tokenVersionId;
+    private String encData;
+    private String integrityValue;
 }

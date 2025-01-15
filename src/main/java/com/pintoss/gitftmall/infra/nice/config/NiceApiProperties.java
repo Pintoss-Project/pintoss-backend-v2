@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @ConfigurationProperties("nice-auth")
 @Configuration
-public class NiceAuthProperties {
+public class NiceApiProperties {
     private String clientId;
     private String clientSecret;
     private String accessTokenUri;
