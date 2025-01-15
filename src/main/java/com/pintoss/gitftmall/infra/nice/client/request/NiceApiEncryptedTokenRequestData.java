@@ -1,9 +1,9 @@
-package com.pintoss.gitftmall.domain.membership.application.command;
+package com.pintoss.gitftmall.infra.nice.client.request;
 
 import lombok.Data;
 
 @Data
-public class EncryptedRequestData {
+public class NiceApiEncryptedTokenRequestData {
 
     private String requestno;
     private String returnurl;
@@ -15,7 +15,7 @@ public class EncryptedRequestData {
     private String popupyn;
     private String receiverdata;
 
-    public EncryptedRequestData(String requestno, String returnurl, String sitecode) {
+    public NiceApiEncryptedTokenRequestData(String requestno, String returnurl, String sitecode) {
         this.requestno = requestno;
         this.returnurl = returnurl;
         this.sitecode = sitecode;
