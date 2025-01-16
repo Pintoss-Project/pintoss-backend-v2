@@ -41,8 +41,6 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
         Long userId = (Long) attributes.get("userId");
-//        String email = (String) attributes.get("email");
-//        String password = (String) attributes.get("password");
 
         String accessToken = tokenProvider.createAccessToken(String.valueOf(userId));
         String refreshToken = tokenProvider.createRefreshToken(String.valueOf(userId));
@@ -51,6 +49,6 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         servletUtils.addCookie(response, "RefreshToken", refreshToken, (int) 1000000000L);
 
         // 성공 후 리다이렉트
-        response.sendRedirect("https://pin-toss.com/");
+        response.sendRedirect("https://pin-toss.com/register?oauth=true");
     }
 }
