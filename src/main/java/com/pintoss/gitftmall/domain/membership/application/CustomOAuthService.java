@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -27,9 +28,10 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         OAuth2User oAuth2User = getOAuth2User(userRequest);
 
         OAuthAttributes attributes = getOAuthAttributes(userRequest, oAuth2User);
-        Long userId = getOrCreate(attributes);
 
-        return createDefaultOAuth2User(userId, attributes);
+        Optional<User> existUser = getUserByEmail(attributes.getEmail());
+
+        return createDefaultOAuth2User(userRequest, existUser, attributes);
     }
 
     private OAuth2User getOAuth2User(OAuth2UserRequest userRequest) {
@@ -47,21 +49,17 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         return OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
     }
 
-    private Long getOrCreate(OAuthAttributes attributes) {
-        return userRepository.findByEmail(attributes.getEmail())
-                .map(User::getId)
-                .orElseGet(() -> {
-                    User newUser = attributes.toEntity();
-                    return userRepository.save(newUser);
-                });
+    private Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
-    private DefaultOAuth2User createDefaultOAuth2User(Long userId, OAuthAttributes attributes) {
+    private DefaultOAuth2User createDefaultOAuth2User(OAuth2UserRequest userRequest, Optional<User> user, OAuthAttributes attributes) {
         Map<String, Object> updatedAttributes = new HashMap<>(attributes.getAttributes());
 
-        updatedAttributes.put("userId", userId);
         updatedAttributes.put("email", attributes.getEmail());
-        updatedAttributes.put("password", attributes.getPassword());
+        updatedAttributes.put("provider", userRequest.getClientRegistration().getRegistrationId());
+
+        user.ifPresent(value -> updatedAttributes.put("userId", value.getId()));
 
         return new DefaultOAuth2User(
                 Collections.emptySet(),

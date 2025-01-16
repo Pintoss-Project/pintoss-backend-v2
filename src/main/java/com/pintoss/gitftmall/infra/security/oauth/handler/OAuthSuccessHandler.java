@@ -40,15 +40,27 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         // Attributes에서 데이터 가져오기
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
+        // 여기서 분기 -> userId 있으면 로그인 성공, 아니면 provider와 email정보 담아서 주기
         Long userId = (Long) attributes.get("userId");
+        String email = (String) attributes.get("email");
+        String provider = (String) attributes.get("provider");
 
-        String accessToken = tokenProvider.createAccessToken(String.valueOf(userId));
-        String refreshToken = tokenProvider.createRefreshToken(String.valueOf(userId));
+        // 기존 아이디 있는 경우
+        if(userId != null) {
+            String accessToken = tokenProvider.createAccessToken(String.valueOf(userId));
+            String refreshToken = tokenProvider.createRefreshToken(String.valueOf(userId));
 
-        servletUtils.addCookie(response, "AccessToken", accessToken, (int) 1000000000L);
-        servletUtils.addCookie(response, "RefreshToken", refreshToken, (int) 1000000000L);
+            servletUtils.addCookie(response, "AccessToken", accessToken, (int) 1000000000L);
+            servletUtils.addCookie(response, "RefreshToken", refreshToken, (int) 1000000000L);
 
-        // 성공 후 리다이렉트
-        response.sendRedirect("https://pin-toss.com/register?oauth=true");
+            response.sendRedirect("https://pin-toss.com");
+        }
+        // 신규 로그인
+        else {
+            servletUtils.addCookie(response, "email", email, (int) 1000000000L);
+            servletUtils.addCookie(response, "provider", provider, (int) 1000000000L);
+
+            response.sendRedirect("https://pin-toss.com/register?oauth=true");
+        }
     }
 }
