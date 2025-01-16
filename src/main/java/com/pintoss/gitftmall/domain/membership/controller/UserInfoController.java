@@ -5,7 +5,7 @@ import com.pintoss.gitftmall.common.exceptions.ErrorCode;
 import com.pintoss.gitftmall.common.exceptions.client.MissingTokenException;
 import com.pintoss.gitftmall.common.exceptions.client.NotFoundMemberException;
 import com.pintoss.gitftmall.common.utils.HttpServletUtils;
-import com.pintoss.gitftmall.domain.membership.application.result.UserInfoResult;
+import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.service.TokenManageService;
 import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
@@ -29,7 +29,7 @@ public class UserInfoController {
     private final UserRepositoryImpl userRepository;
 
     @GetMapping("/user_info")
-    public ApiResponse<UserInfoResult> userInfo(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Authentication authentication) {
+    public ApiResponse<UserInfoResponse> userInfo(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Authentication authentication) {
         String accessToken = servletUtils.getCookie(servletRequest, "AccessToken")
                 .map(Cookie::getValue)
                 .orElseThrow(() -> new MissingTokenException(ErrorCode.INVALID_ACCESS, "액세스 토큰이 빈 값입니다."));
@@ -40,7 +40,7 @@ public class UserInfoController {
                 () -> new NotFoundMemberException("존재하지 않는 회원입니다.")
         );
 
-        UserInfoResult userInfoResult = new UserInfoResult(user.getEmail().toString(), user.getName(), user.getPhone().toString());
+        UserInfoResponse userInfoResult = new UserInfoResponse(user.getEmail().toString(), user.getName(), user.getPhone().toString());
 
         return ApiResponse.of(HttpStatus.OK, "회원정보를 조회했습니다.", userInfoResult);
     }

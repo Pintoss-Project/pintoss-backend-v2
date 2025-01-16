@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.domain.membership.application.result.UserInfoResult;
+import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,11 @@ public class AdminUserInfoService {
 
     private final UserRepositoryImpl userRepository;
 
-    public List<UserInfoResult> findUserInfo(Pageable pageable) {
+    public List<UserInfoResponse> findUserInfo(Pageable pageable) {
         Page<User> userList = userRepository.getUsers(pageable);
 
         return userList.stream()
-                .map(user -> new UserInfoResult(
+                .map(user -> new UserInfoResponse(
                         user.getEmail().toString(),
                         user.getName(),
                         user.getPhone().toString()
