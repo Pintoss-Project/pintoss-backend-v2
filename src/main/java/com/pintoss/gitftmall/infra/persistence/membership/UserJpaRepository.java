@@ -1,6 +1,8 @@
 package com.pintoss.gitftmall.infra.persistence.membership;
 
 import com.pintoss.gitftmall.domain.membership.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +20,6 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     Optional<User> findByIdWithRoles(@Param("userId") long userId);
 
     boolean existsByPhone_Phone(String phone);
+
+    Page<User> findAll(Pageable pageable);
 }

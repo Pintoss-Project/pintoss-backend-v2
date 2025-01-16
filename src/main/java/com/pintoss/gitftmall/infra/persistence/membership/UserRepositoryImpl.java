@@ -3,6 +3,9 @@ package com.pintoss.gitftmall.infra.persistence.membership;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,7 +49,8 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
-    public List<User> findAllUsers() {
-        return userJpaRepository.findAll();
+    public Page<User> getUsers(Pageable pageable) {
+        return userJpaRepository.findAll(pageable);
     }
+
 }

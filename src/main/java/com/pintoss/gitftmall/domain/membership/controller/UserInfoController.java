@@ -29,7 +29,7 @@ public class UserInfoController {
     private final UserRepositoryImpl userRepository;
 
     @GetMapping("/user_info")
-    public ApiResponse<?> userInfo(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Authentication authentication) {
+    public ApiResponse<UserInfoResult> userInfo(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Authentication authentication) {
         String accessToken = servletUtils.getCookie(servletRequest, "AccessToken")
                 .map(Cookie::getValue)
                 .orElseThrow(() -> new MissingTokenException(ErrorCode.INVALID_ACCESS, "액세스 토큰이 빈 값입니다."));
