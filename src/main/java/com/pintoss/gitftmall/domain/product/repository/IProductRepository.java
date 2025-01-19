@@ -11,9 +11,9 @@ public interface IProductRepository {
 
     boolean existsByName(String name);
 
-    Page<Product> getProducts(Pageable pageable);
+    Page<Product> findAll(Pageable pageable);
 
-    Page<Product> getPopularProducts(Pageable pageable);
+    Page<Product> findByIsPopularTrue(Pageable pageable);
 
     Page<Product> findByCategory(ProductCategory category, Pageable pageable);
 }

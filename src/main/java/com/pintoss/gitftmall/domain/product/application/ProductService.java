@@ -19,6 +19,18 @@ public class ProductService {
 
     private final IProductRepository productRepository;
 
+    public List<ProductInfoResponse> getAllProducts(Pageable pageable) {
+        Page<Product> productPage = productRepository.findAll(pageable);
+
+        return mapToProductInfoResponseList(productPage);
+    }
+
+    public List<ProductInfoResponse> getPopularProducts(Pageable pageable) {
+        Page<Product> productPage = productRepository.findByIsPopularTrue(pageable);
+
+        return mapToProductInfoResponseList(productPage);
+    }
+
     public List<ProductInfoResponse> getProductsByCategory(String category, Pageable pageable) {
         ProductCategory productCategory = getProductCategory(category);
 
@@ -43,7 +55,7 @@ public class ProductService {
         try{
             return ProductCategory.valueOf(category.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new InvalidCategoryException(category + " 는 없는 카테고리입니다");
+            throw new InvalidCategoryException("해당 카테고리는 없는 카테고리입니다: " + category);
         }
     }
 }
