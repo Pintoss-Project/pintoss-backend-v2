@@ -37,4 +37,21 @@ public class ProductController {
 
         return ApiResponse.of(HttpStatus.OK, "전체 상품권 조회 완료", productInfoList);
     }
+
+    @GetMapping("/popular")
+    public ApiResponse<List<ProductInfoResponse>> getPopularProducts(Pageable pageable) {
+        Page<Product> popularProductList = productRepository.getPopularProducts(pageable);
+
+        List<ProductInfoResponse> popularProductInfoList = popularProductList.stream()
+                .map(product -> new ProductInfoResponse(
+                        product.getId(),
+                        product.getName(),
+                        product.getDiscount() != null ? product.getDiscount().getCardDiscount() : null,
+                        product.getDiscount() != null ? product.getDiscount().getPhoneDiscount() : null,
+                        null
+                ))
+                .toList();
+
+        return ApiResponse.of(HttpStatus.OK, "인기 상품권 조회 완료", popularProductInfoList);
+    }
 }

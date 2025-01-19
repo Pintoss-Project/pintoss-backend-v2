@@ -11,4 +11,6 @@ public interface IProductRepository {
     boolean existsByName(String name);
 
     Page<Product> getProducts(Pageable pageable);
+
+    Page<Product> getPopularProducts(Pageable pageable);
 }

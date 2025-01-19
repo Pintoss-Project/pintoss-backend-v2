@@ -27,4 +27,9 @@ public class ProductRepositoryImpl implements IProductRepository {
     public Page<Product> getProducts(Pageable pageable) {
         return productJpaRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Product> getPopularProducts(Pageable pageable) {
+        return productJpaRepository.findByIsPopularTrue(pageable);
+    }
 }
