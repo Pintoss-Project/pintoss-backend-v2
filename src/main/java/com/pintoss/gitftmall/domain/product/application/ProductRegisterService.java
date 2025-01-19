@@ -8,7 +8,8 @@ import com.pintoss.gitftmall.domain.product.model.value.ContactInfo;
 import com.pintoss.gitftmall.domain.product.model.value.CsCenter;
 import com.pintoss.gitftmall.domain.product.model.value.Discount;
 import com.pintoss.gitftmall.domain.product.model.value.HomePage;
-import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
+import com.pintoss.gitftmall.domain.product.repository.IProductCommandRepository;
+import com.pintoss.gitftmall.domain.product.repository.IProductQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductRegisterService {
 
-    private final IProductRepository productRepository;
+    private final IProductQueryRepository productQueryRepository;
+    private final IProductCommandRepository productCommandRepository;
 
     public void register(ProductRegisterServiceCommand command){
 
-        if( productRepository.existsByName(command.getName()) ) {
+        if( productQueryRepository.existsByName(command.getName()) ) {
             throw new DuplicateProductNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품입니다.");
         }
 
@@ -38,7 +40,7 @@ public class ProductRegisterService {
                 command.getIndex()
         );
 
-        productRepository.save(product);
+        productCommandRepository.save(product);
     }
 
 }

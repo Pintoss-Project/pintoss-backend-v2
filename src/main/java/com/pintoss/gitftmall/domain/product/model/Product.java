@@ -2,7 +2,12 @@ package com.pintoss.gitftmall.domain.product.model;
 
 import com.pintoss.gitftmall.domain.product.model.value.ContactInfo;
 import com.pintoss.gitftmall.domain.product.model.value.Discount;
+import com.pintoss.gitftmall.domain.product.model.value.Image;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +54,9 @@ public class Product {
     //드래그 드랍 인덱스 컬럼
     @Column(name = "product_index")
     private int index;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<Image> images = new ArrayList<>();
 
     private LocalDateTime createdAt;
 

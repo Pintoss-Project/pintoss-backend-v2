@@ -5,9 +5,9 @@ spring:
     import: application-jwt.yaml, application-nice.yaml
   application:
     name : giftmall
-  #  sql:
-  #    init:
-  #      data-locations: classpath:sql/data.sql
+    sql:
+      init:
+        data-locations: classpath:sql/data.sql
   datasource:
     username: root
     password: 1234
@@ -22,6 +22,7 @@ spring:
         #        show_sql: true
         highlight_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
+    defer-datasource-initialization: true
 #        use_sql_comments: true
 logging:
   level:

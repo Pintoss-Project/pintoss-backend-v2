@@ -1,5 +1,7 @@
 package com.pintoss.gitftmall.domain.product.model.value;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -11,10 +13,14 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ContactInfo {
 
-    @Column(length = 100)
+    @AttributeOverrides({
+        @AttributeOverride(name = "url", column = @Column(name = "homePage", nullable = false, length = 100))
+    })
     private HomePage homePage;
 
-    @Column(length = 20)
+    @AttributeOverrides({
+        @AttributeOverride(name = "tel", column = @Column(name = "csCenter", nullable = false, length = 20))
+    })
     private CsCenter csCenter;
 
     public ContactInfo(HomePage homePage, CsCenter csCenter) {
