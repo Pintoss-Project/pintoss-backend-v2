@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.domain.product.model;
 
 import com.pintoss.gitftmall.domain.product.model.value.ContactInfo;
 import com.pintoss.gitftmall.domain.product.model.value.Discount;
+import com.pintoss.gitftmall.domain.product.model.value.ProductCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -49,6 +50,9 @@ public class Product {
     //드래그 드랍 인덱스 컬럼
     @Column(name = "product_index")
     private int index;
+
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
 
     private LocalDateTime createdAt;
 
