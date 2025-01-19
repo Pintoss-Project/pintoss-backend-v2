@@ -1,6 +1,7 @@
 package com.pintoss.gitftmall.infra.persistence.product;
 
 import com.pintoss.gitftmall.domain.product.model.Product;
+import com.pintoss.gitftmall.domain.product.model.value.ProductCategory;
 import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,4 +33,10 @@ public class ProductRepositoryImpl implements IProductRepository {
     public Page<Product> getPopularProducts(Pageable pageable) {
         return productJpaRepository.findByIsPopularTrue(pageable);
     }
+
+    @Override
+    public Page<Product> findByCategory(ProductCategory category, Pageable pageable) {
+        return productJpaRepository.findByCategory(category, pageable);
+    }
+
 }
