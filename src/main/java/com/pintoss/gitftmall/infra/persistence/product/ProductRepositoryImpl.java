@@ -3,6 +3,8 @@ package com.pintoss.gitftmall.infra.persistence.product;
 import com.pintoss.gitftmall.domain.product.model.Product;
 import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,5 +21,10 @@ public class ProductRepositoryImpl implements IProductRepository {
     @Override
     public boolean existsByName(String name) {
         return productJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Page<Product> getProducts(Pageable pageable) {
+        return productJpaRepository.findAll(pageable);
     }
 }

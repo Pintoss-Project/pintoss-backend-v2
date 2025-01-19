@@ -1,47 +1,40 @@
 package com.pintoss.gitftmall.domain.product.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
-import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.domain.product.application.ProductRegisterService;
-import com.pintoss.gitftmall.domain.product.application.command.ProductRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.product.controller.request.ProductRegisterRequest;
-import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.pintoss.gitftmall.domain.product.controller.response.ProductInfoResponse;
+import com.pintoss.gitftmall.domain.product.model.Product;
+import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api/products")
-@RequiredArgsConstructor
+import java.util.Arrays;
+import java.util.List;
+
+@RestController("/api/product")
+@AllArgsConstructor
 public class ProductController {
 
-    private final ProductRegisterService productRegisterService;
+    private final IProductRepository productRepository;
 
-    @PostMapping
-    @AuthorizationRequired(RoleEnum.ADMIN)
-    public ApiResponse<Void> registerProduct(@RequestBody @Valid ProductRegisterRequest request){
-        ProductRegisterServiceCommand command = new ProductRegisterServiceCommand(
-                request.getName(),
-                request.isPopular(),
-                request.getCardDiscount(),
-                request.getPhoneDiscount(),
-                request.getHomePage(),
-                request.getCsCenter(),
-                request.getDescription(),
-                request.getPublisher(),
-                request.getLogoImageUrl(),
-                request.getNote(),
-                request.getIndex()
-        );
+    @GetMapping
+    public ApiResponse<List<ProductInfoResponse>> getProducts(@PageableDefault Pageable pageable) {
+        Page<Product> productList = productRepository.getProducts(pageable);
 
-        productRegisterService.register(command);
+        List<ProductInfoResponse> productInfoList = productList.stream()
+                .map(product -> new ProductInfoResponse(
+                        product.getId(),
+                        product.getName(),
+                        product.getDiscount() != null ? product.getDiscount().getCardDiscount() : null,
+                        product.getDiscount() != null ? product.getDiscount().getPhoneDiscount() : null,
+                        null
+                ))
+                .toList();
 
-        return ApiResponse.ok(null);
+        return ApiResponse.of(HttpStatus.OK, "전체 상품권 조회 완료", productInfoList);
     }
-
-
-
 }
