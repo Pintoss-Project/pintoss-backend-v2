@@ -1,7 +1,8 @@
 package com.pintoss.gitftmall.domain.product.application;
 
 import com.pintoss.gitftmall.common.exceptions.product.InvalidCategoryException;
-import com.pintoss.gitftmall.domain.product.controller.response.ProductInfoResponse;
+import com.pintoss.gitftmall.domain.product.controller.response.ProductListResponse;
+import com.pintoss.gitftmall.domain.product.mapper.ProductMapper;
 import com.pintoss.gitftmall.domain.product.model.Product;
 import com.pintoss.gitftmall.domain.product.model.value.ProductCategory;
 import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -18,44 +18,25 @@ import java.util.List;
 public class ProductService {
 
     private final IProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public List<ProductInfoResponse> getAllProducts(Pageable pageable) {
+    public List<ProductListResponse> getAllProducts(Pageable pageable) {
         Page<Product> productPage = productRepository.findAll(pageable);
 
-        return mapToProductInfoResponseList(productPage);
+        return productMapper.toProductListResponseList(productPage);
     }
 
-    public List<ProductInfoResponse> getPopularProducts(Pageable pageable) {
+    public List<ProductListResponse> getPopularProducts(Pageable pageable) {
         Page<Product> productPage = productRepository.findByIsPopularTrue(pageable);
 
-        return mapToProductInfoResponseList(productPage);
+        return productMapper.toProductListResponseList(productPage);
     }
 
-    public List<ProductInfoResponse> getProductsByCategory(String category, Pageable pageable) {
-        ProductCategory productCategory = getProductCategory(category);
+    public List<ProductListResponse> getProductsByCategory(String category, Pageable pageable) {
+        ProductCategory productCategory = ProductCategory.from(category);
 
         Page<Product> productPage = productRepository.findByCategory(productCategory, pageable);
 
-        return mapToProductInfoResponseList(productPage);
-    }
-
-    public List<ProductInfoResponse> mapToProductInfoResponseList(Page<Product> productPage) {
-        return productPage.stream()
-                .map(product -> new ProductInfoResponse(
-                        product.getId(),
-                        product.getName(),
-                        product.getDiscount() != null ? product.getDiscount().getCardDiscount() : null,
-                        product.getDiscount() != null ? product.getDiscount().getPhoneDiscount() : null,
-                        null
-                ))
-                .toList();
-    }
-
-    public ProductCategory getProductCategory(String category) {
-        try{
-            return ProductCategory.valueOf(category.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidCategoryException("해당 카테고리는 없는 카테고리입니다: " + category);
-        }
+        return productMapper.toProductListResponseList(productPage);
     }
 }

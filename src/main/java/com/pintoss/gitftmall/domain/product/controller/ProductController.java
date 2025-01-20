@@ -2,11 +2,9 @@ package com.pintoss.gitftmall.domain.product.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.product.application.ProductService;
-import com.pintoss.gitftmall.domain.product.controller.response.ProductInfoResponse;
-import com.pintoss.gitftmall.domain.product.model.Product;
+import com.pintoss.gitftmall.domain.product.controller.response.ProductListResponse;
 import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -26,11 +24,11 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ApiResponse<List<ProductInfoResponse>> getProducts(
+    public ApiResponse<List<ProductListResponse>> getProducts(
             @RequestParam(required = false) String category,
             @PageableDefault Pageable pageable
     ) {
-        List<ProductInfoResponse> productInfoList;
+        List<ProductListResponse> productInfoList;
         String message = "";
 
         if(category == null) {
@@ -47,8 +45,8 @@ public class ProductController {
     }
 
     @GetMapping("/popular")
-    public ApiResponse<List<ProductInfoResponse>> getPopularProducts(Pageable pageable) {
-        List<ProductInfoResponse> productInfoList = productService.getPopularProducts(pageable);
+    public ApiResponse<List<ProductListResponse>> getPopularProducts(Pageable pageable) {
+        List<ProductListResponse> productInfoList = productService.getPopularProducts(pageable);
 
         return ApiResponse.of(HttpStatus.OK, "인기 상품권 조회 완료", productInfoList);
     }

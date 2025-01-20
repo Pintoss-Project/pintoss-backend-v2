@@ -63,7 +63,7 @@ public class SecurityConfig {
             )
             .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, securityService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(request ->
-                request.requestMatchers("/api/product/**").permitAll()
+                request.requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
             )
             .build();
