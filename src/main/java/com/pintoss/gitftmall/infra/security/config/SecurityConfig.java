@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.infra.security.config;
 
 import com.pintoss.gitftmall.common.utils.HttpServletUtils;
 import com.pintoss.gitftmall.domain.membership.application.CustomOAuthService;
+import com.pintoss.gitftmall.infra.security.oauth.handler.OAuthFailureHandler;
 import com.pintoss.gitftmall.infra.security.oauth.handler.OAuthSuccessHandler;
 import com.pintoss.gitftmall.infra.security.service.SecurityService;
 import com.pintoss.gitftmall.infra.security.filter.jwt.JwtFilter;
@@ -31,6 +32,7 @@ public class SecurityConfig {
     private final HttpServletUtils servletUtils;
     private final SecurityService securityService;
     private final OAuthSuccessHandler oAuthSuccessHandler;
+    private final OAuthFailureHandler oAuthFailureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -50,7 +52,8 @@ public class SecurityConfig {
                         "/v3/api-docs/**",
                         "/h2-console/**",
                         "/resources/**",
-                        "/static/**"
+                        "/static/**",
+                        "/oauth/error"
                 );
     }
 
@@ -73,6 +76,7 @@ public class SecurityConfig {
                 .userInfoEndpoint(userInfo
                         -> userInfo.userService(customOAuthUserService)) // AccessToken 발급시 loadUser 실행.
                 .successHandler(oAuthSuccessHandler)
+                .failureHandler(oAuthFailureHandler)
             )
             .build();
     }
