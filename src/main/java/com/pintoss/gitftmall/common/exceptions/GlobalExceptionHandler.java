@@ -3,6 +3,7 @@ package com.pintoss.gitftmall.common.exceptions;
 import com.pintoss.gitftmall.common.dto.ApiErrorResponse;
 import com.pintoss.gitftmall.common.exceptions.client.AuthorizationException;
 import com.pintoss.gitftmall.common.exceptions.client.BadRequestException;
+import com.pintoss.gitftmall.common.exceptions.client.CustomOAuthAuthenticationException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -110,4 +111,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = {CustomOAuthAuthenticationException.class})
+    public final ResponseEntity<ApiErrorResponse> handleCustomOAuthException(CustomOAuthAuthenticationException ex) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ErrorCode.INTERNAL_SERVER_ERROR,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
