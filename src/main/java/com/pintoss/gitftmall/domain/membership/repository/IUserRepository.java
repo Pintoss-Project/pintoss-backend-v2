@@ -1,6 +1,9 @@
 package com.pintoss.gitftmall.domain.membership.repository;
 
 import com.pintoss.gitftmall.domain.membership.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Optional;
 
 public interface IUserRepository {
@@ -16,4 +19,6 @@ public interface IUserRepository {
     Optional<User> findByIdWithRoles(long id);
 
     boolean existsByPhone_Phone(String phone);
+
+    Page<User> getUsers(Pageable pageable);
 }
