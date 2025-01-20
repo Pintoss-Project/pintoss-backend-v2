@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.common.exceptions.CustomOAuth2AuthException;
+import com.pintoss.gitftmall.common.exceptions.client.CustomOAuthAuthenticationException;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.repository.IUserRepository;
 import com.pintoss.gitftmall.infra.security.oauth.dto.OAuthAttributes;
@@ -24,7 +24,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
     private final IUserRepository userRepository;
 
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws CustomOAuth2AuthException {
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws CustomOAuthAuthenticationException {
         OAuth2User oAuth2User = getOAuth2User(userRequest);
 
         OAuthAttributes attributes = getOAuthAttributes(userRequest, oAuth2User);
@@ -39,7 +39,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
             OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
             return delegate.loadUser(userRequest);
         } catch (Exception e) {
-            throw new CustomOAuth2AuthException("OAuth2 사용자 정보를 가져오는 중 문제가 발생했습니다");
+            throw new CustomOAuthAuthenticationException("OAuth2 사용자 정보를 가져오는 중 문제가 발생했습니다");
         }
     }
 
@@ -53,7 +53,8 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
 
             return OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
         } catch (Exception e) {
-            throw new CustomOAuth2AuthException("OAuth2 사용자 속성 매핑하는 과정에서 문제가 발생했습니다");
+            throw new CustomOAuthAuthenticationException("OAuth2 사용자 속성 매핑하는 과정에서 문제가 발생했습니다");
+
         }
     }
 
@@ -76,7 +77,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
                     attributes.getNameAttributeKey()
             );
         } catch (Exception e) {
-            throw new CustomOAuth2AuthException("DefaultOAuth2User 생성 중 문제가 발생했습니다");
+            throw new CustomOAuthAuthenticationException("DefaultOAuth2User 생성 중 문제가 발생했습니다");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.pintoss.gitftmall.infra.security.oauth.handler;
 
+import com.pintoss.gitftmall.common.exceptions.client.CustomOAuthAuthenticationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,8 +10,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 @Component
 @RequiredArgsConstructor
@@ -21,8 +20,6 @@ public class OAuthFailureHandler implements AuthenticationFailureHandler {
             HttpServletResponse response,
             AuthenticationException exception
     ) throws IOException, ServletException {
-        String encodedMessage = URLEncoder.encode(exception.getMessage(), StandardCharsets.UTF_8);
-
-        response.sendRedirect("/oauth/error?message=" + encodedMessage);
+        throw new CustomOAuthAuthenticationException(exception.getMessage());
     }
 }
