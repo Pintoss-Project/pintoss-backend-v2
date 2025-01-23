@@ -20,19 +20,19 @@ public class ProductService {
     private final IProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public List<ProductListResponse> getAllProducts(Pageable pageable) {
+    public Page<ProductListResponse> getAllProducts(Pageable pageable) {
         Page<Product> productPage = productRepository.findAll(pageable);
 
         return productMapper.toProductListResponseList(productPage);
     }
 
-    public List<ProductListResponse> getPopularProducts(Pageable pageable) {
+    public Page<ProductListResponse> getPopularProducts(Pageable pageable) {
         Page<Product> productPage = productRepository.findByIsPopularTrue(pageable);
 
         return productMapper.toProductListResponseList(productPage);
     }
 
-    public List<ProductListResponse> getProductsByCategory(String category, Pageable pageable) {
+    public Page<ProductListResponse> getProductsByCategory(String category, Pageable pageable) {
         ProductCategory productCategory = ProductCategory.from(category);
 
         Page<Product> productPage = productRepository.findByCategory(productCategory, pageable);
