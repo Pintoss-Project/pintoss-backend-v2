@@ -38,5 +38,4 @@ public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository
     public Page<VoucherProvider> findByCategory(VoucherProviderCategory category, Pageable pageable) {
         return voucherProviderJpaRepository.findByCategory(category, pageable);
     }
-
 }

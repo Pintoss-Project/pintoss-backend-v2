@@ -2,9 +2,9 @@ package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.domain.voucher.application.ProductRegisterService;
-import com.pintoss.gitftmall.domain.voucher.application.command.ProductRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.voucher.controller.request.ProductRegisterRequest;
+import com.pintoss.gitftmall.domain.voucher.application.VoucherProviderRegisterService;
+import com.pintoss.gitftmall.domain.voucher.application.command.VoucherProviderRegisterServiceCommand;
+import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherProviderRegisterRequest;
 import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,34 +14,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/voucher-providers")
 @RequiredArgsConstructor
-public class AdminProductController {
+public class AdminVoucherProviderController {
 
-    private final ProductRegisterService productRegisterService;
+    private final VoucherProviderRegisterService voucherProviderRegisterService;
 
     @PostMapping
     @AuthorizationRequired(RoleEnum.ADMIN)
-    public ApiResponse<Void> registerProduct(@RequestBody @Valid ProductRegisterRequest request){
-        ProductRegisterServiceCommand command = new ProductRegisterServiceCommand(
+    public ApiResponse<Void> registerVoucherProvider(@RequestBody @Valid VoucherProviderRegisterRequest request){
+        VoucherProviderRegisterServiceCommand command = new VoucherProviderRegisterServiceCommand(
                 request.getName(),
                 request.isPopular(),
-                request.getCardDiscount(),
-                request.getPhoneDiscount(),
                 request.getHomePage(),
                 request.getCsCenter(),
                 request.getDescription(),
                 request.getPublisher(),
+                request.getCategory(),
                 request.getLogoImageUrl(),
                 request.getNote(),
                 request.getIndex()
         );
 
-        productRegisterService.register(command);
+        voucherProviderRegisterService.register(command);
 
         return ApiResponse.ok(null);
     }
-
-
-
 }
