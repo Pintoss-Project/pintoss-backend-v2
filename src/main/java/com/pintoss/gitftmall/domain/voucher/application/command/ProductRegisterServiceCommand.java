@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.product.application.command;
+package com.pintoss.gitftmall.domain.voucher.application.command;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

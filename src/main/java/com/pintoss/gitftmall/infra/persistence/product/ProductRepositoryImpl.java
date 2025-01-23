@@ -1,8 +1,8 @@
 package com.pintoss.gitftmall.infra.persistence.product;
 
-import com.pintoss.gitftmall.domain.product.model.Product;
-import com.pintoss.gitftmall.domain.product.model.value.ProductCategory;
-import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
+import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
+import com.pintoss.gitftmall.domain.voucher.model.value.ProductCategory;
+import com.pintoss.gitftmall.domain.voucher.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ public class ProductRepositoryImpl implements IProductRepository {
     private final ProductJpaRepository productJpaRepository;
 
     @Override
-    public void save(Product product) {
+    public void save(VoucherProvider product) {
         productJpaRepository.save(product);
     }
 
@@ -25,17 +25,17 @@ public class ProductRepositoryImpl implements IProductRepository {
     }
 
     @Override
-    public Page<Product> findAll(Pageable pageable) {
+    public Page<VoucherProvider> findAll(Pageable pageable) {
         return productJpaRepository.findAll(pageable);
     }
 
     @Override
-    public Page<Product> findByIsPopularTrue(Pageable pageable) {
+    public Page<VoucherProvider> findByIsPopularTrue(Pageable pageable) {
         return productJpaRepository.findByIsPopularTrue(pageable);
     }
 
     @Override
-    public Page<Product> findByCategory(ProductCategory category, Pageable pageable) {
+    public Page<VoucherProvider> findByCategory(ProductCategory category, Pageable pageable) {
         return productJpaRepository.findByCategory(category, pageable);
     }
 

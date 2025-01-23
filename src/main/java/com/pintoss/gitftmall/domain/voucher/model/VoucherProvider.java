@@ -1,8 +1,8 @@
-package com.pintoss.gitftmall.domain.product.model;
+package com.pintoss.gitftmall.domain.voucher.model;
 
-import com.pintoss.gitftmall.domain.product.model.value.ContactInfo;
-import com.pintoss.gitftmall.domain.product.model.value.Discount;
-import com.pintoss.gitftmall.domain.product.model.value.ProductCategory;
+import com.pintoss.gitftmall.domain.voucher.model.value.ContactInfo;
+import com.pintoss.gitftmall.domain.voucher.model.value.Discount;
+import com.pintoss.gitftmall.domain.voucher.model.value.ProductCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -13,23 +13,17 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product {
+public class VoucherProvider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "voucher_provider_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
     private boolean isPopular;
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
-            @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
-    })
-    private Discount discount;
 
     @Embedded
     @AttributeOverrides({
@@ -58,10 +52,9 @@ public class Product {
 
     private LocalDateTime updatedAt;
 
-    private Product(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index) {
+    private VoucherProvider(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher, String note, int index) {
         this.name = name;
         this.isPopular = isPopular;
-        this.discount = discount;
         this.contactInfo = contactInfo;
         this.description = description;
         this.publisher = publisher;
@@ -71,12 +64,11 @@ public class Product {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static Product create(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
-                                 String note, int index){
-        return new Product(
+    public static VoucherProvider create(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
+                                         String note, int index){
+        return new VoucherProvider(
                 name,
                 isPopular,
-                discount,
                 contactInfo,
                 description,
                 publisher,

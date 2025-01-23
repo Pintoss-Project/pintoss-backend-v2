@@ -1,10 +1,10 @@
-package com.pintoss.gitftmall.domain.product.controller;
+package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.domain.product.application.ProductRegisterService;
-import com.pintoss.gitftmall.domain.product.application.command.ProductRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.product.controller.request.ProductRegisterRequest;
+import com.pintoss.gitftmall.domain.voucher.application.ProductRegisterService;
+import com.pintoss.gitftmall.domain.voucher.application.command.ProductRegisterServiceCommand;
+import com.pintoss.gitftmall.domain.voucher.controller.request.ProductRegisterRequest;
 import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

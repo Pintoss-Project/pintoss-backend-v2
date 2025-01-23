@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.product.model.value;
+package com.pintoss.gitftmall.domain.voucher.model.value;
 
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;

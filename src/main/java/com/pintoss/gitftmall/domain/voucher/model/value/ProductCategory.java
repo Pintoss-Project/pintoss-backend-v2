@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.product.model.value;
+package com.pintoss.gitftmall.domain.voucher.model.value;
 
 import com.pintoss.gitftmall.common.exceptions.product.InvalidCategoryException;
 import lombok.Getter;

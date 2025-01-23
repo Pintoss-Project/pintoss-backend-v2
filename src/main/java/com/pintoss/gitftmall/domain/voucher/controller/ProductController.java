@@ -1,9 +1,9 @@
-package com.pintoss.gitftmall.domain.product.controller;
+package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
-import com.pintoss.gitftmall.domain.product.application.ProductService;
-import com.pintoss.gitftmall.domain.product.controller.response.ProductListResponse;
-import com.pintoss.gitftmall.domain.product.repository.IProductRepository;
+import com.pintoss.gitftmall.domain.voucher.application.ProductService;
+import com.pintoss.gitftmall.domain.voucher.controller.response.ProductListResponse;
+import com.pintoss.gitftmall.domain.voucher.repository.IProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")

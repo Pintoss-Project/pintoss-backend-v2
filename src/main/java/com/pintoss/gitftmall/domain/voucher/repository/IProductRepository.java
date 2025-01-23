@@ -1,13 +1,17 @@
-package com.pintoss.gitftmall.infra.persistence.product;
+package com.pintoss.gitftmall.domain.voucher.repository;
 
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.model.value.ProductCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductJpaRepository extends JpaRepository<VoucherProvider,Long> {
+public interface IProductRepository {
+
+    void save(VoucherProvider product);
+
     boolean existsByName(String name);
+
+    Page<VoucherProvider> findAll(Pageable pageable);
 
     Page<VoucherProvider> findByIsPopularTrue(Pageable pageable);
 

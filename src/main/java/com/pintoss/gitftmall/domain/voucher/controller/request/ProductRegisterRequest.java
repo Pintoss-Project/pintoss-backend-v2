@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.product.controller.request;
+package com.pintoss.gitftmall.domain.voucher.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;

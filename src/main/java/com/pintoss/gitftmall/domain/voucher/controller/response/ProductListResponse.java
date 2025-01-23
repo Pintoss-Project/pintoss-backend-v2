@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.product.controller.response;
+package com.pintoss.gitftmall.domain.voucher.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
