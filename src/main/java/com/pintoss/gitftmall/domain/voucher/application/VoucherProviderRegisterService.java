@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.voucher.application;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.DuplicateProductNameException;
+import com.pintoss.gitftmall.common.exceptions.client.DuplicateVoucherProviderNameException;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.model.value.ContactInfo;
@@ -20,7 +20,7 @@ public class VoucherProviderRegisterService {
     public void register(VoucherProviderRegisterServiceCommand command){
 
         if( voucherProviderRepository.existsByName(command.getName()) ) {
-            throw new DuplicateProductNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품권 제조사입니다.");
+            throw new DuplicateVoucherProviderNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품권 제조사입니다.");
         }
 
         VoucherProvider voucherProvider = VoucherProvider.create(

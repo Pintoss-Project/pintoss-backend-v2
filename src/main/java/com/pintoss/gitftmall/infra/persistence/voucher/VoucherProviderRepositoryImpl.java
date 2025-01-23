@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.infra.persistence.product;
+package com.pintoss.gitftmall.infra.persistence.voucher;
 
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.model.value.VoucherProviderCategory;

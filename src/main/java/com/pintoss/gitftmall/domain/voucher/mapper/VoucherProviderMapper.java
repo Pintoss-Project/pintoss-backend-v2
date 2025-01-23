@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class VoucherProviderMapper {
 
-    public Page<VoucherProviderResponse> toProductListResponseList(Page<VoucherProvider> voucherProviderPage) {
+    public Page<VoucherProviderResponse> toVoucherProviderResponseList(Page<VoucherProvider> voucherProviderPage) {
         return new PageImpl<>(
                 voucherProviderPage.stream()
                         .map(this::toVoucherProviderResponse)

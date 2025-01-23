@@ -18,22 +18,22 @@ public class VoucherProviderService {
     private final VoucherProviderMapper voucherProviderMapper;
 
     public Page<VoucherProviderResponse> getAll(Pageable pageable) {
-        Page<VoucherProvider> productPage = voucherProviderRepository.findAll(pageable);
+        Page<VoucherProvider> voucherProviderPage = voucherProviderRepository.findAll(pageable);
 
-        return voucherProviderMapper.toProductListResponseList(productPage);
+        return voucherProviderMapper.toVoucherProviderResponseList(voucherProviderPage);
     }
 
     public Page<VoucherProviderResponse> getPopular(Pageable pageable) {
-        Page<VoucherProvider> productPage = voucherProviderRepository.findByIsPopularTrue(pageable);
+        Page<VoucherProvider> voucherProviderPage = voucherProviderRepository.findByIsPopularTrue(pageable);
 
-        return voucherProviderMapper.toProductListResponseList(productPage);
+        return voucherProviderMapper.toVoucherProviderResponseList(voucherProviderPage);
     }
 
     public Page<VoucherProviderResponse> getByCategory(String category, Pageable pageable) {
-        VoucherProviderCategory productCategory = VoucherProviderCategory.from(category);
+        VoucherProviderCategory voucherProviderCategory = VoucherProviderCategory.from(category);
 
-        Page<VoucherProvider> productPage = voucherProviderRepository.findByCategory(productCategory, pageable);
+        Page<VoucherProvider> voucherProviderPage = voucherProviderRepository.findByCategory(voucherProviderCategory, pageable);
 
-        return voucherProviderMapper.toProductListResponseList(productPage);
+        return voucherProviderMapper.toVoucherProviderResponseList(voucherProviderPage);
     }
 }

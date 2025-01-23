@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.common.exceptions.product;
+package com.pintoss.gitftmall.common.exceptions.voucher;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
 import com.pintoss.gitftmall.common.exceptions.client.BadRequestException;

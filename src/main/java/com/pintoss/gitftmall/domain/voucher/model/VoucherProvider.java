@@ -41,7 +41,7 @@ public class VoucherProvider {
     private String note;
 
     //드래그 드랍 인덱스 컬럼
-    @Column(name = "product_index")
+    @Column(name = "voucher_provider_index")
     private int index;
 
     @Enumerated(EnumType.STRING)
