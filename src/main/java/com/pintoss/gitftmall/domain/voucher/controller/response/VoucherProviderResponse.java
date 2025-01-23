@@ -7,14 +7,10 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-public class ProductListResponse {
-    private Long product_id;
+public class VoucherProviderResponse {
+    private Long voucher_provider_id;
 
     private String name;
-
-    private BigDecimal card_discount;
-
-    private BigDecimal phone_discount;
 
     private String image_url;
 }

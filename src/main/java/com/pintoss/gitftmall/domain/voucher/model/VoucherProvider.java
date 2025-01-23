@@ -47,6 +47,8 @@ public class VoucherProvider {
     @Enumerated(EnumType.STRING)
     private VoucherProviderCategory category;
 
+    private String imageUrl;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
