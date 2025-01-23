@@ -25,7 +25,7 @@ public class VoucherProviderMapper {
         return new VoucherProviderResponse(
                 voucherProvider.getId(),
                 voucherProvider.getName(),
-                voucherProvider.getImageUrl()
+                voucherProvider.getLogoImageUrl()
         );
     }
 }

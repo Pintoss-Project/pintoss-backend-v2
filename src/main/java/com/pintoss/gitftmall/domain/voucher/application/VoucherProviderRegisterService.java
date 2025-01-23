@@ -32,6 +32,8 @@ public class VoucherProviderRegisterService {
                 ),
                 command.getDescription(),
                 command.getPublisher(),
+                command.getCategory(),
+                command.getLogoImageUrl(),
                 command.getNote(),
                 command.getIndex()
         );

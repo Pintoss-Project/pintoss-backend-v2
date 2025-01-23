@@ -47,32 +47,41 @@ public class VoucherProvider {
     @Enumerated(EnumType.STRING)
     private VoucherProviderCategory category;
 
-    private String imageUrl;
+    private String logoImageUrl;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
-    private VoucherProvider(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher, String note, int index) {
+    private VoucherProvider(
+            String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
+            VoucherProviderCategory category, String logoImageUrl, String note, int index
+    ) {
         this.name = name;
         this.isPopular = isPopular;
         this.contactInfo = contactInfo;
         this.description = description;
         this.publisher = publisher;
+        this.category = category;
+        this.logoImageUrl = logoImageUrl;
         this.note = note;
         this.index = index;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static VoucherProvider create(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
-                                         String note, int index){
+    public static VoucherProvider create(
+            String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
+            VoucherProviderCategory category, String logoImageUrl, String note, int index
+    ){
         return new VoucherProvider(
                 name,
                 isPopular,
                 contactInfo,
                 description,
                 publisher,
+                category,
+                logoImageUrl,
                 note,
                 index
         );
