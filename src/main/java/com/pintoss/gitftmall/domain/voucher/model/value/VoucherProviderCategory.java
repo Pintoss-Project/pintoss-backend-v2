@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ProductCategory {
+public enum VoucherProviderCategory {
 
     CBM("문화/도서/영화"),
     GO("게임/온라인콘텐츠"),
@@ -14,9 +14,9 @@ public enum ProductCategory {
 
     private final String category;
 
-    public static ProductCategory from(String category) {
+    public static VoucherProviderCategory from(String category) {
         try{
-            return ProductCategory.valueOf(category.toUpperCase());
+            return VoucherProviderCategory.valueOf(category.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidCategoryException("해당 카테고리는 없는 카테고리입니다: " + category);
         }

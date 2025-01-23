@@ -3,7 +3,7 @@ package com.pintoss.gitftmall.domain.voucher.controller;
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.voucher.application.ProductService;
 import com.pintoss.gitftmall.domain.voucher.controller.response.ProductListResponse;
-import com.pintoss.gitftmall.domain.voucher.repository.IProductRepository;
+import com.pintoss.gitftmall.domain.voucher.repository.IVoucherProviderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class ProductController {
 
-    private final IProductRepository productRepository;
+    private final IVoucherProviderRepository productRepository;
     private final ProductService productService;
 
     @GetMapping

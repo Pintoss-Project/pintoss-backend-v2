@@ -3,8 +3,8 @@ package com.pintoss.gitftmall.domain.voucher.application;
 import com.pintoss.gitftmall.domain.voucher.controller.response.ProductListResponse;
 import com.pintoss.gitftmall.domain.voucher.mapper.ProductMapper;
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
-import com.pintoss.gitftmall.domain.voucher.model.value.ProductCategory;
-import com.pintoss.gitftmall.domain.voucher.repository.IProductRepository;
+import com.pintoss.gitftmall.domain.voucher.model.value.VoucherProviderCategory;
+import com.pintoss.gitftmall.domain.voucher.repository.IVoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final IProductRepository productRepository;
+    private final IVoucherProviderRepository productRepository;
     private final ProductMapper productMapper;
 
     public Page<ProductListResponse> getAllProducts(Pageable pageable) {
@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     public Page<ProductListResponse> getProductsByCategory(String category, Pageable pageable) {
-        ProductCategory productCategory = ProductCategory.from(category);
+        VoucherProviderCategory productCategory = VoucherProviderCategory.from(category);
 
         Page<VoucherProvider> productPage = productRepository.findByCategory(productCategory, pageable);
 

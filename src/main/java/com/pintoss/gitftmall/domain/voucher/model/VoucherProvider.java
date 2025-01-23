@@ -1,8 +1,7 @@
 package com.pintoss.gitftmall.domain.voucher.model;
 
 import com.pintoss.gitftmall.domain.voucher.model.value.ContactInfo;
-import com.pintoss.gitftmall.domain.voucher.model.value.Discount;
-import com.pintoss.gitftmall.domain.voucher.model.value.ProductCategory;
+import com.pintoss.gitftmall.domain.voucher.model.value.VoucherProviderCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,7 +45,7 @@ public class VoucherProvider {
     private int index;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategory category;
+    private VoucherProviderCategory category;
 
     private LocalDateTime createdAt;
 
