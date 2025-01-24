@@ -83,4 +83,14 @@ public class VoucherProviderService {
             throw new DuplicateVoucherProviderNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품권 제조사명 입니다.");
         }
     }
+
+    public void delete(Long id) {
+        Optional<VoucherProvider> optionalVoucherProvider = voucherProviderRepository.findById(id);
+        if(optionalVoucherProvider.isEmpty()) {
+            throw new InvalidVoucherProviderIdException(ErrorCode.BAD_REQUEST, "해당 VoucherProvider ID는 존재하지 않습니다.");
+        }
+        VoucherProvider voucherProvider = optionalVoucherProvider.get();
+
+        voucherProviderRepository.delete(voucherProvider);
+    }
 }

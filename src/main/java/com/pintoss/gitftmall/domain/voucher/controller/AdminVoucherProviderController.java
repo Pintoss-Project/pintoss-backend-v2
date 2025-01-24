@@ -67,6 +67,7 @@ public class AdminVoucherProviderController {
     }
 
     @PatchMapping("/{provider_id}")
+    @AuthorizationRequired(RoleEnum.ADMIN)
     public ApiResponse<Void> updateVoucherProvider(
             @PathVariable("provider_id") Long providerId,
             @RequestBody @Valid VoucherProviderUpdateRequest request
@@ -74,5 +75,13 @@ public class AdminVoucherProviderController {
         voucherProviderService.update(providerId, request);
 
         return new ApiResponse<>(HttpStatus.OK, "상품권 제조사 상세정보 수정 완료", null);
+    }
+
+    @DeleteMapping("/{provider_id}")
+    @AuthorizationRequired(RoleEnum.ADMIN)
+    public ApiResponse<Void> deleteVoucherProvider(@PathVariable("provider_id") Long providerId) {
+        voucherProviderService.delete(providerId);
+
+        return new ApiResponse<>(HttpStatus.OK, "상품권 제조사 삭제 완료", null);
     }
 }

@@ -61,7 +61,7 @@ public class VoucherProvider {
 
     private String logoImageUrl;
 
-    @OneToMany(mappedBy = "voucherProvider")
+    @OneToMany(mappedBy = "voucherProvider", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Voucher> voucherList = new ArrayList<>();
 
     private LocalDateTime createdAt;

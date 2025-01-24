@@ -22,6 +22,11 @@ public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository
     }
 
     @Override
+    public void delete(VoucherProvider voucherProvider) {
+        voucherProviderJpaRepository.delete(voucherProvider);
+    }
+
+    @Override
     public boolean existsByName(String name) {
         return voucherProviderJpaRepository.existsByName(name);
     }

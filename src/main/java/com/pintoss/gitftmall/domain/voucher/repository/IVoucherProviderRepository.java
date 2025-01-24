@@ -11,6 +11,8 @@ public interface IVoucherProviderRepository {
 
     void save(VoucherProvider voucherProvider);
 
+    void delete(VoucherProvider voucherProvider);
+
     boolean existsByName(String name);
 
     Optional<VoucherProvider> findById(Long id);
