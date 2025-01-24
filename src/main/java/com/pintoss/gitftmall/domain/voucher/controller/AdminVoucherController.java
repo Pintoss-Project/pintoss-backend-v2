@@ -1,9 +1,11 @@
 package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
+import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.domain.voucher.application.VoucherRegisterService;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherRegisterRequest;
+import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ public class AdminVoucherController {
     private final VoucherRegisterService voucherRegisterService;
 
     @PostMapping("/vouchers")
+    @AuthorizationRequired(RoleEnum.ADMIN)
     public ApiResponse<Void> registerVoucher(
             @PathVariable("provider_id") Long providerId,
             @RequestBody @Valid VoucherRegisterRequest request

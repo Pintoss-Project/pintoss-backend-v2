@@ -47,7 +47,7 @@ public class VoucherProviderController {
     }
 
     @GetMapping("/{provider_id}")
-    public ApiResponse<?> getVoucherProviderDetail(@PathVariable("provider_id") Long providerId) {
+    public ApiResponse<VoucherProviderDetailResponse> getVoucherProviderDetail(@PathVariable("provider_id") Long providerId) {
         VoucherProviderDetailResponse voucherProviderDetail = voucherProviderService.getDetail(providerId);
 
         return ApiResponse.of(HttpStatus.OK, "상품권 제조사 상세정보 조회 완료", voucherProviderDetail);
