@@ -57,7 +57,7 @@ public class VoucherProviderController {
     }
 
     @GetMapping("/{provider_id}/vouchers")
-    public ApiResponse<?> getVouchers(
+    public ApiResponse<Page<VoucherResponse>> getVouchers(
             @PathVariable("provider_id") Long providerId,
             @PageableDefault Pageable pageable
     ) {
