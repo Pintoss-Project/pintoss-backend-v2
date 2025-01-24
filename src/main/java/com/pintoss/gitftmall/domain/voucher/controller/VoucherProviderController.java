@@ -2,8 +2,10 @@ package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.voucher.application.VoucherProviderService;
+import com.pintoss.gitftmall.domain.voucher.application.VoucherService;
 import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherProviderDetailResponse;
 import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherProviderResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class VoucherProviderController {
 
     private final VoucherProviderService voucherProviderService;
+    private final VoucherService voucherService;
 
     @GetMapping
     public ApiResponse<Page<VoucherProviderResponse>> getVoucherProviders(
@@ -51,5 +54,15 @@ public class VoucherProviderController {
         VoucherProviderDetailResponse voucherProviderDetail = voucherProviderService.getDetail(providerId);
 
         return ApiResponse.of(HttpStatus.OK, "상품권 제조사 상세정보 조회 완료", voucherProviderDetail);
+    }
+
+    @GetMapping("/{provider_id}/vouchers")
+    public ApiResponse<?> getVouchers(
+            @PathVariable("provider_id") Long providerId,
+            @PageableDefault Pageable pageable
+    ) {
+        Page<VoucherResponse> voucherResponsePage = voucherService.getAll(providerId, pageable);
+
+        return ApiResponse.of(HttpStatus.OK, "상품권 리스트 조회 완료", voucherResponsePage);
     }
 }
