@@ -7,5 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VoucherJpaRepository extends JpaRepository<Voucher, Long> {
+
+    void deleteById(Long id);
+
     Page<Voucher> findByVoucherProvider(VoucherProvider voucherProvider, Pageable pageable);
 }

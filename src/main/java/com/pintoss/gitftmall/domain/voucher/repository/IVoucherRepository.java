@@ -9,5 +9,7 @@ public interface IVoucherRepository {
 
     void save(Voucher voucher);
 
+    void deleteById(Long voucherId);
+
     Page<Voucher> findByVoucherProvider(VoucherProvider voucherProvider, Pageable pageable);
 }

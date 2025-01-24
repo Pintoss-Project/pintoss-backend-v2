@@ -1,5 +1,7 @@
 package com.pintoss.gitftmall.infra.persistence.voucher;
 
+import com.pintoss.gitftmall.common.exceptions.ErrorCode;
+import com.pintoss.gitftmall.common.exceptions.voucher.InvalidVoucherException;
 import com.pintoss.gitftmall.domain.voucher.model.Voucher;
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.repository.IVoucherRepository;
@@ -17,6 +19,14 @@ public class VoucherRepositoryImpl implements IVoucherRepository {
     @Override
     public void save(Voucher voucher) {
         voucherJpaRepository.save(voucher);
+    }
+
+    @Override
+    public void deleteById(Long voucherId) {
+        if (!voucherJpaRepository.existsById(voucherId)) {
+            throw new InvalidVoucherException(ErrorCode.BAD_REQUEST, "해당 Voucher ID는 존재하지 않습니다.");
+        }
+        voucherJpaRepository.deleteById(voucherId);
     }
 
     @Override
