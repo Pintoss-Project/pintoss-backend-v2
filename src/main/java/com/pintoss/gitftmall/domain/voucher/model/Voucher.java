@@ -51,4 +51,8 @@ public class Voucher {
                 stock
         );
     }
+
+    public void updateStock(int stock) {
+        this.stock = stock;
+    }
 }

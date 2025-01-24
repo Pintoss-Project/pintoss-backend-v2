@@ -5,11 +5,15 @@ import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IVoucherRepository {
 
     void save(Voucher voucher);
 
     void deleteById(Long voucherId);
+
+    Optional<Voucher> findById(Long voucherId);
 
     Page<Voucher> findByVoucherProvider(VoucherProvider voucherProvider, Pageable pageable);
 }

@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.domain.voucher.application;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
 import com.pintoss.gitftmall.common.exceptions.voucher.InvalidVoucherProviderIdException;
+import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherStockUpdateRequest;
 import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherResponse;
 import com.pintoss.gitftmall.domain.voucher.mapper.VoucherMapper;
 import com.pintoss.gitftmall.domain.voucher.model.Voucher;
@@ -33,5 +34,17 @@ public class VoucherService {
         Page<Voucher> voucherPage = voucherRepository.findByVoucherProvider(voucherProvider, pageable);
 
         return voucherMapper.toVoucherResponsePage(voucherPage);
+    }
+
+    public void update(Long voucherId, VoucherStockUpdateRequest request) {
+        Optional<Voucher> optionalVoucher = voucherRepository.findById(voucherId);
+        if(optionalVoucher.isEmpty()) {
+            throw new InvalidVoucherProviderIdException(ErrorCode.BAD_REQUEST, "해당 VoucherProvider ID는 존재하지 않습니다.");
+        }
+        Voucher voucher = optionalVoucher.get();
+
+        voucher.updateStock(request.getStock());
+
+        voucherRepository.save(voucher);
     }
 }

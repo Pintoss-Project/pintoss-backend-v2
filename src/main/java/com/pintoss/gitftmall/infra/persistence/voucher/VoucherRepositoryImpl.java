@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 public class VoucherRepositoryImpl implements IVoucherRepository {
@@ -27,6 +29,11 @@ public class VoucherRepositoryImpl implements IVoucherRepository {
             throw new InvalidVoucherException(ErrorCode.BAD_REQUEST, "해당 Voucher ID는 존재하지 않습니다.");
         }
         voucherJpaRepository.deleteById(voucherId);
+    }
+
+    @Override
+    public Optional<Voucher> findById(Long voucherId) {
+        return voucherJpaRepository.findById(voucherId);
     }
 
     @Override
