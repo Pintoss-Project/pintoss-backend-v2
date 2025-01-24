@@ -5,7 +5,7 @@ import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.domain.product.application.ProductRegisterService;
 import com.pintoss.gitftmall.domain.product.application.command.ProductRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.product.controller.request.ProductRegisterRequest;
-import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -5,9 +5,9 @@ import com.pintoss.gitftmall.domain.membership.application.port.NiceApiAuthentic
 import com.pintoss.gitftmall.domain.membership.application.port.NiceApiAuthenticationHandlerPort;
 import com.pintoss.gitftmall.domain.membership.application.port.NiceApiTokenManagerPort;
 import com.pintoss.gitftmall.domain.membership.application.result.NiceVerificationServiceResult;
-import com.pintoss.gitftmall.infra.nice.adapter.in.NiceApiAuthenticationEncryptorCommand;
-import com.pintoss.gitftmall.infra.nice.client.response.NiceApiAuthenticationEncryptorResult;
-import com.pintoss.gitftmall.infra.nice.model.NiceApiSymmetricKey;
+import com.pintoss.gitftmall.infra.external.nice.adapter.in.NiceApiAuthenticationEncryptorCommand;
+import com.pintoss.gitftmall.infra.external.nice.client.response.NiceApiAuthenticationEncryptorResult;
+import com.pintoss.gitftmall.infra.external.nice.model.NiceApiSymmetricKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

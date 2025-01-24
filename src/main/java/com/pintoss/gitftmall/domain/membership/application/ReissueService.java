@@ -8,7 +8,6 @@ import com.pintoss.gitftmall.domain.membership.application.command.ReissueServic
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.repository.IUserRepository;
-import com.pintoss.gitftmall.domain.membership.service.TokenManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

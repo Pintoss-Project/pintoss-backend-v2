@@ -15,7 +15,7 @@ import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

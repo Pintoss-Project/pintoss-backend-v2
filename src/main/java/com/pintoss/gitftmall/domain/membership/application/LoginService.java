@@ -2,8 +2,8 @@ package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
-import com.pintoss.gitftmall.infra.security.model.CustomAuthentication;
-import com.pintoss.gitftmall.infra.security.model.CustomDetails;
+import com.pintoss.gitftmall.infra.config.security.authentication.CustomAuthentication;
+import com.pintoss.gitftmall.infra.config.security.userdetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -19,7 +19,7 @@ public class LoginService {
         Authentication authenticate = authenticationManager.authenticate(
             new CustomAuthentication(command.getEmail(), command
                 .getPassword()));
-        CustomDetails principal = (CustomDetails) authenticate.getPrincipal();
+        CustomUserDetails principal = (CustomUserDetails) authenticate.getPrincipal();
         LoginResult loginResult = new LoginResult(principal.getAccessToken(), principal.getRefreshToken());
         return loginResult;
     }

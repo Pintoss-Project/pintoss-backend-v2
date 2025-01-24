@@ -7,7 +7,7 @@ import com.pintoss.gitftmall.common.exceptions.client.NotFoundMemberException;
 import com.pintoss.gitftmall.common.utils.HttpServletUtils;
 import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.model.User;
-import com.pintoss.gitftmall.domain.membership.service.TokenManageService;
+import com.pintoss.gitftmall.domain.membership.application.TokenManageService;
 import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

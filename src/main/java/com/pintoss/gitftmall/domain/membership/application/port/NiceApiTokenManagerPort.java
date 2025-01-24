@@ -1,8 +1,8 @@
 package com.pintoss.gitftmall.domain.membership.application.port;
 
-import com.pintoss.gitftmall.infra.nice.model.NiceApiAccessToken;
-import com.pintoss.gitftmall.infra.nice.model.NiceApiCryptoToken;
-import com.pintoss.gitftmall.infra.nice.model.NiceApiSymmetricKey;
+import com.pintoss.gitftmall.infra.external.nice.model.NiceApiAccessToken;
+import com.pintoss.gitftmall.infra.external.nice.model.NiceApiCryptoToken;
+import com.pintoss.gitftmall.infra.external.nice.model.NiceApiSymmetricKey;
 
 public interface NiceApiTokenManagerPort {
     NiceApiAccessToken getAccessToken();

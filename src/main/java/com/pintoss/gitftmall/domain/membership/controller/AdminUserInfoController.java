@@ -4,7 +4,7 @@ import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.application.AdminUserInfoService;
 import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
