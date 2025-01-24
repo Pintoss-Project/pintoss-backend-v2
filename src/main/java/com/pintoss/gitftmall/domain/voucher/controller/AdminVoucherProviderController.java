@@ -46,7 +46,7 @@ public class AdminVoucherProviderController {
 
         voucherProviderRegisterService.register(command);
 
-        return ApiResponse.ok(null);
+        return new ApiResponse<>(HttpStatus.OK, "상품권 제조사 추가 완료", null);
     }
 
     @PostMapping("/{provider_id}/vouchers")
@@ -63,7 +63,7 @@ public class AdminVoucherProviderController {
 
         voucherRegisterService.register(providerId, command);
 
-        return ApiResponse.ok(null);
+        return new ApiResponse<>(HttpStatus.OK, "상품권 추가 완료", null);
     }
 
     @PatchMapping("/{provider_id}")
