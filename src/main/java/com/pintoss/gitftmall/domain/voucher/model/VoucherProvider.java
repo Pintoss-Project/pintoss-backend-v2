@@ -8,9 +8,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -87,6 +89,36 @@ public class VoucherProvider {
         this.index = index;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void update(
+            Optional<String> name, Optional<Boolean> isPopular,
+            Optional<String> homePage, Optional<String> csCenter,
+            BigDecimal cardDiscount, BigDecimal phoneDiscount,
+            Optional<String> description, Optional<String> publisher,
+            Optional<String> logoImageUrl, Optional<String> note
+    ) {
+        name.ifPresent(newName -> this.name = newName);
+        isPopular.ifPresent(newIsPopular -> this.isPopular = newIsPopular);
+        if (homePage.isPresent() || csCenter.isPresent()) {
+            this.contactInfo = this.contactInfo.update(
+                homePage.orElse(this.contactInfo.getHomePage().getUrl()),
+                csCenter.orElse(this.contactInfo.getCsCenter().getTel())
+            );
+        }
+        if (!cardDiscount.equals(BigDecimal.ZERO) || !phoneDiscount.equals(BigDecimal.ZERO)) {
+            BigDecimal updatedCardDiscount = !cardDiscount.equals(BigDecimal.ZERO)
+                    ? cardDiscount
+                    : this.discount.getCardDiscount();
+            BigDecimal updatedPhoneDiscount = !phoneDiscount.equals(BigDecimal.ZERO)
+                    ? phoneDiscount
+                    : this.discount.getPhoneDiscount();
+            this.discount = this.discount.update(updatedCardDiscount, updatedPhoneDiscount);
+        }
+        description.ifPresent(newDescription -> this.description = newDescription);
+        publisher.ifPresent(newPublisher -> this.publisher = newPublisher);
+        logoImageUrl.ifPresent(newLogoImageUrl -> this.logoImageUrl = newLogoImageUrl);
+        note.ifPresent(newNote -> this.note = newNote);
     }
 
     public static VoucherProvider create(

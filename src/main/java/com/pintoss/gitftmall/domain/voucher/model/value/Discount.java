@@ -20,4 +20,10 @@ public class Discount {
         this.phoneDiscount = phoneDiscount;
     }
 
+    public Discount update(BigDecimal cardDiscount, BigDecimal phoneDiscount) {
+        return new Discount(
+            cardDiscount != null ? cardDiscount : this.cardDiscount,
+            phoneDiscount != null ? phoneDiscount : this.phoneDiscount
+        );
+    }
 }

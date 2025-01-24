@@ -21,4 +21,11 @@ public class ContactInfo {
         this.homePage = homePage;
         this.csCenter = csCenter;
     }
+
+    public ContactInfo update(String homePage, String csCenter) {
+        return new ContactInfo(
+            homePage != null ? new HomePage(homePage) : this.homePage,
+            csCenter != null ? new CsCenter(csCenter) : this.csCenter
+        );
+    }
 }

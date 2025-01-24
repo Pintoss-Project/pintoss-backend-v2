@@ -21,7 +21,7 @@ public class VoucherProviderRegisterService {
     public void register(VoucherProviderRegisterServiceCommand command){
 
         if( voucherProviderRepository.existsByName(command.getName()) ) {
-            throw new DuplicateVoucherProviderNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품권 제조사입니다.");
+            throw new DuplicateVoucherProviderNameException(ErrorCode.BAD_REQUEST, "이미 존재하는 상품권 제조사명 입니다.");
         }
 
         VoucherProvider voucherProvider = VoucherProvider.create(

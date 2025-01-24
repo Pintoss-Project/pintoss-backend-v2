@@ -3,14 +3,17 @@ package com.pintoss.gitftmall.domain.voucher.controller;
 import com.pintoss.gitftmall.common.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.domain.voucher.application.VoucherProviderRegisterService;
+import com.pintoss.gitftmall.domain.voucher.application.VoucherProviderService;
 import com.pintoss.gitftmall.domain.voucher.application.VoucherRegisterService;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherProviderRegisterRequest;
+import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherProviderUpdateRequest;
 import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherRegisterRequest;
 import com.pintoss.gitftmall.infra.security.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +23,8 @@ public class AdminVoucherProviderController {
 
     private final VoucherProviderRegisterService voucherProviderRegisterService;
     private final VoucherRegisterService voucherRegisterService;
+
+    private final VoucherProviderService voucherProviderService;
 
     @PostMapping
     @AuthorizationRequired(RoleEnum.ADMIN)
@@ -59,5 +64,15 @@ public class AdminVoucherProviderController {
         voucherRegisterService.register(providerId, command);
 
         return ApiResponse.ok(null);
+    }
+
+    @PatchMapping("/{provider_id}")
+    public ApiResponse<Void> updateVoucherProvider(
+            @PathVariable("provider_id") Long providerId,
+            @RequestBody @Valid VoucherProviderUpdateRequest request
+    ) {
+        voucherProviderService.update(providerId, request);
+
+        return new ApiResponse<>(HttpStatus.OK, "상품권 제조사 상세정보 수정 완료", null);
     }
 }
