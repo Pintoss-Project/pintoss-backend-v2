@@ -24,12 +24,10 @@ public class VoucherRepositoryImpl implements IVoucherRepository {
     }
 
     @Override
-    public void deleteById(Long voucherId) {
-        if (!voucherJpaRepository.existsById(voucherId)) {
-            throw new InvalidVoucherException(ErrorCode.BAD_REQUEST, "해당 Voucher ID는 존재하지 않습니다.");
-        }
-        voucherJpaRepository.deleteById(voucherId);
+    public void delete(Voucher voucher) {
+        voucherJpaRepository.delete(voucher);
     }
+
 
     @Override
     public Optional<Voucher> findById(Long voucherId) {

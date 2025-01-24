@@ -11,7 +11,7 @@ public interface IVoucherRepository {
 
     void save(Voucher voucher);
 
-    void deleteById(Long voucherId);
+    void delete(Voucher voucher);
 
     Optional<Voucher> findById(Long voucherId);
 
