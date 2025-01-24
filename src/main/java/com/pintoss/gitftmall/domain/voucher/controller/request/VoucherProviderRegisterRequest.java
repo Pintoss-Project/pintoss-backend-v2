@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class VoucherProviderRegisterRequest {
 
-    @NotBlank(message = "상품 이름은 필수 항목입니다.")
+    @NotBlank(message = "상품권 제조사 이름은 필수 항목입니다.")
     private String name;
 
     @NotNull(message = "인기 여부는 필수 항목입니다.")
@@ -31,6 +31,16 @@ public class VoucherProviderRegisterRequest {
     @JsonProperty("cs_center")
     private String csCenter;
 
+    @NotNull(message = "카드 할인 금액은 필수 항목입니다.")
+    @Min(value = 0, message = "카드 할인 금액은 0 이상이어야 합니다.")
+    @JsonProperty("card_discount")
+    private BigDecimal cardDiscount = BigDecimal.ZERO;
+
+    @NotNull(message = "전화 할인 금액은 필수 항목입니다.")
+    @Min(value = 0, message = "전화 할인 금액은 0 이상이어야 합니다.")
+    @JsonProperty("phone_discount")
+    private BigDecimal phoneDiscount = BigDecimal.ZERO;
+
     @NotBlank(message = "설명은 필수 항목입니다.")
     private String description;
 
@@ -38,8 +48,7 @@ public class VoucherProviderRegisterRequest {
     private String publisher;
 
     @NotNull(message = "카테고리는 필수 항목입니다.")
-    @Enumerated(EnumType.STRING)
-    private VoucherProviderCategory category;
+    private String category;
 
     @NotBlank(message = "로고 이미지는 필수 항목입니다.")
     @JsonProperty("image_url")
@@ -50,4 +59,8 @@ public class VoucherProviderRegisterRequest {
 
     //상품권의 인덱스
     private int index;
+
+    public VoucherProviderCategory getValidatedCategory() {
+        return VoucherProviderCategory.from(this.category);
+    }
 }

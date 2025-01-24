@@ -18,7 +18,7 @@ public enum VoucherProviderCategory {
         try{
             return VoucherProviderCategory.valueOf(category.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new InvalidCategoryException("해당 카테고리는 없는 카테고리입니다: " + category);
+            throw new InvalidCategoryException("카테고리 오류: " + category + ". 사용 가능한 카테고리: [CBM(문화/도서/영화), GO(게임/온라인콘텐츠), LS(생활/쇼핑)]");
         }
     }
 }

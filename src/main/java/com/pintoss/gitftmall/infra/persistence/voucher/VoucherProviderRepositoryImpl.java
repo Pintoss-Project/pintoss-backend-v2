@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository {
@@ -22,6 +24,11 @@ public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository
     @Override
     public boolean existsByName(String name) {
         return voucherProviderJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Optional<VoucherProvider> findById(Long id) {
+        return voucherProviderJpaRepository.findById(id);
     }
 
     @Override

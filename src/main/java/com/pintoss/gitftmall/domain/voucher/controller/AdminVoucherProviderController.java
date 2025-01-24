@@ -21,16 +21,18 @@ public class AdminVoucherProviderController {
     private final VoucherProviderRegisterService voucherProviderRegisterService;
 
     @PostMapping
-    @AuthorizationRequired(RoleEnum.ADMIN)
+//    @AuthorizationRequired(RoleEnum.ADMIN)
     public ApiResponse<Void> registerVoucherProvider(@RequestBody @Valid VoucherProviderRegisterRequest request){
         VoucherProviderRegisterServiceCommand command = new VoucherProviderRegisterServiceCommand(
                 request.getName(),
                 request.isPopular(),
                 request.getHomePage(),
                 request.getCsCenter(),
+                request.getCardDiscount(),
+                request.getPhoneDiscount(),
                 request.getDescription(),
                 request.getPublisher(),
-                request.getCategory(),
+                request.getValidatedCategory(),
                 request.getLogoImageUrl(),
                 request.getNote(),
                 request.getIndex()

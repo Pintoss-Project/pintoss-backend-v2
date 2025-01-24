@@ -1,11 +1,12 @@
 package com.pintoss.gitftmall.domain.voucher.application;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.DuplicateVoucherProviderNameException;
+import com.pintoss.gitftmall.common.exceptions.voucher.DuplicateVoucherProviderNameException;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.model.value.ContactInfo;
 import com.pintoss.gitftmall.domain.voucher.model.value.CsCenter;
+import com.pintoss.gitftmall.domain.voucher.model.value.Discount;
 import com.pintoss.gitftmall.domain.voucher.model.value.HomePage;
 import com.pintoss.gitftmall.domain.voucher.repository.IVoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,10 @@ public class VoucherProviderRegisterService {
                 new ContactInfo(
                         new HomePage(command.getHomePage()),
                         new CsCenter(command.getCsCenter())
+                ),
+                new Discount(
+                        command.getCardDiscount(),
+                        command.getPhoneDiscount()
                 ),
                 command.getDescription(),
                 command.getPublisher(),

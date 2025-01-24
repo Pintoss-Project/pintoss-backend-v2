@@ -1,6 +1,7 @@
 package com.pintoss.gitftmall.domain.voucher.model;
 
 import com.pintoss.gitftmall.domain.voucher.model.value.ContactInfo;
+import com.pintoss.gitftmall.domain.voucher.model.value.Discount;
 import com.pintoss.gitftmall.domain.voucher.model.value.VoucherProviderCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,6 +34,13 @@ public class VoucherProvider {
     })
     private ContactInfo contactInfo;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
+            @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
+    })
+    private Discount discount;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
@@ -49,17 +59,26 @@ public class VoucherProvider {
 
     private String logoImageUrl;
 
+    @OneToMany(mappedBy = "voucherProvider")
+    private final List<Voucher> voucherList = new ArrayList<>();
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
+    public void addVoucher(Voucher voucher) {
+        voucherList.add(voucher);
+        voucher.setVoucherProvider(this);
+    }
+
     private VoucherProvider(
-            String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
-            VoucherProviderCategory category, String logoImageUrl, String note, int index
+            String name, boolean isPopular, ContactInfo contactInfo, Discount discount, String description,
+            String publisher, VoucherProviderCategory category, String logoImageUrl, String note, int index
     ) {
         this.name = name;
         this.isPopular = isPopular;
         this.contactInfo = contactInfo;
+        this.discount = discount;
         this.description = description;
         this.publisher = publisher;
         this.category = category;
@@ -71,13 +90,14 @@ public class VoucherProvider {
     }
 
     public static VoucherProvider create(
-            String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
+            String name, boolean isPopular, ContactInfo contactInfo, Discount discount, String description, String publisher,
             VoucherProviderCategory category, String logoImageUrl, String note, int index
     ){
         return new VoucherProvider(
                 name,
                 isPopular,
                 contactInfo,
+                discount,
                 description,
                 publisher,
                 category,

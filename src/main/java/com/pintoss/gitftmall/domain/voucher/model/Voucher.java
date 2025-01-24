@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,20 +21,34 @@ public class Voucher {
 
     private String name;
 
-    private Long price;
+    private BigDecimal price;
 
     private int stock;
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
-            @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
-    })
-    private Discount discount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voucher_provider_id")
     private VoucherProvider voucherProvider;
 
     private LocalDateTime createdAt;
+
+    public void setVoucherProvider(VoucherProvider voucherProvider) {
+        this.voucherProvider = voucherProvider;
+    }
+
+    public Voucher(String name, BigDecimal price, int stock) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public static Voucher create(
+            String name, BigDecimal price, int stock
+    ) {
+        return new Voucher(
+                name,
+                price,
+                stock
+        );
+    }
 }

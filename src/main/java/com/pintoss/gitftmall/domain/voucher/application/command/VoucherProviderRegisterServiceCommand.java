@@ -18,6 +18,10 @@ public class VoucherProviderRegisterServiceCommand {
 
     private String csCenter;
 
+    private BigDecimal cardDiscount;
+
+    private BigDecimal phoneDiscount;
+
     private String description;
 
     private String publisher;
@@ -30,11 +34,13 @@ public class VoucherProviderRegisterServiceCommand {
 
     private int index;
 
-    public VoucherProviderRegisterServiceCommand(String name, boolean isPopular, String homePage, String csCenter, String description, String publisher, VoucherProviderCategory category, String logoImageUrl, String note, int index) {
+    public VoucherProviderRegisterServiceCommand(String name, boolean isPopular, String homePage, String csCenter, BigDecimal cardDiscount, BigDecimal phoneDiscount, String description, String publisher, VoucherProviderCategory category, String logoImageUrl, String note, int index) {
         this.name = name;
         this.isPopular = isPopular;
         this.homePage = homePage;
         this.csCenter = csCenter;
+        this.cardDiscount = cardDiscount;
+        this.phoneDiscount = phoneDiscount;
         this.description = description;
         this.publisher = publisher;
         this.category = category;
