@@ -1,6 +1,7 @@
 package com.pintoss.gitftmall.infra.persistence.voucher;
 
 import com.pintoss.gitftmall.domain.voucher.model.Voucher;
+import com.pintoss.gitftmall.domain.voucher.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.repository.IVoucherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ public class VoucherRepositoryImpl implements IVoucherRepository {
     }
 
     @Override
-    public Page<Voucher> findAll(Pageable pageable) {
-        return voucherJpaRepository.findAll(pageable);
+    public Page<Voucher> findByVoucherProvider(VoucherProvider voucherProvider, Pageable pageable) {
+        return voucherJpaRepository.findByVoucherProvider(voucherProvider, pageable);
     }
 }
