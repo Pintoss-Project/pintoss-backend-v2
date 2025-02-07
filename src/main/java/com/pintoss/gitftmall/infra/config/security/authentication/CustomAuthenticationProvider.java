@@ -38,9 +38,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 계정 활성화 확인
-        if (!userDetails.isEnabled()) {
-            throw new DisabledException("계정이 비활성화되었습니다.");
-        }
+//        if (!userDetails.isEnabled()) {
+//            throw new DisabledException("계정이 비활성화되었습니다.");
+//        }
 
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }

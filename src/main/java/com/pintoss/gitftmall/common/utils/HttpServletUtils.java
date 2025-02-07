@@ -1,13 +1,14 @@
 package com.pintoss.gitftmall.common.utils;
 
-import static java.util.Optional.empty;
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.Optional;
-import org.springframework.stereotype.Component;
+
+import static java.util.Optional.empty;
 
 @Component
 public class HttpServletUtils {
@@ -26,7 +27,7 @@ public class HttpServletUtils {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(seconds);
         cookie.setSecure(true);
-        cookie.setAttribute("SameSite", "None");
+        response.addHeader("SameSite", "None");
         response.addCookie(cookie);
     }
 
@@ -38,7 +39,7 @@ public class HttpServletUtils {
             cookie.setHttpOnly(true);
             cookie.setMaxAge(0);
             cookie.setSecure(true);
-            cookie.setAttribute("SameSite", "None");
+            response.addHeader("SameSite", "None");
             response.addCookie(cookie);
         }
     }

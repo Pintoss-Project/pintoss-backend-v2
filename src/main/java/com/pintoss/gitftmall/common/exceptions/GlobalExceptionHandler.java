@@ -3,6 +3,7 @@ package com.pintoss.gitftmall.common.exceptions;
 import com.pintoss.gitftmall.common.dto.ApiErrorResponse;
 import com.pintoss.gitftmall.common.exceptions.client.AuthorizationException;
 import com.pintoss.gitftmall.common.exceptions.client.BadRequestException;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Hidden
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
