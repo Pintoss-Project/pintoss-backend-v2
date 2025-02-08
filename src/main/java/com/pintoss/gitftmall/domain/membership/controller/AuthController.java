@@ -14,6 +14,8 @@ import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
+import com.pintoss.gitftmall.domain.membership.controller.response.LoginResponse;
+import com.pintoss.gitftmall.domain.membership.controller.response.ReissueResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import jakarta.servlet.http.Cookie;
@@ -43,16 +45,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<LoginResult> login(@RequestBody @Valid LoginRequest request, HttpServletResponse servletResponse) {
+    public ApiResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request, HttpServletResponse servletResponse) {
         LoginServiceCommand command = new LoginServiceCommand(request.getEmail(), request.getPassword());
 
         LoginResult loginResult = loginService.login(command);
 
         // TODO : 만료 기간은 미정 임의 값 입니다.
-        servletUtils.addCookie(servletResponse, "AccessToken", loginResult.getAccessToken(), (int) 1000000000L);
+//        servletUtils.addCookie(servletResponse, "AccessToken", loginResult.getAccessToken(), (int) 1000000000L);
         servletUtils.addCookie(servletResponse, "RefreshToken", loginResult.getRefreshToken(), (int) 1000000000L);
 
-        return ApiResponse.ok(null);
+        return ApiResponse.ok(new LoginResponse(loginResult.getAccessToken()));
     }
 
     @PostMapping("/logout")
@@ -64,9 +66,8 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    public ApiResponse<Void> reissue(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        String accessToken = servletUtils.getCookie(servletRequest, "AccessToken")
-                .map(Cookie::getValue)
+    public ApiResponse<ReissueResponse> reissue(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        String accessToken = servletUtils.getAccessToken(servletRequest)
                 .orElseThrow(() -> new MissingTokenException(ErrorCode.INVALID_ACCESS, "액세스 토큰이 빈 값입니다."));
 
         String refreshToken = servletUtils.getCookie(servletRequest, "RefreshToken")
@@ -78,10 +79,10 @@ public class AuthController {
         ReissueResult reissue = reissueService.reissue(command);
 
         // TODO : 만료 기간은 미정 임의 값 입니다.
-        servletUtils.addCookie(servletResponse, "AccessToken", reissue.getAccessToken(), (int) 10000000L);
+//        servletUtils.addCookie(servletResponse, "AccessToken", reissue.getAccessToken(), (int) 10000000L);
         servletUtils.addCookie(servletResponse, "RefreshToken", reissue.getRefreshToken(), (int) 10000000L);
 
-        return ApiResponse.ok(null);
+        return ApiResponse.ok(new ReissueResponse(reissue.getAccessToken()));
     }
 
     @GetMapping("/check-id")

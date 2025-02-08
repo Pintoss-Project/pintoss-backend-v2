@@ -45,9 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     private String getAccessToken(HttpServletRequest request) {
-        return servletUtils.getCookie(request, "AccessToken")
-                .map(Cookie::getValue)
-                .orElse(null);
+        return servletUtils.getAccessToken(request).orElse(null);
     }
 
 }

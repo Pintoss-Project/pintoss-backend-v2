@@ -5,8 +5,11 @@ import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.domain.voucherProvider.application.VoucherProviderRegisterService;
 import com.pintoss.gitftmall.domain.voucherProvider.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucherProvider.controller.request.VoucherProviderRegisterRequest;
+import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
+import com.pintoss.gitftmall.domain.voucherProvider.repository.IVoucherProviderRepository;
 import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class VoucherProviderController {
 
     private final VoucherProviderRegisterService voucherProviderRegisterService;
+    private final IVoucherProviderRepository voucherProviderRepository;
 
     @PostMapping
     @AuthorizationRequired({ RoleEnum.ADMIN, RoleEnum.USER })
@@ -41,5 +45,11 @@ public class VoucherProviderController {
         voucherProviderRegisterService.register(command);
 
         return ApiResponse.ok(null);
+    }
+
+    @GetMapping
+    public ApiResponse<List<VoucherProviderListResponse>> findAll() {
+        List<VoucherProviderListResponse> voucherProviders = voucherProviderRepository.findAll();
+        return ApiResponse.ok(voucherProviders);
     }
 }

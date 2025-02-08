@@ -13,6 +13,14 @@ import static java.util.Optional.empty;
 @Component
 public class HttpServletUtils {
 
+    public Optional<String> getAccessToken(HttpServletRequest request) {
+        Optional<String> authorization = Optional.ofNullable(request.getHeader("Authorization"));
+
+        if(authorization.isPresent()) {
+            return authorization;
+        }
+        return authorization;
+    }
     public Optional<String> getHeader(HttpServletRequest request, String name) {
         return Optional.ofNullable(request.getHeader(name));
     }

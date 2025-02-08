@@ -1,7 +1,9 @@
 package com.pintoss.gitftmall.infra.persistence.voucherProvider;
 
+import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
 import com.pintoss.gitftmall.domain.voucherProvider.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucherProvider.repository.IVoucherProviderRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,15 +11,21 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository {
 
-    private final VoucherProviderJpaRepository voucherProviderJpaRepository;
+    private final VoucherProviderJpaRepository jpaRepository;
+    private final VoucherProviderQueryDslRepository queryDslRepository;
 
     @Override
     public void save(VoucherProvider voucherProvider) {
-        voucherProviderJpaRepository.save(voucherProvider);
+        jpaRepository.save(voucherProvider);
     }
 
     @Override
     public boolean existsByName(String name) {
-        return voucherProviderJpaRepository.existsByName(name);
+        return jpaRepository.existsByName(name);
+    }
+
+    @Override
+    public List<VoucherProviderListResponse> findAll() {
+        return queryDslRepository.findAll();
     }
 }
