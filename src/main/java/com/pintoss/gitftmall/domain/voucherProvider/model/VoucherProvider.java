@@ -1,5 +1,6 @@
 package com.pintoss.gitftmall.domain.voucherProvider.model;
 
+import com.pintoss.gitftmall.domain.voucherProvider.model.value.Discount;
 import com.pintoss.gitftmall.domain.voucherProvider.model.value.ContactInfo;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -20,6 +21,13 @@ public class VoucherProvider {
     private String name;
 
     private boolean isPopular;
+
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
+        @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
+    })
+    private Discount discount;
 
     @Embedded
     @AttributeOverrides({
@@ -45,9 +53,10 @@ public class VoucherProvider {
 
     private LocalDateTime updatedAt;
 
-    private VoucherProvider(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher, String note, int index) {
+    private VoucherProvider(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index) {
         this.name = name;
         this.isPopular = isPopular;
+        this.discount = discount;
         this.contactInfo = contactInfo;
         this.description = description;
         this.publisher = publisher;
@@ -57,11 +66,12 @@ public class VoucherProvider {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static VoucherProvider create(String name, boolean isPopular, ContactInfo contactInfo, String description, String publisher,
+    public static VoucherProvider create(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
                                  String note, int index){
         return new VoucherProvider(
                 name,
                 isPopular,
+                discount,
                 contactInfo,
                 description,
                 publisher,

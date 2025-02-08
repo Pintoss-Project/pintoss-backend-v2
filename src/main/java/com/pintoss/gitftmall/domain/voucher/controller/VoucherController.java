@@ -22,8 +22,6 @@ public class VoucherController {
     public ApiResponse<Void> registerVoucher(@RequestBody @Valid VoucherRegisterRequest request) {
         VoucherRegisterServiceCommand command = new VoucherRegisterServiceCommand(
                 request.getVoucherProviderId(),
-                request.getCardDiscount(),
-                request.getPhoneDiscount(),
                 request.getPrice(),
                 request.getStock()
         );

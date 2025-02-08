@@ -8,6 +8,7 @@ import com.pintoss.gitftmall.domain.voucherProvider.controller.request.VoucherPr
 import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,8 @@ public class VoucherProviderController {
         VoucherProviderRegisterServiceCommand command = new VoucherProviderRegisterServiceCommand(
                 request.getName(),
                 request.isPopular(),
+                request.getCardDiscount(),
+                request.getPhoneDiscount(),
                 request.getHomePage(),
                 request.getCsCenter(),
                 request.getDescription(),

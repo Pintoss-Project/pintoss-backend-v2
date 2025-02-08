@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 public class VoucherRegisterServiceCommand {
 
     private Long voucherProviderId;
-
-    private BigDecimal cardDiscount = BigDecimal.ZERO;
-
-    private BigDecimal phoneDiscount = BigDecimal.ZERO;
+//
+//    private BigDecimal cardDiscount = BigDecimal.ZERO;
+//
+//    private BigDecimal phoneDiscount = BigDecimal.ZERO;
 
     private Long price;
 

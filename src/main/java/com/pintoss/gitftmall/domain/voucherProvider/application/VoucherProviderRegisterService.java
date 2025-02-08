@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.domain.voucherProvider.application;
 
 import com.pintoss.gitftmall.common.exceptions.ErrorCode;
 import com.pintoss.gitftmall.common.exceptions.client.DuplicateProductNameException;
+import com.pintoss.gitftmall.domain.voucherProvider.model.value.Discount;
 import com.pintoss.gitftmall.domain.voucherProvider.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucherProvider.model.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucherProvider.model.value.ContactInfo;
@@ -26,6 +27,7 @@ public class VoucherProviderRegisterService {
         VoucherProvider voucherProvider = VoucherProvider.create(
                 command.getName(),
                 command.isPopular(),
+                new Discount(command.getCardDiscount(), command.getPhoneDiscount()),
                 new ContactInfo(
                         new HomePage(command.getHomePage()),
                         new CsCenter(command.getCsCenter())
