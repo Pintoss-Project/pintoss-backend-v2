@@ -17,7 +17,9 @@ public class HttpServletUtils {
         Optional<String> authorization = Optional.ofNullable(request.getHeader("Authorization"));
 
         if(authorization.isPresent()) {
-            return authorization;
+            if(authorization.get().startsWith("Bearer ")) {
+                return Optional.of(authorization.get().substring(7));
+            }
         }
         return authorization;
     }
