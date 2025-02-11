@@ -1,9 +1,9 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.ExpiredServerTokenException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidRequestTokenException;
-import com.pintoss.gitftmall.common.exceptions.client.NotFoundMemberException;
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.ExpiredServerTokenException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidRequestTokenException;
+import com.pintoss.gitftmall.core.exceptions.client.NotFoundMemberException;
 import com.pintoss.gitftmall.domain.membership.application.command.ReissueServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.model.User;

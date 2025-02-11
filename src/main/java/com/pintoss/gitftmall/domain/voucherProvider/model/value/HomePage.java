@@ -1,8 +1,8 @@
 package com.pintoss.gitftmall.domain.voucherProvider.model.value;
 
-import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.EmptyURLException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidURLException;
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyURLException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidURLException;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;

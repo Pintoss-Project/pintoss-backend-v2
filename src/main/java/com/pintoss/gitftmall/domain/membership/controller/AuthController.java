@@ -1,9 +1,9 @@
 package com.pintoss.gitftmall.domain.membership.controller;
 
-import com.pintoss.gitftmall.common.dto.ApiResponse;
-import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.MissingTokenException;
-import com.pintoss.gitftmall.common.utils.HttpServletUtils;
+import com.pintoss.gitftmall.core.dto.ApiResponse;
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.MissingTokenException;
+import com.pintoss.gitftmall.core.util.HttpServletUtils;
 import com.pintoss.gitftmall.domain.membership.application.LoginService;
 import com.pintoss.gitftmall.domain.membership.application.RegisterService;
 import com.pintoss.gitftmall.domain.membership.application.ReissueService;
@@ -17,7 +17,7 @@ import com.pintoss.gitftmall.domain.membership.controller.request.RegisterReques
 import com.pintoss.gitftmall.domain.membership.controller.response.LoginResponse;
 import com.pintoss.gitftmall.domain.membership.controller.response.ReissueResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
-import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.core.config.web.interceptor.AuthorizationRequired;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

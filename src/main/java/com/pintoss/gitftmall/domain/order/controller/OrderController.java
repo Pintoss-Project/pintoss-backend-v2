@@ -1,13 +1,13 @@
 package com.pintoss.gitftmall.domain.order.controller;
 
-import com.pintoss.gitftmall.common.dto.ApiResponse;
+import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
 import com.pintoss.gitftmall.domain.order.application.OrderCreateService;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
-import com.pintoss.gitftmall.infra.config.web.interceptor.AuthorizationRequired;
-import com.pintoss.gitftmall.infra.util.SecurityContextUtils;
+import com.pintoss.gitftmall.core.config.web.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.core.util.SecurityContextUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

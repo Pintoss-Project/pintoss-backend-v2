@@ -1,14 +1,12 @@
 package com.pintoss.gitftmall.domain.membership.controller;
 
-import com.pintoss.gitftmall.common.dto.ApiResponse;
-import com.pintoss.gitftmall.common.exceptions.ErrorCode;
-import com.pintoss.gitftmall.common.exceptions.client.MissingTokenException;
-import com.pintoss.gitftmall.common.exceptions.client.NotFoundMemberException;
-import com.pintoss.gitftmall.common.utils.HttpServletUtils;
+import com.pintoss.gitftmall.core.dto.ApiResponse;
+import com.pintoss.gitftmall.core.exceptions.client.NotFoundMemberException;
+import com.pintoss.gitftmall.core.util.HttpServletUtils;
 import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
+import com.pintoss.gitftmall.domain.membership.infra.UserRepositoryImpl;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.application.TokenManageService;
-import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,7 +30,7 @@ public class UserInfoController {
     public ApiResponse<UserInfoResponse> userInfo(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Authentication authentication) {
         String accessToken = servletUtils.getCookie(servletRequest, "AccessToken")
                 .map(Cookie::getValue)
-                .orElseThrow(() -> new MissingTokenException(ErrorCode.INVALID_ACCESS, "액세스 토큰이 빈 값입니다."));
+                .orElseThrow(null);
 
         String subject = tokenManageService.getSubject(accessToken);
 

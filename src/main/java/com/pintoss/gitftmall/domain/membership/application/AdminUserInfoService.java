@@ -1,8 +1,8 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.domain.membership.controller.request.UserInfoResponse;
+import com.pintoss.gitftmall.domain.membership.infra.UserRepositoryImpl;
 import com.pintoss.gitftmall.domain.membership.model.User;
-import com.pintoss.gitftmall.infra.persistence.membership.UserRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

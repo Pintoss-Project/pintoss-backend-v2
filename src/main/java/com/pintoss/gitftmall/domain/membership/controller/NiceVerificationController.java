@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.controller;
 
-import com.pintoss.gitftmall.common.dto.ApiResponse;
+import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.application.NiceRequestService;
 import com.pintoss.gitftmall.domain.membership.application.NiceVerificationService;
 import com.pintoss.gitftmall.domain.membership.application.command.NiceVerificationServiceCommand;

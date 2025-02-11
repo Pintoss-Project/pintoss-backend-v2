@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.common.exceptions.client.DuplicateEmailException;
-import com.pintoss.gitftmall.common.exceptions.client.DuplicatePhoneException;
+import com.pintoss.gitftmall.core.exceptions.client.DuplicateEmailException;
+import com.pintoss.gitftmall.core.exceptions.client.DuplicatePhoneException;
 import com.pintoss.gitftmall.domain.membership.application.command.RegisterServiceCommand;
 import com.pintoss.gitftmall.domain.membership.model.User;
 import com.pintoss.gitftmall.domain.membership.model.value.Email;

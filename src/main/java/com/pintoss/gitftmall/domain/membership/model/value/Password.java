@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.model.value;
 
-import com.pintoss.gitftmall.common.exceptions.client.EmptyPasswordException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidPasswordFormatException;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyPasswordException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidPasswordFormatException;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;

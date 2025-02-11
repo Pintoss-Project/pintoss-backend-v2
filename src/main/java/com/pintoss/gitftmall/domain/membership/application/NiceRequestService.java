@@ -5,12 +5,12 @@ import com.pintoss.gitftmall.domain.membership.application.port.NiceApiRequestDa
 import com.pintoss.gitftmall.domain.membership.application.port.NiceApiSymmetricKeyGeneratorPort;
 import com.pintoss.gitftmall.domain.membership.application.port.NiceApiTokenManagerPort;
 import com.pintoss.gitftmall.domain.membership.application.result.EncryptedDataResult;
-import com.pintoss.gitftmall.infra.external.nice.adapter.in.NiceApiEncryptedRequestDataCommand;
-import com.pintoss.gitftmall.infra.external.nice.adapter.in.NiceApiGenerateHmacIntegrityCommand;
-import com.pintoss.gitftmall.infra.external.nice.adapter.in.NiceApiGenerateSymmetricKeyCommand;
-import com.pintoss.gitftmall.infra.external.nice.adapter.out.NiceApiSymmetricKeyResult;
-import com.pintoss.gitftmall.infra.external.nice.config.NiceApiProperties;
-import com.pintoss.gitftmall.infra.external.nice.model.NiceApiCryptoToken;
+import com.pintoss.gitftmall.domain.membership.infra.nice.adapter.in.NiceApiEncryptedRequestDataCommand;
+import com.pintoss.gitftmall.domain.membership.infra.nice.adapter.in.NiceApiGenerateHmacIntegrityCommand;
+import com.pintoss.gitftmall.domain.membership.infra.nice.adapter.in.NiceApiGenerateSymmetricKeyCommand;
+import com.pintoss.gitftmall.domain.membership.infra.nice.adapter.out.NiceApiSymmetricKeyResult;
+import com.pintoss.gitftmall.domain.membership.infra.nice.config.NiceApiProperties;
+import com.pintoss.gitftmall.domain.membership.infra.nice.model.NiceApiCryptoToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

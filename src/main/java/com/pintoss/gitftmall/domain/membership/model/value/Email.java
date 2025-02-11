@@ -1,8 +1,8 @@
 package com.pintoss.gitftmall.domain.membership.model.value;
 
 
-import com.pintoss.gitftmall.common.exceptions.client.EmptyEmailException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidEmailFormatException;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyEmailException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidEmailFormatException;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
