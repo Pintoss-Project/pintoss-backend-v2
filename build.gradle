@@ -10,6 +10,7 @@ tasks.withType(War) {
         include "**/*.yaml"
         include "**/*.yml"
         include "**/*.properties"
+        into("WEB-INF/classes")
     }
 }
 
