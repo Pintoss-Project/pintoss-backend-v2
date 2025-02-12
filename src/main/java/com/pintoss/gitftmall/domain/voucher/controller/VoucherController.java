@@ -30,4 +30,10 @@ public class VoucherController {
 
         return ApiResponse.ok(null);
     }
+
+    @GetMapping
+    public ApiResponse<String> findVoucherByProviderId(@RequestParam("providerId") String providerId) {
+        return ApiResponse.ok("특정 제공사의 상품권 목록 조회");
+    }
+
 }

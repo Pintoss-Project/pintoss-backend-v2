@@ -13,7 +13,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://pin-toss.com") // 클라이언트 도메인 허용
+                        .allowedOrigins(
+                                "https://pin-toss.com",
+                                "http://localhost:5173",
+                                "http://localhost:3000"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowCredentials(true);
             }

@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.core.security.userdetails;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
-import com.pintoss.gitftmall.domain.membership.domain.repository.IUserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
 import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
 
     @Transactional

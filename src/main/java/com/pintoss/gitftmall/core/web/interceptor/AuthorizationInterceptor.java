@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public class AuthorizationInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         AuthorizationRequired annotation = getAnnotation(handler);
 
         if( annotation == null ){

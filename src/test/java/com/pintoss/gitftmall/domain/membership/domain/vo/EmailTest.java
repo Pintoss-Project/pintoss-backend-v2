@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.domain.vo;
 
-import com.pintoss.gitftmall.common.exceptions.client.EmptyEmailException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidEmailFormatException;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyEmailException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidEmailFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

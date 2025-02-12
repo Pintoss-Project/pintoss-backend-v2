@@ -1,14 +1,14 @@
 package com.pintoss.gitftmall.domain.voucher.infra.repository;
 
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
-import com.pintoss.gitftmall.domain.voucher.domain.repository.IVoucherRepository;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class VoucherRepositoryImpl implements IVoucherRepository {
+public class VoucherRepositoryImpl implements VoucherRepository {
 
     private final VoucherJpaRepository voucherJpaRepository;
 

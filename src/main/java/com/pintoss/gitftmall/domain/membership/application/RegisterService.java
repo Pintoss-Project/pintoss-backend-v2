@@ -8,7 +8,7 @@ import com.pintoss.gitftmall.domain.membership.domain.vo.Email;
 import com.pintoss.gitftmall.domain.membership.domain.vo.Phone;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
 import com.pintoss.gitftmall.domain.membership.domain.vo.UserRole;
-import com.pintoss.gitftmall.domain.membership.domain.repository.IUserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class RegisterService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
     public void signup(RegisterServiceCommand command) {

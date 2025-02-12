@@ -8,7 +8,7 @@ import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.ContactInfo;
 import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.CsCenter;
 import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.HomePage;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.IVoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.VoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class VoucherProviderRegisterService {
 
-    private final IVoucherProviderRepository voucherProviderRepository;
+    private final VoucherProviderRepository voucherProviderRepository;
 
     public void register(VoucherProviderRegisterServiceCommand command){
 

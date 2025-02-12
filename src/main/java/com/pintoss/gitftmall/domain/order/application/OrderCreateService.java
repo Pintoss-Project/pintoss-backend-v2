@@ -3,9 +3,9 @@ package com.pintoss.gitftmall.domain.order.application;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
-import com.pintoss.gitftmall.domain.order.domain.repository.IOrderRepository;
+import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
-import com.pintoss.gitftmall.domain.voucher.domain.repository.IVoucherRepository;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderCreateService {
 
-    private final IOrderRepository orderRepository;
-    private final IVoucherRepository voucherRepository;
+    private final OrderRepository orderRepository;
+    private final VoucherRepository voucherRepository;
 
     public Long create(OrderCreateServiceCommand command) {
         List<OrderItem> orderItems = command.getOrderItems().stream().map(item -> {

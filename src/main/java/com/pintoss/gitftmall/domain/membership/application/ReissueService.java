@@ -7,7 +7,7 @@ import com.pintoss.gitftmall.core.exceptions.client.NotFoundMemberException;
 import com.pintoss.gitftmall.domain.membership.application.command.ReissueServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.domain.User;
-import com.pintoss.gitftmall.domain.membership.domain.repository.IUserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ReissueService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final TokenManageService tokenManageService;
 
     @Transactional

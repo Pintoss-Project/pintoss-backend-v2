@@ -2,14 +2,14 @@ package com.pintoss.gitftmall.domain.voucherProvider.infra.repository;
 
 import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
 import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.IVoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.VoucherProviderRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class VoucherProviderRepositoryImpl implements IVoucherProviderRepository {
+public class VoucherProviderRepositoryImpl implements VoucherProviderRepository {
 
     private final VoucherProviderJpaRepository jpaRepository;
     private final VoucherProviderQueryDslRepository queryDslRepository;

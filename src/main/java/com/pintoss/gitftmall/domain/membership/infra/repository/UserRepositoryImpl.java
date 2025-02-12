@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.infra.repository;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
-import com.pintoss.gitftmall.domain.membership.domain.repository.IUserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements IUserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
 

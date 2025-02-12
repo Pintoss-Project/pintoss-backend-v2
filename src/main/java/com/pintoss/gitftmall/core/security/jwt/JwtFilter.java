@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.core.security.jwt;
 
 import com.pintoss.gitftmall.core.util.HttpServletUtils;
-import com.pintoss.gitftmall.domain.membership.application.port.SecurityAuthenticationProviderPort;
+import com.pintoss.gitftmall.core.security.authentication.SecurityAuthenticationProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,12 +16,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
     private final HttpServletUtils servletUtils;
-    private final SecurityAuthenticationProviderPort securityAuthenticationProviderPort;
+    private final SecurityAuthenticationProvider securityAuthenticationProvider;
 
-    public JwtFilter(TokenProvider tokenProvider, HttpServletUtils servletUtils, SecurityAuthenticationProviderPort securityAuthenticationProviderPort) {
+    public JwtFilter(TokenProvider tokenProvider, HttpServletUtils servletUtils, SecurityAuthenticationProvider securityAuthenticationProvider) {
         this.tokenProvider = tokenProvider;
         this.servletUtils = servletUtils;
-        this.securityAuthenticationProviderPort = securityAuthenticationProviderPort;
+        this.securityAuthenticationProvider = securityAuthenticationProvider;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     private void setAuthentication(String accessToken) {
-        Authentication authentication = securityAuthenticationProviderPort.getAuthentication(tokenProvider.getSubject(accessToken));
+        Authentication authentication = securityAuthenticationProvider.getAuthentication(tokenProvider.getSubject(accessToken));
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 

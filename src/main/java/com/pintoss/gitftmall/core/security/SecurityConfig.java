@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.core.security;
 
 import com.pintoss.gitftmall.core.util.HttpServletUtils;
-import com.pintoss.gitftmall.domain.membership.application.port.SecurityAuthenticationProviderPort;
+import com.pintoss.gitftmall.core.security.authentication.SecurityAuthenticationProvider;
 import com.pintoss.gitftmall.core.security.jwt.JwtFilter;
 import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class SecurityConfig {
 
     private final TokenProvider tokenProvider;
     private final HttpServletUtils servletUtils;
-    private final SecurityAuthenticationProviderPort securityAuthenticationProviderPort;
+    private final SecurityAuthenticationProvider securityAuthenticationProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -61,7 +61,7 @@ public class SecurityConfig {
             .sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-            .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, securityAuthenticationProviderPort), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, securityAuthenticationProvider), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(request ->
                 request.requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
