@@ -2,8 +2,8 @@ package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
-import com.pintoss.gitftmall.core.config.security.authentication.CustomAuthentication;
-import com.pintoss.gitftmall.core.config.security.userdetails.CustomUserDetails;
+import com.pintoss.gitftmall.core.security.authentication.CustomAuthentication;
+import com.pintoss.gitftmall.core.security.userdetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;

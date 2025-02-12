@@ -1,11 +1,11 @@
 package com.pintoss.gitftmall.domain.order.application;
 
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
-import com.pintoss.gitftmall.domain.order.model.Order;
-import com.pintoss.gitftmall.domain.order.model.value.OrderItem;
-import com.pintoss.gitftmall.domain.order.repository.IOrderRepository;
-import com.pintoss.gitftmall.domain.voucher.model.Voucher;
-import com.pintoss.gitftmall.domain.voucher.repository.IVoucherRepository;
+import com.pintoss.gitftmall.domain.order.domain.Order;
+import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
+import com.pintoss.gitftmall.domain.order.domain.repository.IOrderRepository;
+import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.IVoucherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

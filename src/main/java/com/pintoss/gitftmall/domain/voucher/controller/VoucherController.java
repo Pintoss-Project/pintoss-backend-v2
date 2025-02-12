@@ -1,11 +1,11 @@
 package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.core.dto.ApiResponse;
-import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
+import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
 import com.pintoss.gitftmall.domain.voucher.application.VoucherRegisterService;
 import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherRegisterRequest;
-import com.pintoss.gitftmall.core.config.web.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

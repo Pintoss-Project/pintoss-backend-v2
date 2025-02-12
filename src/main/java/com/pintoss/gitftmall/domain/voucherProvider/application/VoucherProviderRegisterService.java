@@ -2,13 +2,13 @@ package com.pintoss.gitftmall.domain.voucherProvider.application;
 
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.DuplicateProductNameException;
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.Discount;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.Discount;
 import com.pintoss.gitftmall.domain.voucherProvider.application.command.VoucherProviderRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.voucherProvider.model.VoucherProvider;
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.ContactInfo;
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.CsCenter;
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.HomePage;
-import com.pintoss.gitftmall.domain.voucherProvider.repository.IVoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.ContactInfo;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.CsCenter;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.HomePage;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.IVoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

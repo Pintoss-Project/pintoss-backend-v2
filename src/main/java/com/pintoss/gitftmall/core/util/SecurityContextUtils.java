@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.core.util;
 
-import com.pintoss.gitftmall.domain.membership.model.User;
-import com.pintoss.gitftmall.core.config.security.authentication.CustomAuthentication;
+import com.pintoss.gitftmall.domain.membership.domain.User;
+import com.pintoss.gitftmall.core.security.authentication.CustomAuthentication;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

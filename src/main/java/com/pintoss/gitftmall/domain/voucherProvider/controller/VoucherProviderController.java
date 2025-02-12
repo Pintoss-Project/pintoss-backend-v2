@@ -1,13 +1,13 @@
 package com.pintoss.gitftmall.domain.voucherProvider.controller;
 
 import com.pintoss.gitftmall.core.dto.ApiResponse;
-import com.pintoss.gitftmall.domain.membership.model.value.RoleEnum;
+import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
 import com.pintoss.gitftmall.domain.voucherProvider.application.VoucherProviderRegisterService;
 import com.pintoss.gitftmall.domain.voucherProvider.application.command.VoucherProviderRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucherProvider.controller.request.VoucherProviderRegisterRequest;
 import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
-import com.pintoss.gitftmall.domain.voucherProvider.repository.IVoucherProviderRepository;
-import com.pintoss.gitftmall.core.config.web.interceptor.AuthorizationRequired;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.IVoucherProviderRepository;
+import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

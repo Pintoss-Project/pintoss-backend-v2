@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.voucherProvider.controller.response;
 
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.ContactInfo;
-import com.pintoss.gitftmall.domain.voucherProvider.model.value.Discount;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.ContactInfo;
+import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.Discount;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
