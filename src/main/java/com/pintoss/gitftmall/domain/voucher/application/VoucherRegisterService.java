@@ -15,6 +15,7 @@ public class VoucherRegisterService {
     public void register(VoucherRegisterServiceCommand command) {
         Voucher voucher = Voucher.create(
                 command.getVoucherProviderId(),
+                command.getName(),
                 command.getPrice(),
                 command.getStock()
         );

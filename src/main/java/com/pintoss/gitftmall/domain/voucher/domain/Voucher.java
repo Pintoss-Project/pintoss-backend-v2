@@ -18,6 +18,8 @@ public class Voucher {
     @Column(nullable = false, name = "voucher_provider_id")
     private Long voucherProviderId;
 
+    private String name;
+
     private Long price;
 
     private Integer stock;
@@ -26,15 +28,16 @@ public class Voucher {
 
     private LocalDateTime updatedAt;
 
-    private Voucher(Long voucherProviderId, Long price, Integer stock) {
+    private Voucher(Long voucherProviderId, String name, Long price, Integer stock) {
         this.voucherProviderId = voucherProviderId;
+        this.name = name;
         this.price = price;
         this.stock = stock;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static Voucher create(Long voucherProviderId, Long price, Integer stock) {
-        return new Voucher(voucherProviderId, price, stock);
+    public static Voucher create(Long voucherProviderId, String name, Long price, Integer stock) {
+        return new Voucher(voucherProviderId, name, price, stock);
     }
 }
