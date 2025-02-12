@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.domain.vo;
 
-import com.pintoss.gitftmall.common.exceptions.client.EmptyPhoneException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidPhoneFormatException;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyPhoneException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidPhoneFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

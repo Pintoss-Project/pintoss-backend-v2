@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.domain.vo;
 
-import com.pintoss.gitftmall.common.exceptions.client.EmptyPasswordException;
-import com.pintoss.gitftmall.common.exceptions.client.InvalidPasswordFormatException;
+import com.pintoss.gitftmall.core.exceptions.client.EmptyPasswordException;
+import com.pintoss.gitftmall.core.exceptions.client.InvalidPasswordFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
