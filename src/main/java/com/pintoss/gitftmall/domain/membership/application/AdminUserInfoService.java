@@ -14,10 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminUserInfoService {
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepositoryImpl userRepositoryImpl;
 
     public List<UserInfoResponse> findUserInfo(Pageable pageable) {
-        Page<User> userList = userRepository.getUsers(pageable);
+        Page<User> userList = userRepositoryImpl.getUsers(pageable);
 
         return userList.stream()
                 .map(user -> new UserInfoResponse(

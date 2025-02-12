@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.application;
+package com.pintoss.gitftmall.domain.membership.domain.service;
 
 import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
 import io.jsonwebtoken.Claims;
