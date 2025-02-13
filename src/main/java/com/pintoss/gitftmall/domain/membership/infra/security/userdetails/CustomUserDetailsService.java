@@ -1,8 +1,8 @@
-package com.pintoss.gitftmall.core.security.userdetails;
+package com.pintoss.gitftmall.domain.membership.infra.security.userdetails;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
 import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
-import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
+import com.pintoss.gitftmall.domain.membership.infra.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

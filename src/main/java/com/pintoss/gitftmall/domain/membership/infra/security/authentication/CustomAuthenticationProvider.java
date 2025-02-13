@@ -1,7 +1,7 @@
-package com.pintoss.gitftmall.core.security.authentication;
+package com.pintoss.gitftmall.domain.membership.infra.security.authentication;
 
-import com.pintoss.gitftmall.core.security.userdetails.CustomUserDetails;
-import com.pintoss.gitftmall.core.security.userdetails.CustomUserDetailsService;
+import com.pintoss.gitftmall.domain.membership.infra.security.userdetails.CustomUserDetails;
+import com.pintoss.gitftmall.domain.membership.infra.security.userdetails.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

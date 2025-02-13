@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.core.security.authentication;
+package com.pintoss.gitftmall.domain.membership.infra.security.authentication;
 
 import com.pintoss.gitftmall.core.exceptions.client.NotFoundMemberException;
 import com.pintoss.gitftmall.domain.membership.domain.User;
@@ -9,12 +9,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SecurityAuthenticationProviderImpl implements SecurityAuthenticationProvider {
+public class TokenAuthenticationProviderImpl implements TokenAuthenticationProvider {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public SecurityAuthenticationProviderImpl(UserRepository userRepository) {
+    public TokenAuthenticationProviderImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

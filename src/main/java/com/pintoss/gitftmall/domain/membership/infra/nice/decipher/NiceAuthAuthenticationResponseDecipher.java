@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.domain.service;
+package com.pintoss.gitftmall.domain.membership.infra.nice.decipher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.AuthenticationDataDecipherCommand;

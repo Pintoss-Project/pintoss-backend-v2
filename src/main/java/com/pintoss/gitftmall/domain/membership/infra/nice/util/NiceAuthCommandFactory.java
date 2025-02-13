@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.domain.service;
+package com.pintoss.gitftmall.domain.membership.infra.nice.util;
 
 import com.pintoss.gitftmall.domain.membership.domain.service.command.AuthenticationDataDecipherCommand;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.EncryptedRequestDataCommand;

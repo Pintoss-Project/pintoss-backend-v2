@@ -2,10 +2,10 @@ package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.domain.membership.application.result.NiceEncryptedDataResult;
 import com.pintoss.gitftmall.domain.membership.domain.repository.NiceApiTokenRepository;
-import com.pintoss.gitftmall.domain.membership.domain.service.NiceAuthHmacGenerator;
-import com.pintoss.gitftmall.domain.membership.domain.service.NiceAuthCommandFactory;
-import com.pintoss.gitftmall.domain.membership.domain.service.NiceAuthStandardAuthRequestEncryptor;
-import com.pintoss.gitftmall.domain.membership.domain.service.NiceAuthSymmetricKeyGenerator;
+import com.pintoss.gitftmall.domain.membership.infra.nice.encryption.NiceAuthHmacGenerator;
+import com.pintoss.gitftmall.domain.membership.infra.nice.util.NiceAuthCommandFactory;
+import com.pintoss.gitftmall.domain.membership.infra.nice.encryption.NiceAuthStandardAuthRequestEncryptor;
+import com.pintoss.gitftmall.domain.membership.infra.nice.encryption.NiceAuthSymmetricKeyGenerator;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.EncryptedRequestDataCommand;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.GenerateHmacIntegrityCommand;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.GenerateSymmetricKeyCommand;

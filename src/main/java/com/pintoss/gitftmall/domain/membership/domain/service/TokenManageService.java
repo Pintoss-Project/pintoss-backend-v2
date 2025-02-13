@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.domain.service;
 
-import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
+import com.pintoss.gitftmall.domain.membership.infra.security.jwt.TokenProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;

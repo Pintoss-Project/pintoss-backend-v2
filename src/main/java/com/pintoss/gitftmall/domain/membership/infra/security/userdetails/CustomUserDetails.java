@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.core.security.userdetails;
+package com.pintoss.gitftmall.domain.membership.infra.security.userdetails;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
 import lombok.Getter;

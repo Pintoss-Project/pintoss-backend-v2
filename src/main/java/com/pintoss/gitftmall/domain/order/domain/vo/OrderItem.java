@@ -34,4 +34,8 @@ public class OrderItem {
     public static OrderItem create(Long voucherId, Integer quantity, Long price) {
         return new OrderItem(voucherId, quantity, price);
     }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

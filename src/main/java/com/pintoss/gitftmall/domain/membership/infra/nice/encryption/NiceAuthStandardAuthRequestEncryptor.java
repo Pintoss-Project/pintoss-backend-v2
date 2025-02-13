@@ -1,11 +1,11 @@
-package com.pintoss.gitftmall.domain.membership.domain.service;
+package com.pintoss.gitftmall.domain.membership.infra.nice.encryption;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.server.InternalServerException;
 import com.pintoss.gitftmall.domain.membership.domain.service.command.EncryptedRequestDataCommand;
-import com.pintoss.gitftmall.domain.membership.domain.vo.NiceAuthStandardAuthRequest;
+import com.pintoss.gitftmall.domain.membership.infra.nice.encryption.model.NiceAuthStandardAuthRequest;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.*;

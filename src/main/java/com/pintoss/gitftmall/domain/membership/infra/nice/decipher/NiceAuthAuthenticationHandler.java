@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.domain.service;
+package com.pintoss.gitftmall.domain.membership.infra.nice.decipher;
 
 import com.pintoss.gitftmall.domain.membership.domain.service.result.AuthenticationDataDecipherResult;
 import org.springframework.stereotype.Component;

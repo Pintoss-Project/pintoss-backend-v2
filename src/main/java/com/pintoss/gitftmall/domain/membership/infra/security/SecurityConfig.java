@@ -1,9 +1,9 @@
-package com.pintoss.gitftmall.core.security;
+package com.pintoss.gitftmall.domain.membership.infra.security;
 
 import com.pintoss.gitftmall.core.util.HttpServletUtils;
-import com.pintoss.gitftmall.core.security.authentication.SecurityAuthenticationProvider;
-import com.pintoss.gitftmall.core.security.jwt.JwtFilter;
-import com.pintoss.gitftmall.core.security.jwt.TokenProvider;
+import com.pintoss.gitftmall.domain.membership.infra.security.authentication.TokenAuthenticationProvider;
+import com.pintoss.gitftmall.domain.membership.infra.security.jwt.JwtFilter;
+import com.pintoss.gitftmall.domain.membership.infra.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ public class SecurityConfig {
 
     private final TokenProvider tokenProvider;
     private final HttpServletUtils servletUtils;
-    private final SecurityAuthenticationProvider securityAuthenticationProvider;
+    private final TokenAuthenticationProvider tokenAuthenticationProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -61,7 +61,7 @@ public class SecurityConfig {
             .sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-            .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, securityAuthenticationProvider), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new JwtFilter(tokenProvider,servletUtils, tokenAuthenticationProvider), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(request ->
                 request.requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()

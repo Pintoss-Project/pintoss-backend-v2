@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.core.security.authentication;
+package com.pintoss.gitftmall.domain.membership.infra.security.authentication;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
 import com.pintoss.gitftmall.domain.membership.domain.vo.UserRole;

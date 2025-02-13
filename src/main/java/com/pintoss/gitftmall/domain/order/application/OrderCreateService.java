@@ -2,8 +2,10 @@ package com.pintoss.gitftmall.domain.order.application;
 
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.domain.Order;
-import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
+import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
+import com.pintoss.gitftmall.domain.order.infra.event.OrderCreatedEvent;
+import com.pintoss.gitftmall.domain.order.infra.event.OrderEventPublisher;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class OrderCreateService {
 
     private final OrderRepository orderRepository;
     private final VoucherRepository voucherRepository;
+    private final OrderEventPublisher orderEventPublisher;
 
     public Long create(OrderCreateServiceCommand command) {
         List<OrderItem> orderItems = command.getOrderItems().stream().map(item -> {
@@ -26,7 +29,11 @@ public class OrderCreateService {
         }).collect(Collectors.toList());
 
         Order order = Order.create(command.getOrdererId(), orderItems);
-
-        return orderRepository.save(order).getId();
+        for (OrderItem orderItem : orderItems) {
+            orderItem.setOrder(order);
+        }
+        Order saveOrder = orderRepository.save(order);
+        orderEventPublisher.publish(new OrderCreatedEvent(1L));
+        return 1L;
     }
 }

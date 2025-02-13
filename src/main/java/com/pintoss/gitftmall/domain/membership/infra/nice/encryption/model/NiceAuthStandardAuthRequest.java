@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.domain.vo;
+package com.pintoss.gitftmall.domain.membership.infra.nice.encryption.model;
 
 import lombok.Data;
 
