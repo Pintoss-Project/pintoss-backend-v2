@@ -1,13 +1,14 @@
 package com.pintoss.gitftmall.domain.voucherProvider.infra.repository;
 
-import static com.pintoss.gitftmall.domain.voucherProvider.domain.QVoucherProvider.voucherProvider;
-
 import com.pintoss.gitftmall.domain.voucherProvider.controller.response.QVoucherProviderListResponse;
 import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+import static com.pintoss.gitftmall.domain.voucherProvider.domain.QVoucherProvider.voucherProvider;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class VoucherProviderQueryDslRepository {
                 voucherProvider.contactInfo,
                 voucherProvider.description,
                 voucherProvider.publisher,
+                voucherProvider.imageUrl,
                 voucherProvider.note
             )
         ).from(voucherProvider)

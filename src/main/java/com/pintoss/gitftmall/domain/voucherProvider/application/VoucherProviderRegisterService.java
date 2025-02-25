@@ -35,7 +35,8 @@ public class VoucherProviderRegisterService {
                 command.getDescription(),
                 command.getPublisher(),
                 command.getNote(),
-                command.getIndex()
+                command.getIndex(),
+                command.getImageUrl()
         );
 
         voucherProviderRepository.save(voucherProvider);

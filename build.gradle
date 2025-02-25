@@ -6,6 +6,7 @@ plugins {
 }
 
 tasks.withType(War) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE  // 중복 파일 무시
     from("src/main/resources") {
         include "**/*.yaml"
         include "**/*.yml"

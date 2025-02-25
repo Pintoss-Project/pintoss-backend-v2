@@ -53,7 +53,9 @@ public class VoucherProvider {
 
     private LocalDateTime updatedAt;
 
-    private VoucherProvider(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index) {
+    private String imageUrl;
+
+    private VoucherProvider(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index, String imageUrl) {
         this.name = name;
         this.isPopular = isPopular;
         this.discount = discount;
@@ -62,12 +64,13 @@ public class VoucherProvider {
         this.publisher = publisher;
         this.note = note;
         this.index = index;
+        this.imageUrl = imageUrl;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
     public static VoucherProvider create(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
-                                 String note, int index){
+                                 String note, int index, String imageUrl){
         return new VoucherProvider(
                 name,
                 isPopular,
@@ -76,7 +79,8 @@ public class VoucherProvider {
                 description,
                 publisher,
                 note,
-                index
+                index,
+                imageUrl
         );
     }
 }

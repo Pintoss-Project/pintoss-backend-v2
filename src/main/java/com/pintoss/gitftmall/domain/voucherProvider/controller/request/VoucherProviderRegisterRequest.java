@@ -3,9 +3,10 @@ package com.pintoss.gitftmall.domain.voucherProvider.controller.request;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -42,7 +43,7 @@ public class VoucherProviderRegisterRequest {
 //    private ProductCategory category;
 
     @NotBlank(message = "로고 이미지는 필수 항목입니다.")
-    private String logoImageUrl;
+    private String imageUrl;
 
     @NotBlank(message = "상품 유의사항은 필수 항목입니다.")
     private String note;

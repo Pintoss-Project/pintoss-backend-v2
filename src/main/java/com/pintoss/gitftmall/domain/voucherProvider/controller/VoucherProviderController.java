@@ -34,7 +34,7 @@ public class VoucherProviderController {
                 request.getCsCenter(),
                 request.getDescription(),
                 request.getPublisher(),
-                request.getLogoImageUrl(),
+                request.getImageUrl(),
                 request.getNote(),
                 request.getIndex()
         );

@@ -17,11 +17,12 @@ public class VoucherProviderListResponse {
     private ContactInfo contactInfo;
     private String description;
     private String publisher;
+    private String imageUrl;
     private String note;
 
     @QueryProjection
     public VoucherProviderListResponse(Long id, String name, boolean isPopular, Discount discount,
-        ContactInfo contactInfo, String description, String publisher, String note) {
+        ContactInfo contactInfo, String description, String publisher, String imageUrl, String note) {
         this.id = id;
         this.name = name;
         this.isPopular = isPopular;
@@ -29,6 +30,7 @@ public class VoucherProviderListResponse {
         this.contactInfo = contactInfo;
         this.description = description;
         this.publisher = publisher;
+        this.imageUrl = imageUrl;
         this.note = note;
     }
 }

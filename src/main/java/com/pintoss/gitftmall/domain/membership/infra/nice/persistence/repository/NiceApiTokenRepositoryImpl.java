@@ -47,7 +47,7 @@ public class NiceApiTokenRepositoryImpl implements NiceApiTokenRepository {
 
     @Override
     public NiceApiCryptoToken getCryptoToken() {
-        if(isEmptyCryptoToken() && isExpiredCryptoToken()){
+        if(isEmptyCryptoToken() || isExpiredCryptoToken()){
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
