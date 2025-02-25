@@ -26,6 +26,7 @@ public class VoucherProviderRegisterService {
 
         VoucherProvider voucherProvider = VoucherProvider.create(
                 command.getName(),
+                command.getCode(),
                 command.isPopular(),
                 new Discount(command.getCardDiscount(), command.getPhoneDiscount()),
                 new ContactInfo(

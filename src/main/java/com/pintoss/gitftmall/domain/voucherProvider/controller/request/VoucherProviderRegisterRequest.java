@@ -15,6 +15,9 @@ public class VoucherProviderRegisterRequest {
     @NotBlank(message = "상품 이름은 필수 항목입니다.")
     private String name;
 
+    @NotBlank(message = "상품 코드 번호는 필수 항목입니다.")
+    private String code;
+
     @NotNull(message = "인기 여부는 필수 항목입니다.")
     private boolean isPopular = false;
 

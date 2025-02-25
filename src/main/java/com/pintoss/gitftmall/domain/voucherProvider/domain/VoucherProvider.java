@@ -20,6 +20,9 @@ public class VoucherProvider {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false, unique = true)
+    private String code;
+
     private boolean isPopular;
 
     @Embedded
@@ -55,8 +58,9 @@ public class VoucherProvider {
 
     private String imageUrl;
 
-    private VoucherProvider(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index, String imageUrl) {
+    private VoucherProvider(String name, String code, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index, String imageUrl) {
         this.name = name;
+        this.code = code;
         this.isPopular = isPopular;
         this.discount = discount;
         this.contactInfo = contactInfo;
@@ -69,10 +73,11 @@ public class VoucherProvider {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static VoucherProvider create(String name, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
+    public static VoucherProvider create(String name, String code, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
                                  String note, int index, String imageUrl){
         return new VoucherProvider(
                 name,
+                code,
                 isPopular,
                 discount,
                 contactInfo,

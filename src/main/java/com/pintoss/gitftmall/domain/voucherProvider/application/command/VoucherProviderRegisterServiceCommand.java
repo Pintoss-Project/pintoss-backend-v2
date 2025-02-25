@@ -9,6 +9,8 @@ public class VoucherProviderRegisterServiceCommand {
 
     private String name;
 
+    private String code;
+
     private boolean isPopular;
 
     private BigDecimal cardDiscount = BigDecimal.ZERO;
@@ -29,10 +31,11 @@ public class VoucherProviderRegisterServiceCommand {
 
     private int index;
 
-    public VoucherProviderRegisterServiceCommand(String name, boolean isPopular,
+    public VoucherProviderRegisterServiceCommand(String name, String code, boolean isPopular,
                                                  BigDecimal cardDiscount, BigDecimal phoneDiscount, String homePage, String csCenter,
                                                  String description, String publisher, String imageUrl, String note, int index) {
         this.name = name;
+        this.code = code;
         this.isPopular = isPopular;
         this.cardDiscount = cardDiscount;
         this.phoneDiscount = phoneDiscount;
