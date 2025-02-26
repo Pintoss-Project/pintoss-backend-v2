@@ -70,9 +70,9 @@ public class Voucher {
         }
     }
 
-    // 재고 감소 (결제 시 사용)
+    // 재고 감소 (주문 시 사용)
     public void reduceStock(int quantity) {
-        validateStockForPurchase(quantity);
+        validateStockForOrder(quantity);
         this.stock -= quantity;
         this.updatedAt = LocalDateTime.now();
     }

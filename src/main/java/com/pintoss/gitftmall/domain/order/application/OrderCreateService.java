@@ -34,6 +34,7 @@ public class OrderCreateService {
         List<OrderItem> orderItems = command.getOrderItems().stream().map(item -> {
                 Voucher voucher = voucherRepository.findById(item.getVoucherId()).orElseThrow(() -> new IllegalArgumentException());
                 voucher.validateStockForOrder(item.getQuantity());
+                voucher.reduceStock(item.getQuantity());
                 productNames.add(voucher.getName());
                 return OrderItem.create(voucher.getId(), item.getQuantity(), voucher.getPrice());
         }).collect(Collectors.toList());
