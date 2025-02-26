@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.voucher.controller.request;
+package com.pintoss.gitftmall.domain.voucher.controller.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class VoucherRegisterRequest {
+public class VoucherRegisterWithProviderRequest {
 
     @NotNull(message = "상품권 제공사는 필수 항목입니다.")
     private Long voucherProviderId;
-
 
     @NotNull(message = "상품권 명은 필수 항목입니다.")
     private String name;

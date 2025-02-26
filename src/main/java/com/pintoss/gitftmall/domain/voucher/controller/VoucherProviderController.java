@@ -1,13 +1,13 @@
-package com.pintoss.gitftmall.domain.voucherProvider.controller;
+package com.pintoss.gitftmall.domain.voucher.controller;
 
 import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
-import com.pintoss.gitftmall.domain.voucherProvider.application.VoucherProviderRegisterService;
-import com.pintoss.gitftmall.domain.voucherProvider.application.command.VoucherProviderRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.voucherProvider.controller.request.VoucherProviderRegisterRequest;
-import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.VoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucher.application.command.VoucherProviderRegisterService;
+import com.pintoss.gitftmall.domain.voucher.application.dto.VoucherProviderRegisterServiceCommand;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherProviderListResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherProviderRegisterRequest;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherProviderRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,20 +25,7 @@ public class VoucherProviderController {
     @PostMapping
     @AuthorizationRequired({ RoleEnum.ADMIN, RoleEnum.USER })
     public ApiResponse<Void> registerVoucherProvider(@RequestBody @Valid VoucherProviderRegisterRequest request){
-        VoucherProviderRegisterServiceCommand command = new VoucherProviderRegisterServiceCommand(
-                request.getName(),
-                request.getCode(),
-                request.isPopular(),
-                request.getCardDiscount(),
-                request.getPhoneDiscount(),
-                request.getHomePage(),
-                request.getCsCenter(),
-                request.getDescription(),
-                request.getPublisher(),
-                request.getImageUrl(),
-                request.getNote(),
-                request.getIndex()
-        );
+        VoucherProviderRegisterServiceCommand command = VoucherProviderRegisterServiceCommand.from(request);
 
         voucherProviderRegisterService.register(command);
 

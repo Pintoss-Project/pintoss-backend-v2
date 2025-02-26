@@ -3,11 +3,11 @@ package com.pintoss.gitftmall.domain.voucher.controller;
 import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
-import com.pintoss.gitftmall.domain.voucher.application.VoucherQueryService;
-import com.pintoss.gitftmall.domain.voucher.application.VoucherRegisterService;
-import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterServiceCommand;
-import com.pintoss.gitftmall.domain.voucher.controller.request.VoucherRegisterRequest;
-import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherDetailResponse;
+import com.pintoss.gitftmall.domain.voucher.application.query.VoucherQueryService;
+import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterService;
+import com.pintoss.gitftmall.domain.voucher.application.dto.VoucherRegisterServiceCommand;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherDetailResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherRegisterWithProviderRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class VoucherController {
 
     @PostMapping()
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<Void> registerVoucher(@RequestBody @Valid VoucherRegisterRequest request) {
+    public ApiResponse<Void> registerVoucher(@RequestBody @Valid VoucherRegisterWithProviderRequest request) {
         VoucherRegisterServiceCommand command = new VoucherRegisterServiceCommand(
                 request.getVoucherProviderId(),
                 request.getName(),

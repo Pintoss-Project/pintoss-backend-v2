@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.voucherProvider.domain.vo;
+package com.pintoss.gitftmall.domain.voucher.domain.vo;
 
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.EmptyURLException;

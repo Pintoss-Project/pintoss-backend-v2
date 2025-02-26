@@ -1,8 +1,11 @@
-package com.pintoss.gitftmall.domain.voucherProvider.controller.request;
+package com.pintoss.gitftmall.domain.voucher.controller.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,9 +20,6 @@ public class VoucherProviderRegisterRequest {
 
     @NotBlank(message = "상품 코드 번호는 필수 항목입니다.")
     private String code;
-
-    @NotNull(message = "인기 여부는 필수 항목입니다.")
-    private boolean isPopular = false;
 
     @NotNull(message = "카드 할인 금액은 필수 항목입니다.")
     @Min(value = 0, message = "카드 할인 금액은 0 이상이어야 합니다.")
@@ -41,16 +41,13 @@ public class VoucherProviderRegisterRequest {
     @NotBlank(message = "발행자는 필수 항목입니다.")
     private String publisher;
 
-//    @NotNull(message = "카테고리는 필수 항목입니다.")
-//    @Enumerated(EnumType.STRING)
-//    private ProductCategory category;
-
     @NotBlank(message = "로고 이미지는 필수 항목입니다.")
     private String imageUrl;
 
     @NotBlank(message = "상품 유의사항은 필수 항목입니다.")
     private String note;
 
-    //상품권의 인덱스
-    private int index;
+    @NotEmpty(message = "상품권 종류는 1개 이상이어야 합니다.")
+    private List<VoucherRegisterRequest> vouchers = new ArrayList<>();
+
 }

@@ -1,7 +1,7 @@
-package com.pintoss.gitftmall.domain.voucherProvider.domain.repository;
+package com.pintoss.gitftmall.domain.voucher.domain.repository;
 
-import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherProviderListResponse;
+import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.voucherProvider.domain.vo;
+package com.pintoss.gitftmall.domain.voucher.domain.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

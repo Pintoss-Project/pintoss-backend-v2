@@ -1,7 +1,7 @@
-package com.pintoss.gitftmall.domain.voucherProvider.domain;
+package com.pintoss.gitftmall.domain.voucher.domain;
 
-import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.Discount;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.vo.ContactInfo;
+import com.pintoss.gitftmall.domain.voucher.domain.vo.Discount;
+import com.pintoss.gitftmall.domain.voucher.domain.vo.ContactInfo;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,8 +22,6 @@ public class VoucherProvider {
 
     @Column(nullable = false, unique = true)
     private String code;
-
-    private boolean isPopular;
 
     @Embedded
     @AttributeOverrides({
@@ -48,43 +46,35 @@ public class VoucherProvider {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String note;
 
-    //드래그 드랍 인덱스 컬럼
-    @Column(name = "product_index")
-    private int index;
-
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
     private String imageUrl;
 
-    private VoucherProvider(String name, String code, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, int index, String imageUrl) {
+    private VoucherProvider(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl) {
         this.name = name;
         this.code = code;
-        this.isPopular = isPopular;
         this.discount = discount;
         this.contactInfo = contactInfo;
         this.description = description;
         this.publisher = publisher;
         this.note = note;
-        this.index = index;
         this.imageUrl = imageUrl;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static VoucherProvider create(String name, String code, boolean isPopular, Discount discount, ContactInfo contactInfo, String description, String publisher,
-                                 String note, int index, String imageUrl){
+    public static VoucherProvider create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
+                                 String note, String imageUrl){
         return new VoucherProvider(
                 name,
                 code,
-                isPopular,
                 discount,
                 contactInfo,
                 description,
                 publisher,
                 note,
-                index,
                 imageUrl
         );
     }

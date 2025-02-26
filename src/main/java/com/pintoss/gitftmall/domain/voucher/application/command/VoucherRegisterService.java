@@ -1,6 +1,6 @@
-package com.pintoss.gitftmall.domain.voucher.application;
+package com.pintoss.gitftmall.domain.voucher.application.command;
 
-import com.pintoss.gitftmall.domain.voucher.application.command.VoucherRegisterServiceCommand;
+import com.pintoss.gitftmall.domain.voucher.application.dto.VoucherRegisterServiceCommand;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import lombok.RequiredArgsConstructor;

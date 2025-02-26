@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.voucher.infra.repository;
 
-import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherDetailResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherDetailResponse;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +29,10 @@ public class VoucherRepositoryImpl implements VoucherRepository {
     @Override
     public List<VoucherDetailResponse> findByVoucherProviderId(Long providerId) {
         return voucherQueryDslRepository.findByVoucherProviderId(providerId);
+    }
+
+    @Override
+    public void saveAll(List<Voucher> vouchers) {
+        voucherJpaRepository.saveAll(vouchers);
     }
 }

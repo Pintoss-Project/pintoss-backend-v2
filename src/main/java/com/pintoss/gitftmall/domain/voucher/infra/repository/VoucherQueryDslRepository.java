@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.voucher.infra.repository;
 
-import com.pintoss.gitftmall.domain.voucher.controller.response.QVoucherDetailResponse;
-import com.pintoss.gitftmall.domain.voucher.controller.response.VoucherDetailResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.QVoucherDetailResponse;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherDetailResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.pintoss.gitftmall.domain.voucher.domain.QVoucher.voucher;
-import static com.pintoss.gitftmall.domain.voucherProvider.domain.QVoucherProvider.voucherProvider;
+import static com.pintoss.gitftmall.domain.voucher.domain.QVoucherProvider.voucherProvider;
 
 @Repository
 @RequiredArgsConstructor
