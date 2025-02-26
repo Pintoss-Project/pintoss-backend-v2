@@ -7,7 +7,6 @@ import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateRespons
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
-import com.pintoss.gitftmall.domain.order.infra.event.OrderEventPublisher;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
@@ -25,7 +24,6 @@ public class OrderCreateService {
     private final OrderRepository orderRepository;
     private final VoucherRepository voucherRepository;
     private final VoucherProviderRepository voucherProviderRepository;
-    private final OrderEventPublisher orderEventPublisher;
     private final UserRepository userRepository;
 
     public OrderCreateResponse create(OrderCreateServiceCommand command) {
@@ -38,13 +36,13 @@ public class OrderCreateService {
                 return OrderItem.create(voucher.getId(), item.getQuantity(), voucher.getPrice());
         }).collect(Collectors.toList());
 
-        Order order = Order.create(command.getOrdererId(), user.getName(), provider.getCode(), provider.getName(), orderItems);
+        Order order = Order.create(command.getOrdererId(), user.getName(), provider.getCode(), provider.getName(), orderItems, command.getPaymentMethodType());
 
         Order saveOrder = orderRepository.save(order);
-//        orderEventPublisher.publish(new OrderCreatedEvent(1L));
 
         return new OrderCreateResponse(
                 saveOrder.getId(),
+                command.getPaymentMethodType().getServiceCode(),
                 saveOrder.getTotalPrice(),
                 saveOrder.getOrdererName(),
                 saveOrder.getProductCode(),

@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 public class OrderCreateResponse {
     private Long orderId;
 
+    private String paymentMethod;
+
     private Long price;
 
     private String ordererName;

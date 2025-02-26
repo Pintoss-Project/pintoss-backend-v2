@@ -1,6 +1,8 @@
 package com.pintoss.gitftmall.domain.order.application.command;
 
+import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderItemRequest;
+import com.pintoss.gitftmall.domain.order.controller.request.PaymentMethodType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,6 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderCreateServiceCommand {
     private Long ordererId;
+    private PaymentMethodType paymentMethodType;
     private Long providerId;
     private List<OrderItemRequest> orderItems;
+
+    public static OrderCreateServiceCommand from(Long ordererId, OrderCreateRequest request) {
+        return new OrderCreateServiceCommand(
+                ordererId,
+                request.getPaymentMethod(),
+                request.getProviderId(),
+                request.getOrderItems()
+        );
+    }
 }

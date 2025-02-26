@@ -1,5 +1,6 @@
 package com.pintoss.gitftmall.domain.order.domain;
 
+import com.pintoss.gitftmall.domain.order.controller.request.PaymentMethodType;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderStatus;
 import jakarta.persistence.*;
@@ -32,6 +33,9 @@ public class Order {
     @Column(nullable = false, name = "product_name")
     private String productName;
 
+    @Enumerated(EnumType.STRING)
+    private PaymentMethodType paymentMethodType;
+
     @OneToMany(
             mappedBy = "order",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
@@ -47,7 +51,7 @@ public class Order {
 
     private LocalDateTime updatedAt;
 
-    private Order(Long ordererId, String ordererName, String productCode, String productName,List<OrderItem> orderItems) {
+    private Order(Long ordererId, String ordererName, String productCode, String productName,List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
         this.ordererId = ordererId;
         this.ordererName = ordererName;
         this.productCode = productCode;
@@ -66,7 +70,7 @@ public class Order {
         orderItem.setOrder(this);
     }
 
-    public static Order create(Long ordererId, String ordererName, String productCode, String productName, List<OrderItem> orderItems) {
-        return new Order(ordererId, ordererName, productCode, productName, orderItems);
+    public static Order create(Long ordererId, String ordererName, String productCode, String productName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
+        return new Order(ordererId, ordererName, productCode, productName, orderItems, paymentMethodType);
     }
 }

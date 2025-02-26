@@ -25,7 +25,7 @@ public class OrderController {
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody OrderCreateRequest request) {
         Long userId = SecurityContextUtils.getUserId();
-        OrderCreateServiceCommand command = new OrderCreateServiceCommand(userId, request.getProviderId(), request.getOrderItems());
+        OrderCreateServiceCommand command = OrderCreateServiceCommand.from(userId, request);
 
         OrderCreateResponse response = orderCreateService.create(command);
 
