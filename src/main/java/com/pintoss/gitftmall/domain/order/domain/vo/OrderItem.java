@@ -2,8 +2,11 @@ package com.pintoss.gitftmall.domain.order.domain.vo;
 
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id
@@ -21,7 +24,7 @@ public class OrderItem {
 
     private Long price;
 
-    public Long calcTotalPrice() {
+    public Long calculateTotalPrice() {
         return quantity * price;
     }
 

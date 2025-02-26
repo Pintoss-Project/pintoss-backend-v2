@@ -8,5 +8,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class OrderCreateRequest {
+    private Long providerId;
     private List<OrderItemRequest> orderItems;
 }

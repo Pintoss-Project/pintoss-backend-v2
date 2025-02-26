@@ -10,5 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderCreateServiceCommand {
     private Long ordererId;
+    private Long providerId;
     private List<OrderItemRequest> orderItems;
 }

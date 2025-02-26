@@ -1,13 +1,13 @@
 package com.pintoss.gitftmall.domain.order.controller;
 
 import com.pintoss.gitftmall.core.dto.ApiResponse;
+import com.pintoss.gitftmall.core.util.SecurityContextUtils;
+import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
 import com.pintoss.gitftmall.domain.order.application.OrderCreateService;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
-import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
-import com.pintoss.gitftmall.core.util.SecurityContextUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,14 +21,14 @@ public class OrderController {
 
     private final OrderCreateService orderCreateService;
 
-    @PostMapping()
+    @PostMapping
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody OrderCreateRequest request) {
         Long userId = SecurityContextUtils.getUserId();
-        OrderCreateServiceCommand command = new OrderCreateServiceCommand(userId, request.getOrderItems());
+        OrderCreateServiceCommand command = new OrderCreateServiceCommand(userId, request.getProviderId(), request.getOrderItems());
 
-        Long orderId = orderCreateService.create(command);
+        OrderCreateResponse response = orderCreateService.create(command);
 
-        return ApiResponse.ok(new OrderCreateResponse(orderId));
+        return ApiResponse.ok(response);
     }
 }

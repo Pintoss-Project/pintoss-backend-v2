@@ -23,6 +23,15 @@ public class Order {
     @Column(nullable = false, name = "orderer_id")
     private Long ordererId;
 
+    @Column(nullable = false, name = "orderer_name")
+    private String ordererName;
+
+    @Column(nullable = false, name = "product_code")
+    private String productCode;
+
+    @Column(nullable = false, name = "product_name")
+    private String productName;
+
     @OneToMany(
             mappedBy = "order",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
@@ -38,16 +47,26 @@ public class Order {
 
     private LocalDateTime updatedAt;
 
-    private Order(Long ordererId, List<OrderItem> orderItems) {
+    private Order(Long ordererId, String ordererName, String productCode, String productName,List<OrderItem> orderItems) {
         this.ordererId = ordererId;
+        this.ordererName = ordererName;
+        this.productCode = productCode;
+        this.productName = productName;
+        orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
         this.status = OrderStatus.PENDING;
-        this.totalPrice = orderItems.stream().mapToLong(item -> item.calcTotalPrice()).sum();
+        this.totalPrice = orderItems.stream().mapToLong(item -> item.calculateTotalPrice()).sum();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static Order create(Long ordererId, List<OrderItem> orderItems) {
-        return new Order(ordererId, orderItems);
+    // 개별 OrderItem 추가 메서드 (연관관계 설정)
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public static Order create(Long ordererId, String ordererName, String productCode, String productName, List<OrderItem> orderItems) {
+        return new Order(ordererId, ordererName, productCode, productName, orderItems);
     }
 }
