@@ -24,9 +24,6 @@ public class Order {
     @Column(nullable = false, name = "orderer_id")
     private Long ordererId;
 
-    @Column(nullable = false, name = "orderer_name")
-    private String ordererName;
-
     @Column(nullable = false, name = "product_code")
     private String productCode;
 
@@ -51,9 +48,8 @@ public class Order {
 
     private LocalDateTime updatedAt;
 
-    private Order(Long ordererId, String ordererName, String productCode, String productName,List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
+    private Order(Long ordererId, String productCode, String productName,List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
         this.ordererId = ordererId;
-        this.ordererName = ordererName;
         this.productCode = productCode;
         this.productName = productName;
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
@@ -70,7 +66,7 @@ public class Order {
         orderItem.setOrder(this);
     }
 
-    public static Order create(Long ordererId, String ordererName, String productCode, String productName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
-        return new Order(ordererId, ordererName, productCode, productName, orderItems, paymentMethodType);
+    public static Order create(Long ordererId, String productCode, String productName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
+        return new Order(ordererId, productCode, productName, orderItems, paymentMethodType);
     }
 }

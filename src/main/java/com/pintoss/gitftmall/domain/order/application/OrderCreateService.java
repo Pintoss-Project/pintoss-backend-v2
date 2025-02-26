@@ -11,6 +11,8 @@ import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
 import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherProviderRepository;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +26,37 @@ public class OrderCreateService {
     private final OrderRepository orderRepository;
     private final VoucherRepository voucherRepository;
     private final VoucherProviderRepository voucherProviderRepository;
-    private final UserRepository userRepository;
 
     public OrderCreateResponse create(OrderCreateServiceCommand command) {
-        User user = userRepository.findById(command.getOrdererId()).get();
-
+        Set<String> productNames = new HashSet<>();
         VoucherProvider provider = voucherProviderRepository.findById(command.getProviderId()).get();
+
         List<OrderItem> orderItems = command.getOrderItems().stream().map(item -> {
                 Voucher voucher = voucherRepository.findById(item.getVoucherId()).orElseThrow(() -> new IllegalArgumentException());
                 voucher.validateStockForOrder(item.getQuantity());
+                productNames.add(voucher.getName());
                 return OrderItem.create(voucher.getId(), item.getQuantity(), voucher.getPrice());
         }).collect(Collectors.toList());
 
-        Order order = Order.create(command.getOrdererId(), user.getName(), provider.getCode(), provider.getName(), orderItems, command.getPaymentMethodType());
+        // 대표 상품권을 선택하고 나머지 개수를 계산
+        String productName = productNames.stream()
+            .findFirst()
+            .map(firstProduct -> {
+                int remainingCount = productNames.size() - 1;
+                return remainingCount > 0 ? firstProduct + " 외 " + remainingCount + "개" : firstProduct;
+            })
+            .orElse("상품 없음");
+
+
+        Order order = Order.create(command.getOrdererId(), provider.getCode(), productName, orderItems, command.getPaymentMethodType());
 
         Order saveOrder = orderRepository.save(order);
 
         return new OrderCreateResponse(
                 saveOrder.getId(),
+                saveOrder.getOrdererId(),
                 command.getPaymentMethodType().getServiceCode(),
                 saveOrder.getTotalPrice(),
-                saveOrder.getOrdererName(),
                 saveOrder.getProductCode(),
                 saveOrder.getProductName(),
                 saveOrder.getCreatedAt()

@@ -11,15 +11,15 @@ import java.time.LocalDateTime;
 public class OrderCreateResponse {
     private Long orderId;
 
+    private Long ordererId;
+
     private String paymentMethod;
 
     private Long price;
 
-    private String ordererName;
-
     private String productCode;
 
-    private String providerName;
+    private String productName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDate;

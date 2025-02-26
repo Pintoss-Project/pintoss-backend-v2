@@ -3,9 +3,11 @@ package com.pintoss.gitftmall.domain.order.domain.vo;
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
