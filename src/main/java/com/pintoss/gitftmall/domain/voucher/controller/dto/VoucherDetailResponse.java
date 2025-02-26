@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.voucher.controller.response;
+package com.pintoss.gitftmall.domain.voucher.controller.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

@@ -1,8 +1,8 @@
-package com.pintoss.gitftmall.domain.voucherProvider.infra.repository;
+package com.pintoss.gitftmall.domain.voucher.infra.repository;
 
-import com.pintoss.gitftmall.domain.voucherProvider.controller.response.VoucherProviderListResponse;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.VoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucher.controller.dto.VoucherProviderListResponse;
+import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

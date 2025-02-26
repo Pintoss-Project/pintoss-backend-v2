@@ -9,8 +9,8 @@ import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherRepository;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.VoucherProvider;
-import com.pintoss.gitftmall.domain.voucherProvider.domain.repository.VoucherProviderRepository;
+import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
+import com.pintoss.gitftmall.domain.voucher.domain.repository.VoucherProviderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
