@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO : 값 객체 생성 예정
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter

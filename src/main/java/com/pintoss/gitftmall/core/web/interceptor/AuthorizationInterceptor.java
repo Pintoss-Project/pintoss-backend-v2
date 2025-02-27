@@ -41,8 +41,11 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     }
 
     private AuthorizationRequired getAnnotation(Object handler) {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        if (!(handler instanceof HandlerMethod)) {
+            return null; // HandlerMethod가 아니면 null 반환
+        }
 
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
         return handlerMethod.getMethodAnnotation(AuthorizationRequired.class);
     }
 
