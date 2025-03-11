@@ -43,9 +43,12 @@ public class OrderCreateService {
                 () -> new BadRequestException("존재하지 않는 상품 제공사입니다.")
         );
 
-        Order order = Order.create(command.getOrdererId(),
+        Order order = Order.create(
+                command.getOrdererId(),
                 generateProductName(voucherProvider, providerIds),
-                orderItems, command.getPaymentMethodType());
+                orderItems,
+                command.getPaymentMethodType()
+        );
 
         Order saveOrder = orderRepository.save(order);
 

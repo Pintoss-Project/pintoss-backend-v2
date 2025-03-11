@@ -53,6 +53,7 @@ public class Order {
         this.ordererId = ordererId;
         this.orderNo = OrderNo.create();
         this.productName = productName;
+        this.paymentMethodType = paymentMethodType;
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
         this.status = OrderStatus.PENDING;

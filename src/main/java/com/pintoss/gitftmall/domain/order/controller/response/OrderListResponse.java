@@ -1,11 +1,13 @@
-package com.pintoss.gitftmall.domain.order.controller.request;
+package com.pintoss.gitftmall.domain.order.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.pintoss.gitftmall.domain.order.controller.request.PaymentMethodType;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderStatus;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor

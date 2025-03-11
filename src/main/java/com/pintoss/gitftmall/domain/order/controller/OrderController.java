@@ -8,14 +8,12 @@ import com.pintoss.gitftmall.domain.order.application.OrderCreateService;
 import com.pintoss.gitftmall.domain.order.application.OrderQueryService;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
-import com.pintoss.gitftmall.domain.order.controller.request.OrderListResponse;
+import com.pintoss.gitftmall.domain.order.controller.response.OrderListResponse;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,10 +36,10 @@ public class OrderController {
 
     @GetMapping
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<OrderListResponse> getOrders() {
+    public ApiResponse<List<OrderListResponse>> getOrders() {
         Long userId = SecurityContextUtils.getUserId();
 
-        OrderListResponse response = orderQueryService.getOrders(userId);
+        List<OrderListResponse> response = orderQueryService.getOrders(userId);
 
         return ApiResponse.ok(response);
     }
