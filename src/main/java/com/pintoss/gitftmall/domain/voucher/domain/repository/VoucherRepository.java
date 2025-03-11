@@ -14,4 +14,6 @@ public interface VoucherRepository {
     List<VoucherDetailResponse> findByVoucherProviderId(Long providerId);
 
     void saveAll(List<Voucher> vouchers);
+
+    List<Voucher> findAllByIds(List<Long> voucherIds);
 }

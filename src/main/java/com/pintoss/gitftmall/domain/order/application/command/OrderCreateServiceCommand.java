@@ -11,16 +11,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class OrderCreateServiceCommand {
+
     private Long ordererId;
     private PaymentMethodType paymentMethodType;
-    private Long providerId;
     private List<OrderItemRequest> orderItems;
 
     public static OrderCreateServiceCommand from(Long ordererId, OrderCreateRequest request) {
         return new OrderCreateServiceCommand(
                 ordererId,
                 request.getPaymentMethod(),
-                request.getProviderId(),
                 request.getOrderItems()
         );
     }

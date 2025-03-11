@@ -35,4 +35,9 @@ public class VoucherRepositoryImpl implements VoucherRepository {
     public void saveAll(List<Voucher> vouchers) {
         voucherJpaRepository.saveAll(vouchers);
     }
+
+    @Override
+    public List<Voucher> findAllByIds(List<Long> voucherIds) {
+        return voucherQueryDslRepository.findAllByIds(voucherIds);
+    }
 }
