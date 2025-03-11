@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.domain.membership.infra.repository;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
 import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.vo.Phone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,4 +52,8 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findAll(pageable);
     }
 
+    @Override
+    public Optional<User> findByNameAndPhone(String name, Phone phone) {
+        return userJpaRepository.findByNameAndPhone(name, phone);
+    }
 }

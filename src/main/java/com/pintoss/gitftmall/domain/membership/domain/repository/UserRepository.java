@@ -1,6 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.domain.repository;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
+import com.pintoss.gitftmall.domain.membership.domain.vo.Phone;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,6 +16,8 @@ public interface UserRepository {
     boolean existsByEmail_Email(String email);
 
     Optional<User> findById(long id);
+
+    Optional<User> findByNameAndPhone(String name, Phone phone);
 
     Optional<User> findByIdWithRoles(long id);
 

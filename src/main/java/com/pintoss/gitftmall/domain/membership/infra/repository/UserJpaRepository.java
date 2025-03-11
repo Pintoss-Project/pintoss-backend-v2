@@ -1,12 +1,14 @@
 package com.pintoss.gitftmall.domain.membership.infra.repository;
 
 import com.pintoss.gitftmall.domain.membership.domain.User;
-import java.util.Optional;
+import com.pintoss.gitftmall.domain.membership.domain.vo.Phone;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface UserJpaRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail_Email(String email);
@@ -21,4 +23,6 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     boolean existsByPhone_Phone(String phone);
 
     Page<User> findAll(Pageable pageable);
+
+    Optional<User> findByNameAndPhone(String name, Phone phone);
 }

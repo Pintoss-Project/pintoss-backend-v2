@@ -4,6 +4,7 @@ import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.MissingTokenException;
 import com.pintoss.gitftmall.core.util.HttpServletUtils;
+import com.pintoss.gitftmall.domain.membership.application.AccountRecoveryService;
 import com.pintoss.gitftmall.domain.membership.application.LoginService;
 import com.pintoss.gitftmall.domain.membership.application.RegisterService;
 import com.pintoss.gitftmall.domain.membership.application.ReissueService;
@@ -14,6 +15,7 @@ import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
+import com.pintoss.gitftmall.domain.membership.controller.response.FindAccountResponse;
 import com.pintoss.gitftmall.domain.membership.controller.response.LoginResponse;
 import com.pintoss.gitftmall.domain.membership.controller.response.ReissueResponse;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
@@ -33,6 +35,7 @@ public class AuthController {
     private final RegisterService registerService;
     private final LoginService loginService;
     private final ReissueService reissueService;
+    private final AccountRecoveryService accountRecoveryService;
     private final HttpServletUtils servletUtils;
 
     @PostMapping("/register")
@@ -95,5 +98,11 @@ public class AuthController {
     public ApiResponse<Boolean> checkPhoneDuplicate(@RequestParam(name = "phone") String phone) {
         Boolean rs = registerService.checkPhoneDuplicate(phone);
         return ApiResponse.ok(rs);
+    }
+
+    @GetMapping("/find-id")
+    public ApiResponse<FindAccountResponse> findAccount(@RequestParam(name = "name") String name, @RequestParam(name = "phone") String phone) {
+        FindAccountResponse response = new FindAccountResponse(accountRecoveryService.findAccount(name, phone));
+        return ApiResponse.ok(response);
     }
 }
