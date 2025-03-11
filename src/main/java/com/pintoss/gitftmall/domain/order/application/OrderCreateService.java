@@ -44,13 +44,13 @@ public class OrderCreateService {
         );
 
         Order order = Order.create(command.getOrdererId(),
-                voucherProvider.getName()+" 외 "+ (providerIds.size() -1)+"건",
+                generateProductName(voucherProvider, providerIds),
                 orderItems, command.getPaymentMethodType());
 
         Order saveOrder = orderRepository.save(order);
 
         return new OrderCreateResponse(
-                saveOrder.getId(),
+                saveOrder.getOrderNo().getValue(),
                 saveOrder.getOrdererId(),
                 command.getPaymentMethodType().getServiceCode(),
                 saveOrder.getTotalPrice(),
@@ -58,13 +58,14 @@ public class OrderCreateService {
                 saveOrder.getCreatedAt()
         );
     }
-}
 
-// 대표 상품권을 선택하고 나머지 개수를 계산
-//String productName = productNames.stream()
-//        .findFirst()
-//        .map(firstProduct -> {
-//            int remainingCount = productNames.size() - 1;
-//            return remainingCount > 0 ? firstProduct + " 외 " + remainingCount + "개" : firstProduct;
-//        })
-//        .orElse("상품 없음");
+    private String generateProductName(VoucherProvider voucherProvider, Set<Long> providerIds) {
+        if(voucherProvider == null){
+            throw new BadRequestException("존재하지 않는 상품 제공사입니다.");
+        }
+        if(providerIds.size() == 1) {
+            return voucherProvider.getName();
+        }
+        return voucherProvider.getName()+" 외 "+ (providerIds.size() -1)+"건";
+    }
+}

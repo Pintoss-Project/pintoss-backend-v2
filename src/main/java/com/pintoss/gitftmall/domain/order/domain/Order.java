@@ -2,6 +2,7 @@ package com.pintoss.gitftmall.domain.order.domain;
 
 import com.pintoss.gitftmall.domain.order.controller.request.PaymentMethodType;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
+import com.pintoss.gitftmall.domain.order.domain.vo.OrderNo;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -21,6 +22,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private OrderNo orderNo;
 
     @Column(nullable = false, name = "orderer_id")
     private Long ordererId;
@@ -48,6 +51,7 @@ public class Order {
 
     private Order(Long ordererId, String productName,List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
         this.ordererId = ordererId;
+        this.orderNo = OrderNo.create();
         this.productName = productName;
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
