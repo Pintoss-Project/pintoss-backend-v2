@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.order.controller.request;
+package com.pintoss.gitftmall.domain.order.domain.vo;
 
 import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
 import lombok.Getter;

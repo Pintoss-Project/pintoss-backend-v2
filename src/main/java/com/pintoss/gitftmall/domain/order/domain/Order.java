@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.order.domain;
 
-import com.pintoss.gitftmall.domain.order.controller.request.PaymentMethodType;
+import com.pintoss.gitftmall.domain.order.domain.vo.PaymentMethodType;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderNo;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderStatus;

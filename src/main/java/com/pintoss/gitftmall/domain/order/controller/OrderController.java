@@ -8,8 +8,9 @@ import com.pintoss.gitftmall.domain.order.application.OrderCreateService;
 import com.pintoss.gitftmall.domain.order.application.OrderQueryService;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
-import com.pintoss.gitftmall.domain.order.controller.response.OrderListResponse;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
+import com.pintoss.gitftmall.domain.order.controller.response.OrderItemResponse;
+import com.pintoss.gitftmall.domain.order.controller.response.OrderListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,5 +43,11 @@ public class OrderController {
         List<OrderListResponse> response = orderQueryService.getOrders(userId);
 
         return ApiResponse.ok(response);
+    }
+
+    @GetMapping("/{orderId}")
+    @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
+    public ApiResponse<List<OrderItemResponse>> getOrderItems(@PathVariable Long orderId) {
+        return ApiResponse.ok(null);
     }
 }

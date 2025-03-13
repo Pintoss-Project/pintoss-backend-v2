@@ -6,6 +6,7 @@ import com.pintoss.gitftmall.domain.order.controller.request.OrderItemRequest;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
+import com.pintoss.gitftmall.domain.order.domain.service.OrderItemCreator;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
@@ -25,7 +26,7 @@ public class OrderCreateService {
     private final OrderRepository orderRepository;
     private final VoucherRepository voucherRepository;
     private final VoucherProviderRepository voucherProviderRepository;
-    private final OrderItemFactory orderItemFactory;
+    private final OrderItemCreator orderItemCreator;
 
     public OrderCreateResponse create(OrderCreateServiceCommand command) {
         List<Long> voucherIds = command.getOrderItems().stream()
@@ -33,7 +34,7 @@ public class OrderCreateService {
                         .toList();
         List<Voucher> vouchers = voucherRepository.findAllByIds(voucherIds);
 
-        List<OrderItem> orderItems = orderItemFactory.validateAndCreateOrderItems(vouchers, command.getOrderItems());
+        List<OrderItem> orderItems = orderItemCreator.validateAndGenerate(vouchers, command.getOrderItems());
 
         Set<Long> providerIds = vouchers.stream()
                 .map(Voucher::getVoucherProviderId)

@@ -100,7 +100,7 @@ public class AuthController {
         return ApiResponse.ok(rs);
     }
 
-    @GetMapping("/find-id")
+    @GetMapping("/find_id")
     public ApiResponse<FindAccountResponse> findAccount(@RequestParam(name = "name") String name, @RequestParam(name = "phone") String phone) {
         FindAccountResponse response = new FindAccountResponse(accountRecoveryService.findAccount(name, phone));
         return ApiResponse.ok(response);

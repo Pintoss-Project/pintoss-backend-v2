@@ -1,5 +1,6 @@
 package com.pintoss.gitftmall.domain.order.controller.request;
 
+import com.pintoss.gitftmall.domain.order.domain.vo.PaymentMethodType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

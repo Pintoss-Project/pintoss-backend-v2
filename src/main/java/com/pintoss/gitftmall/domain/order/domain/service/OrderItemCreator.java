@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.order.application;
+package com.pintoss.gitftmall.domain.order.domain.service;
 
 import com.pintoss.gitftmall.domain.order.controller.request.OrderItemRequest;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class OrderItemFactory {
+public class OrderItemCreator {
 
-    public List<OrderItem> validateAndCreateOrderItems(List<Voucher> vouchers, List<OrderItemRequest> orderItems) {
+    public List<OrderItem> validateAndGenerate(List<Voucher> vouchers, List<OrderItemRequest> orderItems) {
         Map<Long, Voucher> voucherMap = vouchers.stream()
                 .collect(Collectors.toMap(Voucher::getId, Function.identity()));
 
