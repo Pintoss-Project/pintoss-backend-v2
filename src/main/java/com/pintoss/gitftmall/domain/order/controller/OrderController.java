@@ -48,14 +48,14 @@ public class OrderController {
 
     @GetMapping("/{orderId}/items")
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<List<OrderItemsResponse>> getOrderItems(@PathVariable Long orderId) {
+    public ApiResponse<List<OrderItemsResponse>> getOrderItems(@PathVariable(name = "orderId") Long orderId) {
         List<OrderItemsResponse> orderItems = orderQueryService.getOrderItems(orderId);
         return ApiResponse.ok(orderItems);
     }
 
     @GetMapping("/{orderId}/details")
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<OrderDetailResponse> getOrderDetail(@PathVariable Long orderId) {
+    public ApiResponse<OrderDetailResponse> getOrderDetail(@PathVariable(name = "orderId") Long orderId) {
         OrderDetailResponse orderDetail = orderQueryService.getOrderDetail(orderId);
         return ApiResponse.ok(orderDetail);
     }
