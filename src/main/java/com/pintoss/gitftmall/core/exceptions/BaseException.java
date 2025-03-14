@@ -19,8 +19,4 @@ public class BaseException extends RuntimeException {
         this.timeStamp = LocalDateTime.now();
     }
 
-    public BaseException(String message) {
-        super(message);
-    }
-
 }

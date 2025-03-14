@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItemResponse {
+public class CartItemListResponse {
     private Long cartId;
     private Long productId;
     private int quantity;
-    private Long voucherId;
     private String name;
     private Long price;
     private String imageUrl;

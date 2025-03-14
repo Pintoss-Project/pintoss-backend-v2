@@ -1,8 +1,6 @@
 package com.pintoss.gitftmall.core.exceptions;
 
 import com.pintoss.gitftmall.core.dto.ApiErrorResponse;
-import com.pintoss.gitftmall.core.exceptions.BaseException;
-import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.AuthorizationException;
 import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -14,18 +12,44 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Hidden
-@RestControllerAdvice
+@ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(value = Exception.class)
+    public final ResponseEntity<ApiErrorResponse> handleException(Exception e) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ErrorCode.INTERNAL_SERVER_ERROR,
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+
+        log.error(e.getMessage());
+        e.printStackTrace();
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {BaseException.class})
+    public final ResponseEntity<ApiErrorResponse> handleCustomException(BaseException e) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+                e.getHttpStatus(),
+                e.getErrorCode(),
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+        log.error(e.getMessage());
+        e.printStackTrace();
+        return new ResponseEntity<>(errorResponse, e.getHttpStatus());
+    }
 
     @ExceptionHandler(value ={BadRequestException.class})
     public final ResponseEntity<ApiErrorResponse> handleBadRequestException(BadRequestException e){
@@ -35,11 +59,12 @@ public class GlobalExceptionHandler {
             e.getMessage(),
             LocalDateTime.now()
         );
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
 
-    @ExceptionHandler(value = {
-        AuthorizationException.class})
+    @ExceptionHandler(value = {AuthorizationException.class})
     public final ResponseEntity<ApiErrorResponse> handleAuthorizationException(AuthorizationException e){
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
                 e.getHttpStatus(),
@@ -47,18 +72,9 @@ public class GlobalExceptionHandler {
                 e.getMessage(),
                 LocalDateTime.now()
         );
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
-    }
-
-    @ExceptionHandler(value = {BaseException.class})
-    public final ResponseEntity<ApiErrorResponse> handleCustomException(BaseException ex) {
-        ApiErrorResponse errorResponse = ApiErrorResponse.of(
-            ex.getHttpStatus(),
-            ex.getErrorCode(),
-            ex.getMessage(),
-            LocalDateTime.now()
-        );
-        return new ResponseEntity<>(errorResponse, ex.getHttpStatus());
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<ApiErrorResponse> handleValidationExceptions(MethodArgumentNotValidException e) {
@@ -74,44 +90,50 @@ public class GlobalExceptionHandler {
             "유효하지 않은 요청입니다",
             errors
         );
-
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = {ConstraintViolationException.class})
-    public final ResponseEntity<ApiErrorResponse> handleConstraintViolationException(ConstraintViolationException ex) {
+    public final ResponseEntity<ApiErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
         Map<String, String> errors = new HashMap<>();
-        ex.getConstraintViolations().forEach(violation ->
+        e.getConstraintViolations().forEach(violation ->
             errors.put(violation.getPropertyPath().toString(), violation.getMessage())
         );
 
         ApiErrorResponse errorResponse = ApiErrorResponse.withErrors(
             HttpStatus.BAD_REQUEST,
             ErrorCode.BAD_REQUEST,
-            ex.getMessage(),
+            e.getMessage(),
             errors
         );
-
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {UsernameNotFoundException.class})
-    public final ResponseEntity<ApiErrorResponse> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+    public final ResponseEntity<ApiErrorResponse> handleUsernameNotFoundException(UsernameNotFoundException e) {
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
                 HttpStatus.BAD_REQUEST,
                 ErrorCode.UNAUTHORIZED,
-                ex.getMessage(),
+                e.getMessage(),
                 LocalDateTime.now()
         );
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = {BadCredentialsException.class})
-    public final ResponseEntity<ApiErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
+    public final ResponseEntity<ApiErrorResponse> handleBadCredentialsException(BadCredentialsException e) {
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
                 HttpStatus.BAD_REQUEST,
                 ErrorCode.UNAUTHORIZED,
-                ex.getMessage(),
+                e.getMessage(),
                 LocalDateTime.now()
         );
+        log.error(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 

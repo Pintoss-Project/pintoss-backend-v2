@@ -1,5 +1,7 @@
 package com.pintoss.gitftmall.domain.cart.domain;
 
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,28 +16,41 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
+    @Column(nullable = false)
+    private Long userId;
+
     private Long productId;
 
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cart_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Cart cart;
+    private boolean isDeleted;
 
-    public CartItem(Long productId, int quantity) {
+    public CartItem(Long userId, Long productId, int quantity) {
+        this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
+        this.isDeleted = false;
     }
 
-    public static CartItem create(Long productId, int quantity) {
-        return new CartItem(productId, quantity);
+    public static CartItem create(Long memberId, Long productId, int quantity) {
+        return new CartItem(memberId, productId, quantity);
     }
 
-    public void assignCart(Cart cart) {
-        this.cart = cart;
-    }
 
     public void increaseQuantity(int quantity) {
         this.quantity += quantity;
+    }
+
+    public void deleted() {
+        this.isDeleted = true;
+    }
+
+    public void calculateQuantity(int quantity) {
+        this.quantity += quantity;
+        if(this.quantity < 0) {
+            throw new BadRequestException(ErrorCode.INVALID_CART_ITEM_QUANTITY);
+        } else if (this.quantity == 0) {
+            this.deleted();
+        }
     }
 }

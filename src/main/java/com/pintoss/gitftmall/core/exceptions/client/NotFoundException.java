@@ -6,17 +6,13 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
-public class BadRequestException extends BaseException {
-    public BadRequestException(String message){
-        super(HttpStatus.BAD_REQUEST, ErrorCode.BAD_REQUEST, message);
-    }
+public class NotFoundException extends BaseException {
 
-    public BadRequestException(ErrorCode errorCode, String message){
+    public NotFoundException(ErrorCode errorCode, String message){
         super(HttpStatus.BAD_REQUEST, errorCode, message);
     }
 
-    public BadRequestException(ErrorCode errorCode){
+    public NotFoundException(ErrorCode errorCode){
         super(HttpStatus.BAD_REQUEST, errorCode, errorCode.getMessage());
     }
-
 }
