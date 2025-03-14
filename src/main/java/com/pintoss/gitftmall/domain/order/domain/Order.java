@@ -23,6 +23,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Embedded
     private OrderNo orderNo;
 
     @Column(nullable = false, name = "orderer_id")

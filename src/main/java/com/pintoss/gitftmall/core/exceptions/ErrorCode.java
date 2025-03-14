@@ -23,6 +23,7 @@ public enum ErrorCode {
     // 404 Not Found
     NOT_FOUND("4041", "자원을 찾을 수 없습니다."),
     NOT_FOUND_CART_ITEM("4042","존재하지 않는 장바구니 목록입니다."),
+    NOT_FOUND_ORDER("4043","존재하지 않는 주문입니다."),
 
     // 409 Conflict
     CONFLICT("4091", "충돌이 발생했습니다."),

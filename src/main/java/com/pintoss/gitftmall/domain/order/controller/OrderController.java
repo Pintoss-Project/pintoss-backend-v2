@@ -9,7 +9,8 @@ import com.pintoss.gitftmall.domain.order.application.OrderQueryService;
 import com.pintoss.gitftmall.domain.order.application.command.OrderCreateServiceCommand;
 import com.pintoss.gitftmall.domain.order.controller.request.OrderCreateRequest;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
-import com.pintoss.gitftmall.domain.order.controller.response.OrderItemResponse;
+import com.pintoss.gitftmall.domain.order.controller.response.OrderDetailResponse;
+import com.pintoss.gitftmall.domain.order.controller.response.OrderItemsResponse;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -45,9 +46,17 @@ public class OrderController {
         return ApiResponse.ok(response);
     }
 
-    @GetMapping("/{orderId}")
+    @GetMapping("/{orderId}/items")
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<List<OrderItemResponse>> getOrderItems(@PathVariable Long orderId) {
-        return ApiResponse.ok(null);
+    public ApiResponse<List<OrderItemsResponse>> getOrderItems(@PathVariable Long orderId) {
+        List<OrderItemsResponse> orderItems = orderQueryService.getOrderItems(orderId);
+        return ApiResponse.ok(orderItems);
+    }
+
+    @GetMapping("/{orderId}/details")
+    @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
+    public ApiResponse<OrderDetailResponse> getOrderDetail(@PathVariable Long orderId) {
+        OrderDetailResponse orderDetail = orderQueryService.getOrderDetail(orderId);
+        return ApiResponse.ok(orderDetail);
     }
 }

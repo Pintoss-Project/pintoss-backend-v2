@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderListResponse {
 
+    private Long orderId;
     private String orderNo;
     private OrderStatus status;
     private PaymentMethodType paymentMethodType;

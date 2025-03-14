@@ -1,14 +1,13 @@
 package com.pintoss.gitftmall.domain.order.domain.vo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.criteria.Order;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
@@ -18,6 +17,7 @@ public class OrderNo {
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 
+    @Column(name = "order_no", nullable = false, unique = true)
     private final String value;
 
     private OrderNo(String value) {
