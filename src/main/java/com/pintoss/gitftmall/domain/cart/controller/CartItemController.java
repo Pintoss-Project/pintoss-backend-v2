@@ -48,7 +48,7 @@ public class CartItemController {
 
     @PutMapping("/items/{cartItemId}")
     @AuthorizationRequired({ RoleEnum.USER, RoleEnum.ADMIN })
-    public ApiResponse<Integer> updateCartItem(@PathVariable Long cartItemId,  @RequestBody CartItemUpdateRequest request) {
+    public ApiResponse<Integer> updateCartItem(@PathVariable(value = "cartItemId") Long cartItemId,  @RequestBody CartItemUpdateRequest request) {
         Long userId = SecurityContextUtils.getUserId();
 
         int count = cartItemUpdateService.update(userId, cartItemId, request);
@@ -58,7 +58,7 @@ public class CartItemController {
 
     @DeleteMapping("/items/{cartItemId}")
     @AuthorizationRequired({ RoleEnum.USER, RoleEnum.ADMIN })
-    public ApiResponse<Void> deleteCartItem(@PathVariable Long cartItemId) {
+    public ApiResponse<Void> deleteCartItem(@PathVariable(value = "cartItemId") Long cartItemId) {
         Long userId = SecurityContextUtils.getUserId();
 
         cartItemDeleteService.deleteCartItem(userId, cartItemId);
