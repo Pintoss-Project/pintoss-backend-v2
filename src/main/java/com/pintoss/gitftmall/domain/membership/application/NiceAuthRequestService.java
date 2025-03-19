@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.domain.membership.application.result.NiceEncryptedDataResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.NiceEncryptedDataResult;
 import com.pintoss.gitftmall.domain.membership.domain.repository.NiceApiTokenRepository;
 import com.pintoss.gitftmall.domain.membership.infra.nice.encryption.NiceAuthHmacGenerator;
 import com.pintoss.gitftmall.domain.membership.infra.nice.util.NiceAuthCommandFactory;

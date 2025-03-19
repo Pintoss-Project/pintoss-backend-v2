@@ -1,11 +1,11 @@
-package com.pintoss.gitftmall.domain.membership.application.command;
+package com.pintoss.gitftmall.domain.membership.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ReissueServiceCommand {
+public class LoginResult {
 
     private String accessToken;
     private String refreshToken;

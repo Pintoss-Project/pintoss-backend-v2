@@ -1,7 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.domain.membership.application.command.NiceVerificationServiceCommand;
-import com.pintoss.gitftmall.domain.membership.application.result.NiceVerificationResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.NiceVerificationServiceCommand;
+import com.pintoss.gitftmall.domain.membership.application.dto.NiceVerificationResult;
 import com.pintoss.gitftmall.domain.membership.domain.repository.NiceApiTokenRepository;
 import com.pintoss.gitftmall.domain.membership.infra.nice.decipher.NiceAuthAuthenticationResponseDecipher;
 import com.pintoss.gitftmall.domain.membership.infra.nice.decipher.NiceAuthAuthenticationHandler;

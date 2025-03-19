@@ -6,9 +6,6 @@ import com.pintoss.gitftmall.domain.membership.controller.response.OAuth2Respons
 import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
 import com.pintoss.gitftmall.domain.membership.domain.vo.LoginType;
 import com.pintoss.gitftmall.domain.membership.domain.vo.OAuth2ProviderType;
-import com.pintoss.gitftmall.domain.membership.infra.security.oauth.OAuth2UserInfo;
-import com.pintoss.gitftmall.domain.membership.infra.security.oauth.OAuth2UserInfoService;
-import com.pintoss.gitftmall.domain.membership.infra.security.oauth.OAuth2UserInfoStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -27,7 +24,7 @@ public class OAuth2Service {
 
     public OAuth2Response handleOAuthLogin(LoginType loginType, String code) {
         OAuth2UserInfoService userInfoService = oAuth2UserInfoStrategy.getOAuth2UserInfoService(loginType);
-        OAuth2UserInfo userInfo = userInfoService.getUserInfo(code);
+        OAuth2UserInfoResponse userInfo = userInfoService.getUserInfo(code);
 
         if (userRepository.existsByEmail_Email(userInfo.getEmail())) {
             throw new BadRequestException(ErrorCode.DUPLICATE_USER);

@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
-import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.LoginResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.infra.security.authentication.CustomAuthentication;
 import com.pintoss.gitftmall.domain.membership.infra.security.userdetails.CustomUserDetails;

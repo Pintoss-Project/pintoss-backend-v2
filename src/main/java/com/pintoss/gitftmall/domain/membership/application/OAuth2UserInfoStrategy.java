@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.infra.security.oauth;
+package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;

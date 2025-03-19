@@ -9,9 +9,9 @@ import com.pintoss.gitftmall.domain.membership.application.AccountRecoveryServic
 import com.pintoss.gitftmall.domain.membership.application.LoginService;
 import com.pintoss.gitftmall.domain.membership.application.RegisterService;
 import com.pintoss.gitftmall.domain.membership.application.ReissueService;
-import com.pintoss.gitftmall.domain.membership.application.command.ReissueServiceCommand;
-import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
-import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.ReissueServiceCommand;
+import com.pintoss.gitftmall.domain.membership.application.dto.LoginResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.ReissueResult;
 import com.pintoss.gitftmall.domain.membership.controller.request.LoginRequest;
 import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
 import com.pintoss.gitftmall.domain.membership.controller.response.FindAccountResponse;

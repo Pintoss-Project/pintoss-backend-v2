@@ -22,7 +22,7 @@ public class OAuth2Controller {
     private final OAuth2Service oAuth2Service;
 
     @GetMapping("/login")
-    public ResponseEntity<Void> getOAuth2LoginUrl(@RequestParam OAuth2ProviderType providerType) {
+    public ResponseEntity<Void> getOAuth2LoginUrl(@RequestParam("providerType") OAuth2ProviderType providerType) {
         String loginUrl = oAuth2Service.getOAuth2LoginUrl(providerType);
 
         return ResponseEntity.status(HttpStatus.FOUND)

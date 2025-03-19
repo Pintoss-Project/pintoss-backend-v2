@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.controller.response;
 
-import com.pintoss.gitftmall.domain.membership.application.result.NiceVerificationResult;
+import com.pintoss.gitftmall.domain.membership.application.dto.NiceVerificationResult;
 import lombok.Data;
 
 @Data
