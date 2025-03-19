@@ -1,5 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.controller.request;
 
+import com.pintoss.gitftmall.domain.membership.domain.vo.LoginType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -21,5 +22,8 @@ public class RegisterRequest  {
 
     @NotBlank(message = "전화번호는 필수 항목입니다.")
     private String phone;
+
+    @NotBlank(message = "로그인 타입을 필수 항목입니다.")
+    private LoginType loginType;
 
 }

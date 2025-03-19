@@ -1,15 +1,17 @@
 package com.pintoss.gitftmall.domain.membership.controller;
 
+import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.domain.membership.application.OAuth2Service;
+import com.pintoss.gitftmall.domain.membership.controller.response.OAuth2Response;
+import com.pintoss.gitftmall.domain.membership.domain.vo.LoginType;
 import com.pintoss.gitftmall.domain.membership.domain.vo.OAuth2ProviderType;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -21,11 +23,18 @@ public class OAuth2Controller {
 
     @GetMapping("/login")
     public ResponseEntity<Void> getOAuth2LoginUrl(@RequestParam OAuth2ProviderType providerType) {
-
         String loginUrl = oAuth2Service.getOAuth2LoginUrl(providerType);
 
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(loginUrl))
                 .build();
+    }
+
+    @GetMapping("/callback/{providerType}")
+    public ApiResponse<Void> oauthCallback(@PathVariable(value = "providerType") LoginType providerType, @RequestParam("code") String code, HttpServletResponse servletResponse) throws IOException {
+        OAuth2Response response = oAuth2Service.handleOAuthLogin(providerType, code);
+
+        servletResponse.sendRedirect("https://pin-toss.com/register?email="+ response.getEmail());
+        return null;
     }
 }

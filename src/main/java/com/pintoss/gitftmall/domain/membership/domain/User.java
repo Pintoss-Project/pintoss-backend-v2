@@ -42,6 +42,10 @@ public class User {
     )
     private Phone phone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private LoginType loginType;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<UserRole> roles = new HashSet<>();
@@ -50,22 +54,24 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    private User(Email email, Password password, String name, Phone phone, Set<UserRole> roles){
+    private User(Email email, Password password, String name, Phone phone, Set<UserRole> roles, LoginType loginType) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.roles = roles;
+        this.loginType = loginType;
         this.createdAt = LocalDateTime.now();
     }
 
-    public static User create(Email email, String rawPassword, String name, Phone phone, Set<UserRole> roles, PasswordEncoder encoder) {
+    public static User create(Email email, String rawPassword, String name, Phone phone, LoginType loginType, Set<UserRole> roles, PasswordEncoder encoder) {
         return new User(
                 email,
                 new Password(rawPassword, encoder),
                 name,
                 phone,
-                roles
+                roles,
+                loginType
         );
     }
 

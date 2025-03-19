@@ -30,6 +30,10 @@ public class Password {
         validate(password);
         this.password = encoder.encode(password);
     }
+
+    public static Password ofSocialUser(){
+        return null;
+    }
     /**
      * 비밀번호 유효성 검증
      *

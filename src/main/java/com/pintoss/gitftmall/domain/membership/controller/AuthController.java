@@ -4,12 +4,11 @@ import com.pintoss.gitftmall.core.dto.ApiResponse;
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.MissingTokenException;
 import com.pintoss.gitftmall.core.util.HttpServletUtils;
+import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import com.pintoss.gitftmall.domain.membership.application.AccountRecoveryService;
 import com.pintoss.gitftmall.domain.membership.application.LoginService;
 import com.pintoss.gitftmall.domain.membership.application.RegisterService;
 import com.pintoss.gitftmall.domain.membership.application.ReissueService;
-import com.pintoss.gitftmall.domain.membership.application.command.LoginServiceCommand;
-import com.pintoss.gitftmall.domain.membership.application.command.RegisterServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.command.ReissueServiceCommand;
 import com.pintoss.gitftmall.domain.membership.application.result.LoginResult;
 import com.pintoss.gitftmall.domain.membership.application.result.ReissueResult;
@@ -19,7 +18,6 @@ import com.pintoss.gitftmall.domain.membership.controller.response.FindAccountRe
 import com.pintoss.gitftmall.domain.membership.controller.response.LoginResponse;
 import com.pintoss.gitftmall.domain.membership.controller.response.ReissueResponse;
 import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
-import com.pintoss.gitftmall.core.web.interceptor.AuthorizationRequired;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,18 +38,14 @@ public class AuthController {
 
     @PostMapping("/register")
     public ApiResponse<Void> register(@RequestBody @Valid RegisterRequest request) {
-        RegisterServiceCommand command = new RegisterServiceCommand(request.getEmail(), request.getPassword(), request.getName(), request.getPhone());
-
-        registerService.signup(command);
+        registerService.signup(request);
 
         return ApiResponse.ok(null);
     }
 
     @PostMapping("/login")
     public ApiResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request, HttpServletResponse servletResponse) {
-        LoginServiceCommand command = new LoginServiceCommand(request.getEmail(), request.getPassword());
-
-        LoginResult loginResult = loginService.login(command);
+        LoginResult loginResult = loginService.login(request);
 
         // TODO : 만료 기간은 미정 임의 값 입니다.
 //        servletUtils.addCookie(servletResponse, "AccessToken", loginResult.getAccessToken(), (int) 1000000000L);

@@ -1,9 +1,8 @@
 package com.pintoss.gitftmall.domain.membership.infra.nice.client;
 
-import com.pintoss.gitftmall.domain.membership.infra.nice.client.response.NiceApiAccessTokenResponse;
 import com.pintoss.gitftmall.domain.membership.infra.nice.client.request.NiceApiCryptoTokenRequest;
+import com.pintoss.gitftmall.domain.membership.infra.nice.client.response.NiceApiAccessTokenResponse;
 import com.pintoss.gitftmall.domain.membership.infra.nice.client.response.NiceApiCryptoTokenResponse;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -16,8 +15,10 @@ public class NiceApiClient {
 
     private final WebClient webClient;
 
-    public NiceApiClient(@Qualifier("niceWebClient") WebClient webClient) {
-        this.webClient = webClient;
+    public NiceApiClient(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder
+                .baseUrl("https://svc.niceapi.co.kr:22001")
+                .build();
     }
 
     public Mono<NiceApiAccessTokenResponse> getAccessToken(String uri, String clientId, String clientSecret) {

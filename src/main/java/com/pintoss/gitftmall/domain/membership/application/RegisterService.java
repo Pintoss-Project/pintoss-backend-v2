@@ -1,17 +1,14 @@
 package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.core.exceptions.client.DuplicateEmailException;
-import com.pintoss.gitftmall.core.exceptions.client.DuplicatePhoneException;
-import com.pintoss.gitftmall.domain.membership.application.command.RegisterServiceCommand;
+import com.pintoss.gitftmall.domain.membership.controller.request.RegisterRequest;
 import com.pintoss.gitftmall.domain.membership.domain.User;
-import com.pintoss.gitftmall.domain.membership.domain.vo.Email;
-import com.pintoss.gitftmall.domain.membership.domain.vo.Phone;
-import com.pintoss.gitftmall.domain.membership.domain.vo.RoleEnum;
-import com.pintoss.gitftmall.domain.membership.domain.vo.UserRole;
 import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
 /*
@@ -56,22 +53,23 @@ public class RegisterService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
-    public void signup(RegisterServiceCommand command) {
-        Email email = new Email(command.getEmail());
-        Phone phone = new Phone(command.getPhone());
-
-        if(userRepository.existsByEmail_Email(email.getEmail())){
+    public void signup(RegisterRequest command) {
+        if(userRepository.existsByEmail_Email(command.getEmail())){
             throw new DuplicateEmailException("이미 존재하는 회원입니다.");
         };
-        if(userRepository.existsByPhone_Phone(phone.getPhone())){
-            throw new DuplicatePhoneException("이미 존재하는 전화번호입니다.");
-        }
+
+        Email email = new Email(command.getEmail());
+        Phone phone = new Phone(
+                command.getLoginType() == LoginType.LOCAL ?
+                command.getPhone() : "RANDOM_PASSWORD1!"
+        );
 
         User user = User.create(
                 email,
                 command.getPassword(),
                 command.getName(),
                 phone,
+                command.getLoginType(),
                 Set.of(new UserRole(RoleEnum.USER)),
                 encoder
         );
