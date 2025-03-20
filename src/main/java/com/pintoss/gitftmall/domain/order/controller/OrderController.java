@@ -12,6 +12,7 @@ import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateRespons
 import com.pintoss.gitftmall.domain.order.controller.response.OrderDetailResponse;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderItemsResponse;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderListResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class OrderController {
 
     @PostMapping
     @AuthorizationRequired({RoleEnum.USER, RoleEnum.ADMIN})
-    public ApiResponse<OrderCreateResponse> createOrder(@RequestBody OrderCreateRequest request) {
+    public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
         Long userId = SecurityContextUtils.getUserId();
         OrderCreateServiceCommand command = OrderCreateServiceCommand.from(userId, request);
 

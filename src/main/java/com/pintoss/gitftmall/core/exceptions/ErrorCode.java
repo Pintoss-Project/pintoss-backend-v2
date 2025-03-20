@@ -17,6 +17,7 @@ public enum ErrorCode {
     UNSUPPORTED_OAUTH2_PROVIDER("4007", "지원하지 않는 소셜 로그인입니다."),
     DUPLICATE_USER("4008", "이미 존재하는 사용자입니다."),
     MISMATCH_SOCIAL_EMAIL("4009", "소셜 로그인 이메일이 일치하지 않습니다."),
+    MISMATCH_ORDER_PRICE("40010", "주문 상품의 가격이 일치하지 않습니다."),
 
     // 401 Unauthorized
     UNAUTHORIZED("4011", "잘못된 자격증명 입니다."),

@@ -66,7 +66,7 @@ public class Order {
     // 개별 OrderItem 추가 메서드 (연관관계 설정)
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
-        orderItem.setOrder(this);
+        orderItem.assignOrder(this);
     }
 
     public static Order create(Long ordererId, String productName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {

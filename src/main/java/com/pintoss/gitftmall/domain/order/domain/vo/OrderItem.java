@@ -1,5 +1,7 @@
 package com.pintoss.gitftmall.domain.order.domain.vo;
 
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -40,7 +42,13 @@ public class OrderItem {
         return new OrderItem(voucherId, quantity, price);
     }
 
-    public void setOrder(Order order) {
+    public void assignOrder(Order order) {
         this.order = order;
+    }
+
+    public void validatePriceMatch(Long price) {
+        if(!this.price.equals(price)) {
+            throw new BadRequestException(ErrorCode.MISMATCH_ORDER_PRICE);
+        }
     }
 }

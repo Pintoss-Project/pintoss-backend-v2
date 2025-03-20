@@ -6,8 +6,8 @@ import com.pintoss.gitftmall.domain.order.controller.request.OrderItemRequest;
 import com.pintoss.gitftmall.domain.order.controller.response.OrderCreateResponse;
 import com.pintoss.gitftmall.domain.order.domain.Order;
 import com.pintoss.gitftmall.domain.order.domain.repository.OrderRepository;
-import com.pintoss.gitftmall.domain.order.domain.service.OrderItemCreator;
 import com.pintoss.gitftmall.domain.order.domain.service.ProductNameService;
+import com.pintoss.gitftmall.domain.order.domain.service.VoucherOrderValidator;
 import com.pintoss.gitftmall.domain.order.domain.vo.OrderItem;
 import com.pintoss.gitftmall.domain.voucher.domain.Voucher;
 import com.pintoss.gitftmall.domain.voucher.domain.VoucherProvider;
@@ -17,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,29 +25,29 @@ public class OrderCreateService {
     private final OrderRepository orderRepository;
     private final VoucherRepository voucherRepository;
     private final VoucherProviderRepository voucherProviderRepository;
-    private final OrderItemCreator orderItemCreator;
     private final ProductNameService productNameService;
+    private final VoucherOrderValidator voucherOrderValidator;
 
-    // 협력 객체가 voucher, voucherProvider, order, orderItem, requestItems
     public OrderCreateResponse create(OrderCreateServiceCommand command) {
         List<Long> voucherIds = command.getOrderItems().stream()
-                        .map(OrderItemRequest::getVoucherId)
-                        .toList();
+                .map(OrderItemRequest::getVoucherId)
+                .toList();
+
         List<Voucher> vouchers = voucherRepository.findAllByIds(voucherIds);
 
-        List<OrderItem> orderItems = orderItemCreator.validateAndGenerate(vouchers, command.getOrderItems());
+        List<OrderItem> orderItems = command.getOrderItems().stream().map(
+                oi -> OrderItem.create(oi.getVoucherId(), oi.getQuantity(), oi.getPrice())
+        ).toList();
 
-        Set<Long> providerIds = vouchers.stream()
-                .map(Voucher::getVoucherProviderId)
-                .collect(Collectors.toSet());
+        voucherOrderValidator.validateStockForOrder(orderItems, vouchers);
 
-        VoucherProvider voucherProvider = voucherProviderRepository.findById(providerIds.iterator().next()).orElseThrow(
+        VoucherProvider voucherProvider = voucherProviderRepository.findById(vouchers.get(0).getVoucherProviderId()).orElseThrow(
                 () -> new BadRequestException("존재하지 않는 상품 제공사입니다.")
         );
 
         Order order = Order.create(
                 command.getOrdererId(),
-                productNameService.generateProductName(voucherProvider, providerIds),
+                productNameService.generateProductName(voucherProvider, vouchers),
                 orderItems,
                 command.getPaymentMethodType()
         );
