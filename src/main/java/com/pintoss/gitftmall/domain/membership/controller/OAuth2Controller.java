@@ -34,7 +34,7 @@ public class OAuth2Controller {
     public ApiResponse<Void> oauthCallback(@PathVariable(value = "providerType") LoginType providerType, @RequestParam("code") String code, HttpServletResponse servletResponse) throws IOException {
         OAuth2Response response = oAuth2Service.handleOAuthLogin(providerType, code);
 
-        servletResponse.sendRedirect("https://pin-toss.com/register?email="+ response.getEmail());
+        servletResponse.sendRedirect("https://pin-toss.com/register?email="+ response.getEmail()+"&loginType="+providerType.toString());
         return null;
     }
 }
