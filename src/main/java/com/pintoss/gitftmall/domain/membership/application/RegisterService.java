@@ -59,10 +59,7 @@ public class RegisterService {
         };
 
         Email email = new Email(command.getEmail());
-        Phone phone = new Phone(
-                command.getLoginType() == LoginType.LOCAL ?
-                command.getPhone() : "RANDOM_PASSWORD1!"
-        );
+        Phone phone = new Phone(command.getPhone());
 
         User user = User.create(
                 email,
