@@ -1,12 +1,4 @@
 package com.pintoss.gitftmall.domain.membership.controller.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
-public class OAuth2Response {
-
-    private String email;
-
+public interface OAuth2Response {
 }

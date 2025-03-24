@@ -1,5 +1,7 @@
 package com.pintoss.gitftmall.domain.membership.domain;
 
+import com.pintoss.gitftmall.core.exceptions.ErrorCode;
+import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
 import com.pintoss.gitftmall.domain.membership.domain.vo.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -82,5 +84,11 @@ public class User {
 
     public boolean isEqualsRefreshToken(String refreshToken) {
         return this.refreshToken.equals(refreshToken);
+    }
+
+    public void validateSameLoginType(LoginType loginType) {
+        if(!this.loginType.equals(loginType)){
+            throw new BadRequestException(ErrorCode.DUPLICATE_USER);
+        };
     }
 }

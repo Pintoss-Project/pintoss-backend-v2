@@ -1,4 +1,4 @@
-package com.pintoss.gitftmall.domain.membership.application;
+package com.pintoss.gitftmall.domain.membership.application.dto;
 
 import com.pintoss.gitftmall.domain.membership.infra.security.oauth.client.dto.KakaoUserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.infra.security.oauth.client.dto.NaverUserInfoResponse;

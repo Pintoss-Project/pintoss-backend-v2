@@ -1,6 +1,6 @@
 package com.pintoss.gitftmall.domain.membership.infra.security.oauth.service;
 
-import com.pintoss.gitftmall.domain.membership.application.OAuth2UserInfoResponse;
+import com.pintoss.gitftmall.domain.membership.application.dto.OAuth2UserInfoResponse;
 import com.pintoss.gitftmall.domain.membership.application.OAuth2UserInfoService;
 import com.pintoss.gitftmall.domain.membership.infra.security.oauth.client.KakaoApiClient;
 import com.pintoss.gitftmall.domain.membership.infra.security.oauth.client.dto.KakaoTokenResponse;

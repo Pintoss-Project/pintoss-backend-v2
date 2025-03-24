@@ -2,17 +2,24 @@ package com.pintoss.gitftmall.domain.membership.application;
 
 import com.pintoss.gitftmall.core.exceptions.ErrorCode;
 import com.pintoss.gitftmall.core.exceptions.client.BadRequestException;
+import com.pintoss.gitftmall.domain.membership.application.dto.OAuth2UserInfoResponse;
+import com.pintoss.gitftmall.domain.membership.controller.response.OAuth2LoginSuccess;
 import com.pintoss.gitftmall.domain.membership.controller.response.OAuth2Response;
+import com.pintoss.gitftmall.domain.membership.controller.response.OAuth2SignupRequired;
+import com.pintoss.gitftmall.domain.membership.domain.User;
 import com.pintoss.gitftmall.domain.membership.domain.repository.UserRepository;
+import com.pintoss.gitftmall.domain.membership.domain.service.TokenManageService;
 import com.pintoss.gitftmall.domain.membership.domain.vo.LoginType;
 import com.pintoss.gitftmall.domain.membership.domain.vo.OAuth2ProviderType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +28,25 @@ public class OAuth2Service {
     private final ClientRegistrationRepository clientRegistrationRepository;
     private final OAuth2UserInfoStrategy oAuth2UserInfoStrategy;
     private final UserRepository userRepository;
+    private final TokenManageService tokenManageService;
 
+    @Transactional
     public OAuth2Response handleOAuthLogin(LoginType loginType, String code) {
         OAuth2UserInfoService userInfoService = oAuth2UserInfoStrategy.getOAuth2UserInfoService(loginType);
         OAuth2UserInfoResponse userInfo = userInfoService.getUserInfo(code);
 
-        if (userRepository.existsByEmail_Email(userInfo.getEmail())) {
-            throw new BadRequestException(ErrorCode.DUPLICATE_USER);
+        Optional<User> optionalUser = userRepository.findByEmail(userInfo.getEmail());
+
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.validateSameLoginType(loginType);
+            String subject = user.getId().toString();
+            String accessToken = tokenManageService.createToken(subject, false);
+            String refreshToken = tokenManageService.createToken(subject, true);
+            user.storeRefreshToken(refreshToken);
+            return new OAuth2LoginSuccess(accessToken);
         }
-        return new OAuth2Response(userInfo.getEmail());
+        return new OAuth2SignupRequired(userInfo.getEmail());
     }
 
     public String getOAuth2LoginUrl(OAuth2ProviderType providerType) {
